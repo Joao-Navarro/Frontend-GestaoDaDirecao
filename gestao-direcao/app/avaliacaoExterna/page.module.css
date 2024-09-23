@@ -1,0 +1,117 @@
+.banner {
+
+    position: relative;
+    
+    z-index: -1;
+}
+
+
+.body {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    width: 80%;
+
+    height: 100px;
+   
+
+}
+
+
+.button {
+
+  
+    padding: 20px;
+  
+    border-radius: 10px;
+  
+    border: 1px;
+  
+    color: #000000;
+  
+    display: flex;
+  
+    align-items: center;
+  
+    flex-direction: row;
+
+    justify-content: space-around;
+
+    width: 100%;
+  
+  }
+  
+
+
+
+.input{
+    color: #000000;
+    border-radius: 15px;
+}
+
+.teste {
+
+    appearance: none;
+    border-radius: 15px;
+    background-color: grey;
+    color: #333;
+    margin-right: 2%;
+    padding: 5px;
+    border-radius: 15px;
+    display: flex;
+
+    justify-content: space-around;
+
+
+
+
+}
+
+
+
+.titulo{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    justify-content: space-around;
+    margin-left: 46%;
+}
+
+
+
+
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+ 
+  }
+ 
+  .th, .td {
+    padding: 8px;
+    border: 1px solid #000000;
+  }
+ 
+  .th {
+    background-color: #f4f4f4;
+    border-bottom: 2px solid #000000;
+  }
+ 
+  .td {
+    border-bottom: 1px solid #000000;
+  }
+ 
+  .tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+ 
+  .tr:hover {
+    background-color: #f1f1f1;
+  }
+ 
+  
