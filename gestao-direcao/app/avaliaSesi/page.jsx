@@ -1,7 +1,10 @@
 "use client"
 import { useState } from 'react';
 
-import style from '@/components/page.module.css';
+import style from './page.module.css';
+import Footer from '@/components/Footer';
+import Header from '@/components/Header';
+
 const studentsData = [
   { aluno: 'João', rm: '123', lp: 'A', mat: 'Matemática', cn: 'Biologia', ch: '10', ing: 'Inglês' },
   { aluno: 'Maria', rm: '456', lp: 'B', mat: 'História', cn: 'Química', ch: '15', ing: 'Espanhol' },
@@ -43,7 +46,7 @@ const Home = () => {
   return (
     <>
     
-    <div>
+    <Header/>
 
       <div className={style.all}>
       
@@ -123,8 +126,9 @@ const Home = () => {
           ))}
         </tbody>
       </table>
+
+      <Footer/>
      
-    </div>
     </>
   );
 
