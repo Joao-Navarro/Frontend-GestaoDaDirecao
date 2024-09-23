@@ -16,7 +16,7 @@ function Home() {
 
 <div className={style.body}>
 
-<Image className={style.img} src="/LOGO SESI.png" width={500} height={300}/>
+<Image className={style.img} src="/LOGOSESI.png" width={500} height={300}/>
 
 </div>
 <div className={style.formContainer}>
