@@ -1,0 +1,151 @@
+.banner {
+
+    position: relative;
+    
+    z-index: -1;
+  }
+  
+  
+  .body {
+  
+    display: flex;
+  
+    flex-wrap: wrap;
+  
+    width: 80%;
+  
+    height: 100px;
+   
+  
+  }
+  .Button {
+    display: flex;
+  
+    align-items: center;
+  
+    justify-content: center;
+  
+    flex-direction: column;
+  
+    width: 100%;
+  
+    margin-bottom: 2%;
+    background-color:#878787;
+  
+  }
+  
+  
+  .button {
+  
+  
+    padding: 20px;
+  
+    border-radius: 10px;
+  
+    border: 1px;
+  
+    color: #000000;
+  
+    display: flex;
+  
+    align-items: center;
+  
+    flex-direction: row;
+    justify-content: center;
+  
+  }
+  
+  
+  .Buttongeral {
+  
+    color: black;
+  
+    align-items: center;
+  
+    padding: 1%;
+  
+    margin: 2%;
+  }
+  
+  .botão{
+  justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    margin-right: 30%;
+    background-color:#878787;
+  
+    
+  
+  
+  }
+  
+  .input{
+    color: #000000;
+    border-radius: 15px;
+  }
+  
+  .teste{ 
+    background-color: #878787;
+    height: 30px;
+    border-radius: 15px;
+    margin-right: 8%;
+  }
+  .botao1{
+    margin-right: 8%;
+    appearance: none;
+    border-radius: 15px;
+    background-color: grey;
+    color: #333;
+  
+   
+  }
+  
+  .botao2{
+    margin-right: 8%;
+  }
+  
+  .botao3{
+    margin-right: 6%;
+  }
+  
+  .botao4{
+    margin-right: 8%;
+  }
+  
+  
+  .titulo{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+ 
+  }
+ 
+  .th, .td {
+    padding: 8px;
+    border: 1px solid #000000;
+  }
+ 
+  .th {
+    background-color: #f4f4f4;
+    border-bottom: 2px solid #000000;
+  }
+ 
+  .td {
+    border-bottom: 1px solid #000000;
+  }
+ 
+  .tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+ 
+  .tr:hover {
+    background-color: #f1f1f1;
+  }
