@@ -1,0 +1,73 @@
+.text{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .filtro{
+    display: flex;
+    padding-right: 100%;
+  }
+  
+  .fund1{
+    display: flex;
+    margin-right: 5%;
+  }
+  
+  .fund2{
+    display: flex;
+    margin-right: 5%;
+  }
+  
+  .ensinoMedio{
+    display: flex;
+    margin-right: 30%;
+  }
+  
+  .ano{
+    display: flex;
+    margin-right: 5%;
+    padding-left: 80%;
+  }
+  
+  .all{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-around;
+  }
+  
+  .test{
+    background-color: #878787;
+    border-radius: 5%;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+  }
+  
+  .th, .td {
+    padding: 10px;
+    border: 1px solid #000000;
+  }
+  
+  .th {
+    background-color: #f4f4f4;
+    border-bottom: 2px solid #000000;
+  }
+  
+  .td {
+    border-bottom: 1px solid #000000;
+  }
+  
+  .tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .tr:hover {
+    background-color: #f1f1f1;
+  }
+  
