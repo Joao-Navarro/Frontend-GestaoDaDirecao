@@ -1,6 +1,8 @@
 "use client"
 import { useState } from 'react';
 import style from "./page.module.css"
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 // import footer from '@/components/footer';
 // import header from '@/components/header';
 <header/>
@@ -41,6 +43,8 @@ const Home = () => {
 
   return (
     <div>
+
+      <Header/>
 
       <div className={style.all}>
       
@@ -120,7 +124,7 @@ const Home = () => {
       </div>
 
       </div>
-      <footer/>
+      <Footer/>
     </div>
     
   );
