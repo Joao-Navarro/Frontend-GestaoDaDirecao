@@ -3,8 +3,7 @@ import { useState } from 'react';
 import style from "./page.module.css"
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-// import footer from '@/components/footer';
-// import header from '@/components/header';
+
 <header/>
 const studentsData = [
   { aluno: 'João', rm: '123', },
@@ -42,16 +41,14 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <>
 
         <Header/>
 
-      <div className={style.all}>
-      
       <div className={style.filtro}>
-        <label className={style.fund1}>
-          <select className={style.test} name="ensino" onChange={handleFilterChange} value={filter.ensino}>
-            <option className={style.test} value="fundamental1">Ensino Fundamental 1</option>
+        <label>
+          <select className={style.button} name="ensino" onChange={handleFilterChange} value={filter.ensino}>
+            <option value="fundamental1">Ensino Fundamental 1</option>
             <option value2="fundamental1">1°</option>
             <option value3="fundamental1">2°</option>
             <option value4="fundamental1">3°</option>
@@ -59,8 +56,8 @@ const Home = () => {
             <option value6="fundamental1">5°</option>
           </select>
         </label>
-        <label className={style.fund2}>
-          <select className={style.test} name="etapa" onChange={handleFilterChange} value={filter.etapa}>
+        <label>
+          <select className={style.button} name="etapa" onChange={handleFilterChange} value={filter.etapa}>
             <option value="">Ensino Fundamental 2</option>
             <option value2="fundamental2">6º</option>
             <option value3="fundamental2">7°A</option>
@@ -71,8 +68,8 @@ const Home = () => {
             <option value8="fundamental2">9ºB</option>
           </select>
         </label>
-        <label className={style.ensinoMedio}>
-          <select className={style.test} name="ano" onChange={handleFilterChange} value={filter.ano}>
+        <label>
+          <select className={style.button} name="ano" onChange={handleFilterChange} value={filter.ano}>
             <option value="">Ensino Medio</option>
             <option value2="medio">1ºA</option>
             <option value3="medio">1ºB</option>
@@ -82,13 +79,17 @@ const Home = () => {
         </label>
 
         <div className={style.ano}>
-        <button className={style.test} onClick={handleFilter}>Ano</button>
-          <input className={style.test} type="number"/>
+        
+        <label className={style.button}>Ano</label>
+        
+          <input className={style.input} type="number"/>
+        
         </div>
 
-        <button className={style.test} onClick={handleFilter}>Filtrar</button>
+        <button className={style.button} onClick={handleFilter}>Filtrar</button>
+       
         </div>
-        </div>
+       
         
         <h1 className={style.text}>Curso Técnico</h1>
         
@@ -119,15 +120,15 @@ const Home = () => {
       </table> 
 
       <div className={style.botao}>
-        <button className={style.test} onClick={() => alert('Ação não implementada!')}>Editar</button>
-        <button className={style.test} onClick={() => alert('Ação não implementada!')}>Salvar</button>
+        <button className={style.button} onClick={() => alert('Ação não implementada!')}>Editar</button>
+        <button className={style.button} onClick={() => alert('Ação não implementada!')}>Salvar</button>
       </div>
 
       </div>
 
             <Footer/>
 
-    </div>
+    </>
     
   );
 
