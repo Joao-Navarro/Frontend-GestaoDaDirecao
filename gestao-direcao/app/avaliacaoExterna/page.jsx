@@ -55,7 +55,7 @@ const Home = () => {
           </select>
         </label>
         <label>
-          <select className={style.button} name="etapa" onChange={handleFilterChange} value={filter.etapa}>
+          <select className={style.button} name="ensino" onChange={handleFilterChange} value={filter.ensino}>
             <option value="">Ensino Fundamental 2</option>
             <option value2="fundamental2">6º</option>
             <option value3="fundamental2">7°A</option>
@@ -67,7 +67,7 @@ const Home = () => {
           </select>
         </label>
         <label>
-          <select className={style.button} name="ano" onChange={handleFilterChange} value={filter.ano}>
+          <select className={style.button} name="ensino médio" onChange={handleFilterChange} value={filter.ensino}>
             <option value="">Ensino Medio</option>
             <option value2="medio">1ºA</option>
             <option value3="medio">1ºB</option>
@@ -88,7 +88,7 @@ const Home = () => {
         </label>
 
         <label>
-          <select className={style.button} name="ano" onChange={handleFilterChange} value={filter.ano}>
+          <select className={style.button} name="etapa" onChange={handleFilterChange} value={filter.etapa}>
             <option value="">Etapa</option>
             <option value2="etapa">1º</option>
             <option value3="etapa">2º</option>
