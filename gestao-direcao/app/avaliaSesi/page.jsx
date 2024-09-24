@@ -1,17 +1,18 @@
 "use client"
 import { useState } from 'react';
-
-import style from './page.module.css';
-import Footer from '@/components/Footer';
+import style from "./page.module.css"
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
+<header/>
 const studentsData = [
-  { aluno: 'João', rm: '123', lp: 'A', mat: 'Matemática', cn: 'Biologia', ch: '10', ing: 'Inglês' },
-  { aluno: 'Maria', rm: '456', lp: 'B', mat: 'História', cn: 'Química', ch: '15', ing: 'Espanhol' },
-  { aluno: 'Pedro', rm: '789', lp: 'A', mat: 'Geografia', cn: 'Física', ch: '12', ing: 'Francês' },
-  { aluno: 'Ana', rm: '101', lp: 'C', mat: 'Português', cn: 'Matemática', ch: '8', ing: 'Italiano' },
-  { aluno: 'Lucas', rm: '202', lp: 'B', mat: 'Artes', cn: 'História', ch: '14', ing: 'Alemão' },
+  { aluno: 'João', rm: '123', },
+  { aluno: 'Maria', rm: '456',},
+  { aluno: 'Pedro', rm: '789',},
+  { aluno: 'Ana', rm: '101',},
+  { aluno: 'Lucas', rm: '202',},
 ];
+
 const Home = () => {
   const [filter, setFilter] = useState({
     ensino: '',
@@ -19,9 +20,7 @@ const Home = () => {
     ano: '',
   });
 
-
   const [filteredStudents, setFilteredStudents] = useState(studentsData);
-
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +29,6 @@ const Home = () => {
       [name]: value,
     }));
   };
-
 
   const handleFilter = () => {
     // Simulação de filtro baseado nos valores. Adapte conforme necessário.
@@ -42,18 +40,15 @@ const Home = () => {
     setFilteredStudents(newFilteredStudents);
   };
 
-
   return (
     <>
-    
-    <Header/>
 
-      <div className={style.all}>
-      
+        <Header/>
+
       <div className={style.filtro}>
-        <label className={style.fund1}>
-          <select className={style.test} name="ensino" onChange={handleFilterChange} value={filter.ensino}>
-            <option className={style.test} value="fundamental1">Ensino Fundamental 1</option>
+        <label>
+          <select className={style.button} name="ensino" onChange={handleFilterChange} value={filter.ensino}>
+            <option value="fundamental1">Ensino Fundamental 1</option>
             <option value2="fundamental1">1°</option>
             <option value3="fundamental1">2°</option>
             <option value4="fundamental1">3°</option>
@@ -61,8 +56,8 @@ const Home = () => {
             <option value6="fundamental1">5°</option>
           </select>
         </label>
-        <label className={style.fund2}>
-          <select className={style.test} name="etapa" onChange={handleFilterChange} value={filter.etapa}>
+        <label>
+          <select className={style.button} name="etapa" onChange={handleFilterChange} value={filter.etapa}>
             <option value="">Ensino Fundamental 2</option>
             <option value2="fundamental2">6º</option>
             <option value3="fundamental2">7°A</option>
@@ -73,8 +68,8 @@ const Home = () => {
             <option value8="fundamental2">9ºB</option>
           </select>
         </label>
-        <label className={style.ensinoMedio}>
-          <select className={style.test} name="ano" onChange={handleFilterChange} value={filter.ano}>
+        <label>
+          <select className={style.button} name="ano" onChange={handleFilterChange} value={filter.ano}>
             <option value="">Ensino Medio</option>
             <option value2="medio">1ºA</option>
             <option value3="medio">1ºB</option>
@@ -82,34 +77,42 @@ const Home = () => {
             <option value5="medio">3º</option>
           </select>
         </label>
-        <label className={style.etapa}>
-          <select className={style.test} name="etapa" onChange={handleFilterChange} value={filter.etapa}>
+
+        <label>
+          <select className={style.button} name="ano" onChange={handleFilterChange} value={filter.ano}>
             <option value="">Etapa</option>
-            <option value1="Etapa">1º ETAPA</option>
-            <option value2="Etapa">2º ETAPA</option>
-            <option value3="Etapa">3º ETAPA</option>
+            <option value2="etapa">1º</option>
+            <option value3="etapa">2º</option>
+            <option value4="etapa">3º</option>
           </select>
         </label>
 
         <div className={style.ano}>
-        <h1 className={style.test}>ANO:</h1>
-        <input className={style.test} type="number"/>
+        
+        <label>Ano</label>
+        
+          <input className={style.input} type="number"/>
+        
         </div>
 
-        <button className={style.test} onClick={handleFilter}>Filtrar</button>
+        <button className={style.button} onClick={handleFilter}>Filtrar</button>
+       
         </div>
-        </div>
-      <h1 className={style.text}>AVALIA SESI</h1>
+       
+        
+        <h1 className={style.text}>Avalia Sesi</h1>
+        
+      
+
+      <div className="info">
       <table className={style.table}>
         <thead>
           <tr>
             <th className={style.th}>Aluno</th>
             <th className={style.th}>RM</th>
-            <th className={style.th}>LP</th>
-            <th className={style.th}>Mat</th>
-            <th className={style.th}>CN</th>
-            <th className={style.th}>CH</th>
-            <th className={style.th}>ING</th>
+            <th className={style.th}>ETAPA</th>
+            <th className={style.th}>ANO</th>
+            <th className={style.th}>NOTA</th>
           </tr>
         </thead>
         <tbody>
@@ -117,26 +120,27 @@ const Home = () => {
             <tr key={index}>
               <td className={style.td}>{student.aluno}</td>
               <td className={style.td}>{student.rm}</td>
-              <td className={style.td}>{student.lp}</td>
-              <td className={style.td}>{student.mat}</td>
-              <td className={style.td}>{student.cn}</td>
-              <td className={style.td}>{student.ch}</td>
-              <td className={style.td}>{student.ing}</td>
+              <td className={style.td}>{student.etapa}</td>
+              <td className={style.td}>{student.ano}</td>
+              <td className={style.td}>{student.nota}</td>
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> 
 
-      <Footer/>
-     
+      <div className={style.botao}>
+        <button className={style.button} onClick={() => alert('Ação não implementada!')}>Editar</button>
+        <button className={style.button} onClick={() => alert('Ação não implementada!')}>Salvar</button>
+      </div>
+
+      </div>
+
+            <Footer/>
+
     </>
+    
   );
-
 
 };
 
-
 export default Home;
-
-
-
