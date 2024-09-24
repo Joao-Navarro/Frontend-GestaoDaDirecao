@@ -1,56 +1,100 @@
-
-import Image from "next/image"
+'use client'
+import { useState, useEffect } from 'react';
+import Head from 'next/head';
+import Image from 'next/image';
 import style from "@/app/page.module.css"
+const SignIn = () => {
+  const [usuario, setUsuario] = useState('');
+  const [senha, setSenha] = useState('');
+  const [msgError, setMsgError] = useState('');
+  const [senhaVisivel, setSenhaVisivel] = useState(false);
 
+  const entrar = () => {
+    // Definindo credenciais fixas
+    const usuarioFixo = 'Gestão';
+    const senhaFixa = '2024';
 
+    // Verificar se os campos estão preenchidos
+    if (!usuario || !senha) {
+      setMsgError('Por favor, preencha todos os campos.');
+      return;
+    }
 
+    // Comparar as credenciais inseridas com as fixas
+    if (usuario === usuarioFixo && senha === senhaFixa) {
+      const token = Math.random().toString(16).substr(2) + Math.random().toString(16).substr(2) + "Amamos_DS_;-)";
+      localStorage.setItem("token", token);
+      localStorage.setItem("userLogado", JSON.stringify({ userCad: usuarioFixo, senhaCad: senhaFixa }));
+      window.location.href = "../menu"; // Redirecionar após login
+    } else {
+      setMsgError('Usuário ou senha incorretos');
+      setUsuario('');
+      setSenha('');
+    }
+  };
+  return (
+    <div>
+      <Head>
+        <title>Login</title>
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+      </Head>
+      <header>
+        <a href="../index.html">
+        <Image className={style.img}  src="/LOGOSESI.png" width={500} height={300}/>
+        </a>
+      </header>
 
-function Home() {
+      <div className={style.container}>
+        <div className={style.card}>
+          <h1 className={style.p}>Entrar</h1>
 
-    return (
+          {msgError && <div id="msgError" style={{ color: 'red' }}>{msgError}</div>}
 
-        <>
+          <div className={style.labelFloat}>
+            <input className={style.input}
+              type="text"
+              id="usuario"
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
+              required
+              placeholder='Digite seu usuario'
+            />
+          </div>
 
-<div className={style.flex}>      
+          <div className={style.labelFloat}>
+            <input className={style.input}
+              type={senhaVisivel ? 'text' : 'password'}
+              id="senha"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              required
+              placeholder='Digite sua senha'
+            />
+            <i
+              className={`fa fa-eye${senhaVisivel ? '' : '-slash'}`}
+              aria-hidden="true"
+              onClick={() => setSenhaVisivel(!senhaVisivel)} // Alternar visibilidade da senha
+              style={{ cursor: 'pointer' }}
+            ></i>
+          </div>
 
+          <div className={style.justifyCenter}>
+            <button className={style.button} onClick={entrar}>Entrar</button>
+          </div>
 
-<div className={style.body}>
+          <div className={style.justifyCenter}>
+            <hr />
+          </div>
 
-<Image className={style.img} src="/LOGOSESI.png" width={500} height={300}/>
-
-</div>
-<div className={style.formContainer}>
-        <label className={style.text}>
-          EMAIL
-          <input className={style.form}
-            type="email" 
-            name="email"
-            required
-          />
-        </label>
-        <label className={style.text}>
-          SENHA
-          <input className={style.form}
-            type="password"
-            name="password"
-            required
-          />
-        </label>
+          
+        </div>
+      </div>
     </div>
-    <button className={style.button} type="submit">Sign in</button>
-
-    
-
-
-    </div>
+  );
+};
 
 
-        </>
-        
-    )
-
-   
-
-}
-
-export default Home
+export default SignIn;
