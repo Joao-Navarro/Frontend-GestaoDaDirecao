@@ -78,9 +78,18 @@ const Home = () => {
           </select>
         </label>
 
+        <label>
+          <select className={style.button} name="ano" onChange={handleFilterChange} value={filter.ano}>
+            <option value="">Etapa</option>
+            <option value2="etapa">1º</option>
+            <option value3="etapa">2º</option>
+            <option value4="etapa">3º</option>
+          </select>
+        </label>
+
         <div className={style.ano}>
         
-        <label className={style.button}>Ano</label>
+        <label>Ano</label>
         
           <input className={style.input} type="number"/>
         
