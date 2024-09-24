@@ -99,11 +99,11 @@ const Home = () => {
         <div className={style.ano}>
         
         <label>Ano</label>
-        
+
           <input className={style.input} type="number"/>
         
         </div>
-
+        
         <button className={style.button} onClick={handleFilter}>Filtrar</button>
        
         </div>
