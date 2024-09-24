@@ -100,7 +100,7 @@ const Home = () => {
         </div>
        
         
-        <h1 className={style.text}>Curso Técnico</h1>
+        <h1 className={style.text}>Avaliação Interna</h1>
         
       
 
