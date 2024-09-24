@@ -76,6 +76,17 @@ const Home = () => {
           </select>
         </label>
 
+
+        <label>
+          <select className={style.button} name="Tipo de prova" onChange={handleFilterChange} value={filter.tipodeprova}>
+            <option value="">Tipo de Prova</option>
+            <option value2="medio">Saresp</option>
+            <option value3="medio">Canguru</option>
+            <option value4="medio">Desbrava ENEM</option>
+
+          </select>
+        </label>
+
         <label>
           <select className={style.button} name="ano" onChange={handleFilterChange} value={filter.ano}>
             <option value="">Etapa</option>
@@ -108,9 +119,7 @@ const Home = () => {
           <tr>
             <th className={style.th}>Aluno</th>
             <th className={style.th}>RM</th>
-            <th className={style.th}>ETAPA</th>
-            <th className={style.th}>ANO</th>
-            <th className={style.th}>NOTA</th>
+           
           </tr>
         </thead>
         <tbody>
@@ -118,9 +127,7 @@ const Home = () => {
             <tr key={index}>
               <td className={style.td}>{student.aluno}</td>
               <td className={style.td}>{student.rm}</td>
-              <td className={style.td}>{student.etapa}</td>
-              <td className={style.td}>{student.ano}</td>
-              <td className={style.td}>{student.nota}</td>
+       
             </tr>
           ))}
         </tbody>
