@@ -49,41 +49,39 @@ const Home = () => {
         <label>
           <select className={style.button} name="ensino" onChange={handleFilterChange} value={filter.ensino}>
             <option value="fundamental1">Ensino Fundamental 1</option>
-            <option value2="fundamental1">1°</option>
-            <option value3="fundamental1">2°</option>
-            <option value4="fundamental1">3°</option>
-            <option value5="fundamental1">4°</option>
-            <option value6="fundamental1">5°</option>
+            <option value1="fundamental1">3°</option>
+            <option value2="fundamental1">4°</option>
+            <option value3="fundamental1">5°</option>
           </select>
         </label>
         <label>
-          <select className={style.button} name="etapa" onChange={handleFilterChange} value={filter.etapa}>
-            <option value="">Ensino Fundamental 2</option>
-            <option value2="fundamental2">6º</option>
-            <option value3="fundamental2">7°A</option>
-            <option value4="fundamental2">7°B</option>
-            <option value5="fundamental2">8°A</option>
-            <option value6="fundamental2">8°B</option>
-            <option value7="fundamental2">9ºA</option>
-            <option value8="fundamental2">9ºB</option>
+          <select className={style.button} name="ensino" onChange={handleFilterChange} value={filter.ensino}>
+            <option value4="">Ensino Fundamental 2</option>
+            <option value5="fundamental2">6º</option>
+            <option value6="fundamental2">7°A</option>
+            <option value7="fundamental2">7°B</option>
+            <option value8="fundamental2">8°A</option>
+            <option value9="fundamental2">8°B</option>
+            <option value10="fundamental2">9ºA</option>
+            <option value11="fundamental2">9ºB</option>
           </select>
         </label>
         <label>
-          <select className={style.button} name="ano" onChange={handleFilterChange} value={filter.ano}>
-            <option value="">Ensino Medio</option>
-            <option value2="medio">1ºA</option>
-            <option value3="medio">1ºB</option>
-            <option value4="medio">2º</option>
-            <option value5="medio">3º</option>
+          <select className={style.button} name="ensino" onChange={handleFilterChange} value={filter.ensino}>
+            <option value12="">Ensino Medio</option>
+            <option value13="medio">1ºA</option>
+            <option value14="medio">1ºB</option>
+            <option value15="medio">2º</option>
+            <option value16="medio">3º</option>
           </select>
         </label>
 
         <label>
-          <select className={style.button} name="ano" onChange={handleFilterChange} value={filter.ano}>
+          <select className={style.button} name="etapa" onChange={handleFilterChange} value={filter.etapa}>
             <option value="">Etapa</option>
-            <option value2="etapa">1º</option>
-            <option value3="etapa">2º</option>
-            <option value4="etapa">3º</option>
+            <option value1="etapa">1º</option>
+            <option value2="etapa">2º</option>
+            <option value3="etapa">3º</option>
           </select>
         </label>
 
@@ -91,7 +89,7 @@ const Home = () => {
         
         <label>Ano</label>
         
-          <input className={style.input} type="number"/>
+          <input className={style.input} value={filter.ano} type="number"/>
         
         </div>
 
