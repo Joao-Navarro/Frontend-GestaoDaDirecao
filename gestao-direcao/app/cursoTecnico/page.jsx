@@ -129,6 +129,7 @@ const Home = () => {
       </table> 
 
       <div className={style.botao}>
+        
         <button className={style.button} onClick={() => alert('Ação não implementada!')}>Editar</button>
         <button className={style.button} onClick={() => alert('Ação não implementada!')}>Salvar</button>
       </div>
