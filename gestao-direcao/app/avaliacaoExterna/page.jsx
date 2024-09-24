@@ -67,7 +67,7 @@ const Home = () => {
           </select>
         </label>
         <label>
-          <select className={style.button} name="ensino médio" onChange={handleFilterChange} value={filter.ensino}>
+          <select className={style.button} name="ensino" onChange={handleFilterChange} value={filter.ensino}>
             <option value="">Ensino Medio</option>
             <option value2="medio">1ºA</option>
             <option value3="medio">1ºB</option>
