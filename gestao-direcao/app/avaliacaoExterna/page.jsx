@@ -109,7 +109,7 @@ const Home = () => {
         </div>
        
         
-        <h1 className={style.text}>Avaliaão Externa</h1>
+        <h1 className={style.text}>Avaliação Externa</h1>
         
       
 
