@@ -1,117 +1,117 @@
-.banner {
-
-    position: relative;
-    
-    z-index: -1;
+.text{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
+.filtro{
 
-.body {
+  display: flex;
 
-    display: flex;
+  justify-content: space-around;
 
-    flex-wrap: wrap;
+  width: 100%;
 
-    width: 80%;
+  align-items: center;
 
-    height: 100px;
-   
+  flex-direction: row;
 
+  margin-top: 3%;
+
+  margin-bottom: 3%;
 }
-
 
 .button {
 
+  display: flex;
+
+  margin-right: 5%;
+
+  background-color: #878787;
   
-    padding: 20px;
-  
-    border-radius: 10px;
-  
-    border: 1px;
-  
-    color: #000000;
-  
-    display: flex;
-  
-    align-items: center;
-  
-    flex-direction: row;
+  border-radius: 5%;
 
-    justify-content: space-around;
+  padding: 10px;
 
-    width: 100%;
-  
-  }
-  
-
-
-
-.input{
-    color: #000000;
-    border-radius: 15px;
-}
-
-.teste {
-
-    appearance: none;
-    border-radius: 15px;
-    background-color: grey;
-    color: #333;
-    margin-right: 2%;
-    padding: 5px;
-    border-radius: 15px;
-    display: flex;
-
-    justify-content: space-around;
-
-
+  border-radius: 10px;
 
 
 }
 
+.button:hover {
 
+  background-color: #a3a1a1;
 
-.titulo{
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    justify-content: space-around;
-    margin-left: 46%;
+  cursor: pointer;
+
+}
+
+.ano {
+
+  display: flex;
+
+  background-color: #878787;
+
+  padding: 10px;
+
+  border-radius: 10px;
+
+  justify-content: space-around;
+
+  width: 15%;
+}
+
+.input {
+
+  border-radius: 5px;
+
+  border-color: solid black 2px;
+
+  text-align: center;
+
+  background-color: #acacac;
+
 }
 
 
 
+.botao {
 
+  margin-bottom: 5%;
+
+  display: flex;
+
+  justify-content: space-around;
+
+}
 
 .table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 16px;
-    text-align: left;
- 
-  }
- 
-  .th, .td {
-    padding: 8px;
-    border: 1px solid #000000;
-  }
- 
-  .th {
-    background-color: #f4f4f4;
-    border-bottom: 2px solid #000000;
-  }
- 
-  .td {
-    border-bottom: 1px solid #000000;
-  }
- 
-  .tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
- 
-  .tr:hover {
-    background-color: #f1f1f1;
-  }
- 
-  
+
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 16px;
+  text-align: left;
+}
+
+.th, .td {
+  padding: 10px;
+  border: 1px solid #000000;
+}
+
+.th {
+  background-color: #f4f4f4;
+  border-bottom: 2px solid #000000;
+}
+
+.td {
+  border-bottom: 1px solid #000000;
+}
+
+.tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.tr:hover {
+  background-color: #f1f1f1;
+}
