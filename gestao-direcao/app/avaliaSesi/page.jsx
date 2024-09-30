@@ -6,11 +6,11 @@ import Footer from '@/components/Footer';
 
 <header/>
 const studentsData = [
-  { aluno: 'João', rm: '123', },
-  { aluno: 'Maria', rm: '456',},
-  { aluno: 'Pedro', rm: '789',},
-  { aluno: 'Ana', rm: '101',},
-  { aluno: 'Lucas', rm: '202',},
+  { aluno: 'João', rm: '123', estapa: '1' },
+  { aluno: 'Maria', rm: '456', estapa: '2'},
+  { aluno: 'Pedro', rm: '789', estapa: '3'},
+  { aluno: 'Ana', rm: '101', estapa: '1'},
+  { aluno: 'Lucas', rm: '202', estapa: '2'},
 ];
 
 const Home = () => {
@@ -89,7 +89,7 @@ const Home = () => {
         
         <label>Ano</label>
         
-          <input className={style.input} value={filter.ano} type="number"/>
+          <input className={style.input} value={filter.ano} type='number'/>
         
         </div>
 
