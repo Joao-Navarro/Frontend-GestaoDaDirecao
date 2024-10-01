@@ -5,10 +5,10 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 const studentsData = [
-  { aluno: 'João', rm: '123', etapa: '3', ano: '2023', nota: '8.5', ensino: '5°' },
-  { aluno: 'Maria', rm: '456', etapa: '4', ano: '2024', nota: '9.0', ensino: '6°' },
-  { aluno: 'Pedro', rm: '789', etapa: '5', ano: '2025', nota: '7.0', ensino: '7°A' },
-  { aluno: 'Ana', rm: '101', etapa: '1', ano: '2026', nota: '6.5', ensino: '3°' },
+  { aluno: 'João', rm: '123', etapa: '3', ano: '2023', nota: '8.5', ensino: '1°A' },
+  { aluno: 'Maria', rm: '456', etapa: '4', ano: '2024', nota: '9.0', ensino: '1°B' },
+  { aluno: 'Pedro', rm: '789', etapa: '5', ano: '2025', nota: '7.0', ensino: '2°' },
+  { aluno: 'Ana', rm: '101', etapa: '1', ano: '2026', nota: '6.5', ensino: '3°EM' },
   { aluno: 'Lucas', rm: '202', etapa: '2', ano: '2027', nota: '9.5', ensino: '4°' },
 ];
 
@@ -49,10 +49,10 @@ const Home = () => {
       case '7°A':
       case '7°B':
         return ['6', '7A', '7B', '8A', '8B', '9A', '9B'];
-      case '1ºA':
-      case '1ºB':
-      case '2º':
-      case '3º':
+      case '1°A':
+      case '1°B':
+      case '2°':
+      case '3°':
         return ['1A', '1B', '2', '3'];
       default:
         return [];
@@ -83,22 +83,22 @@ const Home = () => {
         <label>
           <select className={style.button} name="ensino" onChange={handleFilterChange} value={filter.ensino}>
             <option value4="">Ensino Fundamental 2</option>
-            <option value5="fundamental2">6º</option>
+            <option value5="fundamental2">6°</option>
             <option value6="fundamental2">7°A</option>
             <option value7="fundamental2">7°B</option>
             <option value8="fundamental2">8°A</option>
             <option value9="fundamental2">8°B</option>
-            <option value10="fundamental2">9ºA</option>
-            <option value11="fundamental2">9ºB</option>
+            <option value10="fundamental2">9°A</option>
+            <option value11="fundamental2">9°B</option>
           </select>
         </label>
         <label>
           <select className={style.button} name="ensino" onChange={handleFilterChange} value={filter.ensino}>
             <option value12="">Ensino Medio</option>
-            <option value13="medio">1ºA</option>
-            <option value14="medio">1ºB</option>
-            <option value15="medio">2º</option>
-            <option value16="medio">3º</option>
+            <option value13="medio">1°A</option>
+            <option value14="medio">1°B</option>
+            <option value15="medio">2°EM</option>
+            <option value16="medio">3°EM</option>
           </select>
         </label>
 
