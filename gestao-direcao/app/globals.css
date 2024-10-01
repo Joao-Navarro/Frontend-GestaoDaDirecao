@@ -16,7 +16,7 @@
 
   flex-direction: row;
 
-  justify-content: space-around;
+  justify-content: space-between;
 
   width: 100%;
 
@@ -34,17 +34,15 @@
 
   display: flex;
 
-  justify-content: start;
-
-  margin-right: 10%;
-
   margin-top: 1%;
 
   width: 30px;
 
   height: 30px;
 
-  margin-bottom: 2%;
+  margin-bottom: 8%;
+
+  margin-left: 2%;
 }
 
 .logo {
@@ -53,11 +51,9 @@
 
   justify-content: end;
 
-  margin-left: 60%;
-
-
-
   margin-bottom: 2%;
+
+  margin-right: 2%;
 
 }
 
