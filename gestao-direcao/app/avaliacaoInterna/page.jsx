@@ -134,7 +134,7 @@ const Home = () => {
         </div>
        
        
-        <h1 className={style.text}>Avalia Sesi</h1>
+        <h1 className={style.text}>Avaliação Interna</h1>
 
 
       <div className="info">
