@@ -1,6 +1,7 @@
 "use client"
 
 import Image from 'next/image';
+import '@/app/globals.css';
 
 
 function Header() {
