@@ -1,27 +1,92 @@
-
 "use client";
-import { useState } from 'react';
+import React, { useState } from 'react';
 import style from "./page.module.css";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-const studentsData = [
-  { aluno: 'João', rm: '123', ano: '2023', nota: '8.5', ensino: '1°A'  },
-  { aluno: 'Maria', rm: '456', ano: '2024', nota: '9.0', ensino: '2°EM'  },
-  { aluno: 'Pedro', rm: '789', ano: '2025', nota: '7.0', ensino: '3°EM'  },
-  { aluno: 'Ana', rm: '101', ano: '2026', nota: '6.5', ensino: '4°'  },
-  { aluno: 'Lucas', rm: '202', ano: '2027', nota: '9.5', ensino: '8°B'  },
-];
-
 const Home = () => {
+  const [ensinoTurma, setEnsinoTurma] = useState(''); 
+  const [ano, setAno] = useState('');
+
+  const getFilter = async () => {
+    if (ensinoTurma && ano) {
+      const url = `http://localhost:3001/alunos/${ensinoTurma}/${ano}`
+ console.log(`Constructed URL: ${url}`);
+      console.log('Current state:', ensinoTurma, ano);
+
+      try {
+        const response = await fetch(url);
+        console.log(response);
+        const resData = await response.json();
+        console.log(resData);
+
+  
+        const table = document.createElement('table');
+        table.border = '1'; // add a border to the table
+
+
+        const headerRow = table.insertRow(0);
+        const headers = Object.keys(resData[0]);
+        headers.forEach((header, index) => {
+          const th = document.createElement('th');
+          if (header === 'rm') {
+            th.innerHTML = 'RM';
+          } else if (header === 'Turma') {
+            th.innerHTML = 'Turma';
+          } else if (header === 'PorcentagemAcertoIngles') {
+            th.innerHTML = 'Porcentagem Acerto Inglês';
+          } else if (header === 'Ebep' || header === 'ComDeficiencia') {
+            th.innerHTML = header.replace('Ebep', 'E.B.E.P').replace('ComDeficiencia', 'Com Deficiência');
+          } else {
+            th.innerHTML = header.replace('1S-', '1ª Etapa ').replace('2S-', '2ª Etapa ').replace('3S-', '3ª Etapa ').replace('CH', 'Ciências Humanas').replace('CN', 'Ciências Naturais').replace('LI', 'Língua Inglesa').replace('LP', 'Língua Portuguesa').replace('MAT', 'Matemática');
+          }
+          headerRow.appendChild(th);
+        });
+
+        // Create rows for each data item
+        resData.forEach((item) => {
+          const row = table.insertRow();
+          headers.forEach((header) => {
+            const cell = row.insertCell();
+            if (item[header] === null) {
+              cell.innerHTML = "Não informado";
+            } else if (header === 'Ebep' || header === 'ComDeficiencia') {
+              cell.innerHTML = item[header] === 'TRUE' ? 'Sim' : 'Não';
+            } else {
+              cell.innerHTML = item[header];
+            }
+          });
+        });
+
+        // Add the table to the #descricao div
+        document.getElementById("descricao").innerHTML = '';
+        document.getElementById("descricao").appendChild(table);
+      } catch (error) {
+        console.log('error', error);
+      }
+    } else {
+      console.log('Please select all options');
+    }
+  }
+
+  const handleEnsinoTurmaChange = (e) => {
+    console.log('etapa changed:', e.target.value);
+    setEnsinoTurma(e.target.value);
+  }
+
+
+  const handleAnoChange = (e) => {
+    console.log('ano changed:', e.target.value);
+    setAno(e.target.value);
+  }
+
   const [filter, setFilter] = useState({
     ensino: '',
     etapa: '',
     ano: '',
   });
-  
-  const [filteredStudents, setFilteredStudents] = useState(studentsData);
-  const [availableEtapas, setAvailableEtapas] = useState([]);
+
+ 
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -40,25 +105,7 @@ const Home = () => {
     }
   };
 
-  const getEtapas = (ensino) => {
-    switch (ensino) {
-      case '3°':
-      case '4°':
-      case '5°':
-        return ['3', '4', '5'];
-      case '6°':
-      case '7°A':
-      case '7°B':
-        return ['6', '7A', '7B', '8A', '8B', '9A', '9B'];
-      case '1°A':
-      case '1°B':
-      case '2°':
-      case '3°':
-        return ['1A', '1B', '2', '3'];
-      default:
-        return [];
-    }
-  };
+
 
   const handleFilter = () => {
     const newFilteredStudents = studentsData.filter((student) =>
@@ -74,77 +121,58 @@ const Home = () => {
       <Header />
       <div className={style.filtro}>
         <label>
-          <select className={style.button} name="ensino" onChange={handleFilterChange} value={filter.ensino}>
-            <option value="fundamental1">Ensino Fundamental 1</option>
-            <option value18="fundamental1">1°</option>
-            <option value17="fundamental1">2°</option>
-            <option value1="fundamental1">3°</option>
-            <option value2="fundamental1">4°</option>
-            <option value3="fundamental1">5°</option>
+          <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
+            <option value="">EF1</option>
+            <option value="1%25E.F">1º Ano</option>
+            <option value="2%25E.F">2º Ano</option>
+            <option value="3%25E.F">3º Ano</option>
+            <option value="4%25E.F">4º Ano</option>
+            <option value="5%25E.F">5º Ano</option >
           </select>
         </label>
+
+
         <label>
-          <select className={style.button} name="ensino" onChange={handleFilterChange} value={filter.ensino}>
-            <option value4="">Ensino Fundamental 2</option>
-            <option value5="fundamental2">6°</option>
-            <option value6="fundamental2">7°A</option>
-            <option value7="fundamental2">7°B</option>
-            <option value8="fundamental2">8°A</option>
-            <option value9="fundamental2">8°B</option>
-            <option value10="fundamental2">9°A</option>
-            <option value11="fundamental2">9°B</option>
+          <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
+            <option value="">EF2</option>
+            <option value="6%25A%25">6º Ano A</option>
+            <option value="6%25B%25">6º Ano B</option>
+            <option value="7%25A%25">7º Ano A</option>
+            <option value="7%25B%25">7º Ano B</option>
+            <option value="8%25A%25">8º Ano A</option>
+            <option value="8%25B%25">8º Ano B</option>
+            <option value="9%25A%25">9º Ano A</option>
+            <option value="9%25B%25">9º Ano B</option>
           </select>
         </label>
+
         <label>
-          <select className={style.button} name="ensino" onChange={handleFilterChange} value={filter.ensino}>
-            <option value12="">Ensino Medio</option>
-            <option value13="medio">1°A</option>
-            <option value14="medio">1°B</option>
-            <option value15="medio">2°EM</option>
-            <option value16="medio">3°EM</option>
+          <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
+            <option value="">EM</option>
+            <option value="1%25A%25">1º Ano A</option>
+            <option value="1%25B%25">1º Ano B</option>
+            <option value="2%25E.M">2º Ano</option>
+            <option value="3%25E.M">3º Ano</option>
           </select>
         </label>
 
 
         <div className={style.ano}>
-        
-        <label>Ano</label>
-        
-        <input className={style.input} value={filter.ano} type='number' onChange={handleFilterChange} name="ano" />
-        
+          <label>Ano</label>
+          <input className={style.input} value={ano} type='number' onChange={handleAnoChange} name="ano" />
         </div>
 
-        <button className={style.button} onClick={handleFilter}>Filtrar</button>
-       
-        </div>
-       
-        
-        <h1 className={style.text}>Avalia Sesi</h1>
+
+
+        <button className={style.button} onClick={getFilter} disabled={!ensinoTurma || !ano}>Filtrar</button>
+
+
+      </div>
+
+      <h1 className={style.text}>Gerenciamento de Alunos</h1>
 
       <div className="info">
-        <table className={style.table}>
-          <thead>
-            <tr>
-              <th className={style.th}>Aluno</th>
-              <th className={style.th}>RM</th>
-              <th className={style.th}>ENSINO</th>
-              <th className={style.th}>ANO</th>
-              <th className={style.th}>NOTA</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredStudents.map((student, index) => (
-              <tr key={index}>
-                <td className={style.td}>{student.aluno}</td>
-                <td className={style.td}>{student.rm}</td>
-                <td className={style.td}>{student.ensino}</td>
-                <td className={style.td}>{student.ano}</td>
-                <td className={style.td}>{student.nota}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
+        <div className={style.table} id="descricao"></div>
         <div className={style.botao}>
           <button className={style.button} onClick={() => alert('Ação não implementada!')}>Editar</button>
           <button className={style.button} onClick={() => alert('Ação não implementada!')}>Salvar</button>
