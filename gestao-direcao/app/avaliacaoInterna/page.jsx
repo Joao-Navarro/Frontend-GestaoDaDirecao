@@ -3,6 +3,10 @@ import { useState } from 'react';
 import style from "./page.module.css";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import React, { useState } from "react";
+import Footer from "../../Components/Footer";
+
+
 
 
 const studentsData = [
@@ -15,6 +19,8 @@ const studentsData = [
 
 
 const Home = () => {
+   
+
   const [filter, setFilter] = useState({
     ensino: '',
     etapa: '',
@@ -78,6 +84,12 @@ const Home = () => {
   return (
     <>
       <Header />
+
+    
+
+
+
+
       <div className={style.filtro}>
         <label>
           <select className={style.button} name="ensino" onChange={handleFilterChange} value={filter.ensino}>
