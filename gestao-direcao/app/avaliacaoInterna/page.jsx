@@ -1,13 +1,8 @@
 "use client";
-import { useState } from 'react';
+import React, { useState } from 'react';
 import style from "./page.module.css";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import React, { useState } from "react";
-import Footer from "../../Components/Footer";
-
-
-
 
 const studentsData = [
   { aluno: 'João', rm: '123', etapa: '3', ano: '2023', nota: '8.5', ensino: '1°A' },
@@ -17,19 +12,158 @@ const studentsData = [
   { aluno: 'Lucas', rm: '202', etapa: '2', ano: '2027', nota: '9.5', ensino: '4°' },
 ];
 
-
 const Home = () => {
-   
+  const [ensinoTurma, setEnsinoTurma] = useState(''); // add state for each select
+  const [etapa, setEtapa] = useState('');
+  const [ano, setAno] = useState('');
+
+  const getFilter = async () => {
+    if (ensinoTurma && etapa && ano) {
+      const url = `http://localhost:3001/${ensinoTurma}/${etapa}/${ano}`;  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
+      console.log(`Constructed URL: ${url}`);
+      console.log('Current state:', ensinoTurma, etapa, ano);
+      
+
+      
+
+      try {
+        const response = await fetch(url);
+        console.log(response);
+        const resData = await response.json();
+        console.log(resData);
+
+        // Create a table element
+        // Create a table element
+        const table = document.createElement('table');
+        table.border = '1'; // add a border to the table
+
+        // Create a header row
+        const headerRow = table.insertRow(0);
+        const headers = Object.keys(resData[0]);
+        headers.forEach((header, index) => {
+          const th = document.createElement('th');
+          if (header === 'NomeAluno') {
+              th.innerHTML = 'Nome do Aluno';
+          } else {
+              th.innerHTML = header.replace('1Etapa', '1ª Etapa ').replace('AR', 'Artes').replace('His', 'Historia').replace('CH', 'Ciências Humanas').replace('CN', 'Ciências Naturais').replace('EF', 'Educação Física').replace('LI', 'Língua Inglesa').replace('LP', 'Língua Portuguesa').replace('MAT', 'Matemática').replace('EIXO', 'Eixo').replace('PR', 'Programação').replace('GEO', 'Geografia').replace('ROB', 'Robótica');
+          }
+          headerRow.appendChild(th);
+        });
+
+        // Create rows for each data item
+        resData.forEach((item) => {
+          const row = table.insertRow();
+          headers.forEach((header) => {
+            const cell = row.insertCell();
+            if (item[header] === null) {
+              cell.innerHTML = "Não informado";
+            } else if (header === 'Ebep' || header === 'ComDeficiencia') {
+              cell.innerHTML = item[header] === 'TRUE' ? 'Sim' : 'Não';
+            } else {
+              cell.innerHTML = item[header];
+            }
+          });
+        });
+
+        // Add the table to the #descricao div
+        document.getElementById("descricao").innerHTML = '';
+        document.getElementById("descricao").appendChild(table);
+      } catch (error) {
+        console.log('error', error);
+      }
+    } else {
+      console.log('Please select all options');
+    }
+  }
+
+
+  const Home = () => {
+    const [ensinoTurma, setEnsinoTurma] = useState(''); // add state for each select
+    const [etapa, setEtapa] = useState('');
+    const [ano, setAno] = useState('');
+  
+    const getFilter = async () => {
+      if (ensinoTurma && etapa && ano) {
+        const url = `http://localhost:3001/${ensinoTurma}/${etapa}/${ano}`;  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
+        console.log(`Constructed URL: ${url}`);
+        console.log('Current state:', ensinoTurma, etapa, ano);
+        
+  
+        
+  
+        try {
+          const response = await fetch(url);
+          console.log(response);
+          const resData = await response.json();
+          console.log(resData);
+  
+          // Create a table element
+          // Create a table element
+          const table = document.createElement('table');
+          table.border = '1'; // add a border to the table
+  
+          // Create a header row
+          const headerRow = table.insertRow(0);
+          const headers = Object.keys(resData[0]);
+          headers.forEach((header, index) => {
+            const th = document.createElement('th');
+            if (header === 'NomeAluno') {
+                th.innerHTML = 'Nome do Aluno';
+            } else {
+                th.innerHTML = header.replace('1Etapa', '1ª Etapa ').replace('AR', 'Artes').replace('CCE', 'CCE').replace('CH', 'Ciências Humanas').replace('CN', 'Ciências Naturais').replace('EF', 'Educação Física').replace('LI', 'Língua Inglesa').replace('LP', 'Língua Portuguesa').replace('MAT', 'Matemática').replace('PF', 'Pensamento Filosófico').replace('PR', 'Pensamento Religioso').replace('PSC', 'Psicologia').replace('ROB', 'Robótica');
+            }
+            headerRow.appendChild(th);
+          });
+  
+          // Create rows for each data item
+          resData.forEach((item) => {
+            const row = table.insertRow();
+            headers.forEach((header) => {
+              const cell = row.insertCell();
+              if (item[header] === null) {
+                cell.innerHTML = "Não informado";
+              } else if (header === 'Ebep' || header === 'ComDeficiencia') {
+                cell.innerHTML = item[header] === 'TRUE' ? 'Sim' : 'Não';
+              } else {
+                cell.innerHTML = item[header];
+              }
+            });
+          });
+  
+          // Add the table to the #descricao div
+          document.getElementById("descricao").innerHTML = '';
+          document.getElementById("descricao").appendChild(table);
+        } catch (error) {
+          console.log('error', error);
+        }
+      } else {
+        console.log('Please select all options');
+      }
+    }
+  // add event handlers for each select
+  const handleEnsinoTurmaChange = (e) => {
+    console.log('etapa changed:', e.target.value);
+    setEnsinoTurma(e.target.value);
+  }
+
+  const handleEtapaChange = (e) => {
+    console.log('ensinoTurma changed:', e.target.value);
+    setEtapa(e.target.value);
+  }
+
+  const handleAnoChange = (e) => {
+    console.log('ano changed:', e.target.value);
+    setAno(e.target.value);
+  }
 
   const [filter, setFilter] = useState({
     ensino: '',
     etapa: '',
     ano: '',
   });
- 
+
   const [filteredStudents, setFilteredStudents] = useState(studentsData);
   const [availableEtapas, setAvailableEtapas] = useState([]);
-
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -37,7 +171,6 @@ const Home = () => {
       ...prevFilter,
       [name]: value,
     }));
-
 
     // Atualiza as etapas disponíveis com base no ensino selecionado
     if (name === 'ensino') {
@@ -48,7 +181,6 @@ const Home = () => {
       setAvailableEtapas(getEtapas(value));
     }
   };
-
 
   const getEtapas = (ensino) => {
     switch (ensino) {
@@ -70,7 +202,6 @@ const Home = () => {
     }
   };
 
-
   const handleFilter = () => {
     const newFilteredStudents = studentsData.filter((student) =>
       (filter.ensino ? student.ensino === filter.ensino : true) &&
@@ -80,107 +211,78 @@ const Home = () => {
     setFilteredStudents(newFilteredStudents);
   };
 
-
   return (
     <>
       <Header />
-
-    
-
-
-
-
       <div className={style.filtro}>
         <label>
-          <select className={style.button} name="ensino" onChange={handleFilterChange} value={filter.ensino}>
-            <option value="fundamental1">Ensino Fundamental 1</option>
-            <option value1="fundamental1">3°</option>
-            <option value2="fundamental1">4°</option>
-            <option value3="fundamental1">5°</option>
+        <select className={style.button} value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
+                <option value="">EF1</option>
+                <option value="notasEF1/1%25E.F">1º Ano</option>
+                <option value="notasEF1/2%25E.F">2º Ano</option>
+                <option value="notasEF1/3%25E.F">3º Ano</option>
+                <option value="notasEF1/4%25E.F">4º Ano</option>
+                <option value="notasEF1/5%25E.F">5º Ano</option>
+            </select>
+
+
+          <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
+            <option value="">EF2</option>
+            <option value="6%25A%25">6º Ano A</option>
+            <option value="6%25B%25">6º Ano B</option>
+            <option value="7%25A%25">7º Ano A</option>
+            <option value="7%25B%25">7º Ano B</option>
+            <option value="8%25A%25">8º Ano A</option>
+            <option value="8%25B%25">8º Ano B</option>
+            <option value="9%25A%25">9º Ano A</option>
+            <option value="9%25B%25">9º Ano B</option>
           </select>
-        </label>
-        <label>
-          <select className={style.button} name="ensino" onChange={handleFilterChange} value={filter.ensino}>
-            <option value4="">Ensino Fundamental 2</option>
-            <option value5="fundamental2">6°</option>
-            <option value6="fundamental2">7°A</option>
-            <option value7="fundamental2">7°B</option>
-            <option value8="fundamental2">8°A</option>
-            <option value9="fundamental2">8°B</option>
-            <option value10="fundamental2">9°A</option>
-            <option value11="fundamental2">9°B</option>
+
+          <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
+            <option value="">EM</option>
+            <option value="1%25A%25">1º Ano A</option>
+            <option value="1%25B%25">1º Ano B</option>
+            <option value="2%25E.M">2º Ano</option>
+            <option value="3%25E.M">3º Ano</option>
+
           </select>
-        </label>
-        <label>
-          <select className={style.button} name="ensino" onChange={handleFilterChange} value={filter.ensino}>
-            <option value12="">Ensino Medio</option>
-            <option value13="medio">1°A</option>
-            <option value14="medio">1°B</option>
-            <option value15="medio">2°EM</option>
-            <option value16="medio">3°EM</option>
-          </select>
+
+
         </label>
 
 
         <label>
-          <select className={style.button} name="etapa" onChange={handleFilterChange} value={filter.etapa}>
-            <option value="">Etapa</option>
-            <option value1="etapa">1</option>
-            <option value2="etapa">2</option>
-            <option value3="etapa">3</option>
+          <select className={style.button} name="etapa" onChange={handleEtapaChange} value={etapa}>
+            <option value="">Selecione</option>
+            <option value="%251etapa">1</option>
+            <option value="%252etapa">2</option>
+            <option value="%253etapa">3</option>
           </select>
         </label>
-
 
         <div className={style.ano}>
-       
-        <label>Ano</label>
-       
-        <input className={style.input} value={filter.ano} type='number' onChange={handleFilterChange} name="ano" />
-       
+          <label>Ano</label>
+          <input className={style.input} value={ano} type='number' onChange={handleAnoChange} name="ano" />
         </div>
 
-
-        <button className={style.button} onClick={handleFilter}>Filtrar</button>
-       
-        </div>
-       
-       
-        <h1 className={style.text}>Avaliação Interna</h1>
+        <button onClick={getFilter} disabled={!ensinoTurma || !etapa || !ano}>
+          Filtrar
+        </button>
 
 
-      <div className="info">
+       </div>
+
+      <h1 className={style.text}>Avalia Sesi</h1>
+
+      {/* <div className="info">
         <table className={style.table}>
           <thead>
             <tr>
               <th className={style.th}>Aluno</th>
               <th className={style.th}>RM</th>
-              <th className={style.th}>LP</th>
-              <th className={style.th}>MAT</th>
-              <th className={style.th}>CN</th>
-              <th className={style.th}>CH</th>
-              <th className={style.th}>ART</th>
-              <th className={style.th}>ING</th>
-              <th className={style.th}>ROB</th>
-              <th className={style.th}>EF</th>
-              <th className={style.th}>PF</th>
-              <th className={style.th}>CCE</th>
-              <th className={style.th}>PROG</th>
-              <th className={style.th}>PSC</th>
-              <th className={style.th}>EIXO</th>
-              <th className={style.th}>GEO</th>
-              <th className={style.th}>HIST</th>
-              <th className={style.th}>BIO</th>
-              <th className={style.th}>QUIM</th>
-              <th className={style.th}>FISICA</th>
-              <th className={style.th}>EMP</th>
-              <th className={style.th}>TPT</th>
-              <th className={style.th}>SOCIO</th>
-              <th className={style.th}>FILO</th>
-              <th className={style.th}>TA</th>
-              <th className={style.th}>TAB</th>
-              <th className={style.th}>TAQ</th>
-
+              <th className={style.th}>ETAPA</th>
+              <th className={style.th}>ANO</th>
+              <th className={style.th}>NOTA</th>
             </tr>
           </thead>
           <tbody>
@@ -188,39 +290,22 @@ const Home = () => {
               <tr key={index}>
                 <td className={style.td}>{student.aluno}</td>
                 <td className={style.td}>{student.rm}</td>
-                <td className={style.td}>{student.lp}</td>
-                <td className={style.td}>{student.mat}</td>
-                <td className={style.td}>{student.cn}</td>
-                <td className={style.td}>{student.ch}</td>
-                <td className={style.td}>{student.art}</td>
-                <td className={style.td}>{student.ing}</td>
-                <td className={style.td}>{student.rob}</td>
-                <td className={style.td}>{student.edfisica}</td>
-                <td className={style.td}>{student.praticasfilosoficas}</td>
-                <td className={style.td}>{student.cce}</td>
-                <td className={style.td}>{student.prog}</td>
-                <td className={style.td}>{student.psc}</td>
-                <td className={style.td}>{student.eixo}</td>
-                <td className={style.td}>{student.geo}</td>
-                <td className={style.td}>{student.hist}</td>
-                <td className={style.td}>{student.bio}</td>
-                <td className={style.td}>{student.quim}</td>
-                <td className={style.td}>{student.fisica}</td>
-                <td className={style.td}>{student.emp}</td>
-                <td className={style.td}>{student.tpt}</td>
-                <td className={style.td}>{student.socio}</td>
-                <td className={style.td}>{student.filo}</td>
-                <td className={style.td}>{student.ta}</td>
-                <td className={style.td}>{student.tab}</td>
-                <td className={style.td}>{student.taq}</td>
-              
+                <td className={style.td}>{student.etapa}</td>
+                <td className={style.td}>{student.ano}</td>
+                <td className={style.td}>{student.nota}</td>
               </tr>
             ))}
           </tbody>
         </table>
-
-
         <div className={style.botao}>
+          <button className={style.button} onClick={() => alert('Ação não implementada!')}>Editar</button>
+          <button className={style.button} onClick={() => alert('Ação não implementada!')}>Salvar</button>
+        </div>
+      </div> */}
+
+      <div className="info">
+      <div className={style.table} id="descricao"></div>
+      <div className={style.botao}>
           <button className={style.button} onClick={() => alert('Ação não implementada!')}>Editar</button>
           <button className={style.button} onClick={() => alert('Ação não implementada!')}>Salvar</button>
         </div>
@@ -229,6 +314,12 @@ const Home = () => {
     </>
   );
 };
-
+};
 
 export default Home;
+
+
+
+
+
+
