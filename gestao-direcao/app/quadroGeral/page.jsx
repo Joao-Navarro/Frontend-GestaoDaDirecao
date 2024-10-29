@@ -207,7 +207,7 @@ const Home = () => {
 
        </div>
 
-      <h1 className={style.text}>Avalia Sesi</h1>
+      <h1 className={style.text}>Quadro geral</h1>
 
       {/* <div className="info">
         <table className={style.table}>
