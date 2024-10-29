@@ -5,11 +5,6 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
 const studentsData = [
-  { aluno: 'João', rm: '123', etapa: '3', ano: '2023', nota: '8.5', ensino: '1°A' },
-  { aluno: 'Maria', rm: '456', etapa: '4', ano: '2024', nota: '9.0', ensino: '1°B' },
-  { aluno: 'Pedro', rm: '789', etapa: '5', ano: '2025', nota: '7.0', ensino: '2°' },
-  { aluno: 'Ana', rm: '101', etapa: '1', ano: '2026', nota: '6.5', ensino: '3°EM' },
-  { aluno: 'Lucas', rm: '202', etapa: '2', ano: '2027', nota: '9.5', ensino: '4°' },
 ];
 
 const Home = () => {
@@ -27,6 +22,8 @@ const Home = () => {
       
 
       try {
+        debugger
+
         const response = await fetch(url);
         console.log(response);
         const resData = await response.json();
@@ -45,7 +42,7 @@ const Home = () => {
           if (header === 'NomeAluno') {
               th.innerHTML = 'Nome do Aluno';
           } else {
-              th.innerHTML = header.replace('1Etapa', '1ª Etapa ').replace('AR', 'Artes').replace('CCE', 'CCE').replace('CH', 'Ciências Humanas').replace('CN', 'Ciências Naturais').replace('EF', 'Educação Física').replace('LI', 'Língua Inglesa').replace('LP', 'Língua Portuguesa').replace('MAT', 'Matemática').replace('PF', 'Pensamento Filosófico').replace('PR', 'Pensamento Religioso').replace('PSC', 'Psicologia').replace('ROB', 'Robótica');
+              th.innerHTML = header.replace('1Etapa', '1ª Etapa ').replace('AR', 'Artes').replace('CCE', 'CCE').replace('CH', 'Ciências Humanas').replace('CN', 'Ciências Naturais').replace('EF', 'Educação Física').replace('LI', 'Língua Inglesa').replace('LP', 'Língua Portuguesa').replace('MAT', 'Matemática').replace('PF', 'Pensamento Filosófico').replace('PR', 'Programação').replace('PSC', 'PSC').replace('ROB', 'Robótica');
           }
           headerRow.appendChild(th);
         });
@@ -164,22 +161,22 @@ const Home = () => {
 
           <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
             <option value="">EF2</option>
-            <option value="6%25A%25">6º Ano A</option>
-            <option value="6%25B%25">6º Ano B</option>
-            <option value="7%25A%25">7º Ano A</option>
-            <option value="7%25B%25">7º Ano B</option>
-            <option value="8%25A%25">8º Ano A</option>
-            <option value="8%25B%25">8º Ano B</option>
-            <option value="9%25A%25">9º Ano A</option>
-            <option value="9%25B%25">9º Ano B</option>
+            <option value="notasEF2/6%25A%25">6º Ano A</option>
+            <option value="notasEF2/6%25B%25">6º Ano B</option>
+            <option value="notasEF2/7%25A%25">7º Ano A</option>
+            <option value="notasEF2/7%25B%25">7º Ano B</option>
+            <option value="notasEF2/8%25A%25">8º Ano A</option>
+            <option value="notasEF2/8%25B%25">8º Ano B</option>
+            <option value="notasEF2/9%25A%25">9º Ano A</option>
+            <option value="notasEF2/9%25B%25">9º Ano B</option>
           </select>
 
           <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
             <option value="">EM</option>
-            <option value="1%25A%25">1º Ano A</option>
-            <option value="1%25B%25">1º Ano B</option>
-            <option value="2%25E.M">2º Ano</option>
-            <option value="3%25E.M">3º Ano</option>
+            <option value="notasEM/1%25A%25">1º Ano A</option>
+            <option value="notasEM/1%25B%25">1º Ano B</option>
+            <option value="notasEM/2%25E.M">2º Ano</option>
+            <option value="notasEM/3%25E.M">3º Ano</option>
 
           </select>
 
