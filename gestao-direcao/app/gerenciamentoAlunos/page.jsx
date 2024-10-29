@@ -237,9 +237,14 @@ const Home = () => {
                 const headers = Object.keys(resData[0]);
                 headers.forEach((header, index) => {
                   const th = document.createElement('th');
+
                   if (header === 'RM') {
                     th.innerHTML = 'RM';
-                  } else if (header === 'Turma') {
+                  } 
+                  else if (header === 'NomeAluno') {
+                    th.innerHTML = 'Nome do aluno';
+                  } 
+                  else if (header === 'Turma') {
                     th.innerHTML = 'Turma';
                   } 
                   else if (header === 'ano') {
