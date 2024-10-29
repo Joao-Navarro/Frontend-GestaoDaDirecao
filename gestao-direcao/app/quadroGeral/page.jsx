@@ -7,73 +7,72 @@ import Footer from '@/components/Footer';
 
 
 const Home = () => {
-  const [ensinoTurma, setEnsinoTurma] = useState(''); // add state for each select
+  
+  const [Turma, setEnsinoTurma] = useState(''); // add state for each select
   const [etapa, setEtapa] = useState('');
-  const [ano, setAno] = useState('');
+  const [Ano, setAno] = useState('');
+
+  const [tabela1Data, setTabela1Data] = useState([]);
+  const [tabela2Data, setTabela2Data] = useState([]);
+  const [tabela3Data, setTabela3Data] = useState([]);
 
   const getFilter = async () => {
-    if (ensinoTurma && etapa && ano) {
-      const url = `http://localhost:3001/tabelageralef1/${ensinoTurma}/${ano}`;  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
-      console.log(`Constructed URL: ${url}`);
-      console.log('Current state:', etapa, ensinoTurma, ano);
-
+    if (Turma && etapa && Ano) {
       try {
-        const response = await fetch(url);
-        console.log(response);
-        const resData = await response.json();
-        console.log(resData);
+        // URLs para as três tabelas
+        const urls = [
+          `http://localhost:3001/tabelageralef1/${etapa}/${Turma}/${Ano}`,
+          `http://localhost:3001/tabelageralef2/${etapa}/${Turma}/${Ano}`,
+          `http://localhost:3001/tabelageralem/${etapa}/${Turma}/${Ano}`
+        ];
 
+        // Fazendo as chamadas de forma assíncrona
+        const responses = await Promise.all(urls.map(url => fetch(url)));
+        const data = await Promise.all(responses.map(res => res.json()));
+
+        setTabela1Data(data[0]);
+        setTabela2Data(data[1]);
+        setTabela3Data(data[2]);
         // Create a table element
         // Create a table element
         const table = document.createElement('table');
-        table.border = '1'; // add a border to the table
+        table.className = style.table;// add a border to the table
 
-        // Create a header row
-        const headerRow = table.insertRow(0);
-        const headers = Object.keys(resData[0]);
-        headers.forEach((header, index) => {
-          const th = document.createElement('th');
-          if (header === 'rm') {
-            th.innerHTML = 'RM';
-          } else if (header === 'EnsinoTurma') {
-            th.innerHTML = 'EnsinoTurma';
-          } else if (header === 'PorcentagemAcertoIngles') {
-            th.innerHTML = 'Porcentagem Acerto Inglês';
-          } else if (header === 'Ebep' || header === 'ComDeficiencia') {
-            th.innerHTML = header.replace('Ebep', 'E.B.E.P').replace('ComDeficiencia', 'Com Deficiência');
-          } else {
-            th.innerHTML = header.replace('NomeAluno', 'Nome do aluno').replace('RM', 'RM').replace('NotaFinalLP', 'Lingua Portuguesa').replace('NotaFinalMAT', 'Matematica').replace('NotaFinalCN', 'Ciências Naturais').replace('NotaFinalCH', 'Ciencias Humanas').replace('NotaFinalAR', 'Artes').replace('NotaFinalLI', 'Língua Inglesa').replace('NotaFinalEF', 'ED.Fisica').replace('NotaFinalROB', 'Robotica').replace('NotaFinalPF', 'Praticas Filosoficas').replace('NotaFinalCCE', 'Cultura Corporal e Esporte').replace('NotaFinalROB', 'Robótica').replace('NotaFinalPR', 'Programação').replace('NotaFinalPSC', 'PSC').replace('1S-CH', 'AV.CH').replace('1S-CN', 'AV.CN').replace('1S-LI', 'AV.LI').replace('1S-LP', 'AV.LP').replace('1S-MAT', 'AV.MAT').replace('2S-CH', 'AV.CH').replace('2S-CN', 'AV.CN').replace('2S-LI', 'AV.LI').replace('2S-LP','AV.LP').replace('2S-MAT','AV.MAT').replace('3S-CH', 'AV.CH').replace('3S-CN', 'AV.CN').replace('3S-LI', 'AV.LI').replace('3S-LP','AV.LP').replace('3S-MAT','AV.MAT').replace('Ano', 'Ano');          }
-          headerRow.appendChild(th);
-        });
-
-
-        
-
-        // Create rows for each data item
-        resData.forEach((item) => {
-          const row = table.insertRow();
-          headers.forEach((header) => {
-            const cell = row.insertCell();
-            if (item[header] === null) {
-              cell.innerHTML = "Não informado";
-            } else if (header === 'Ebep' || header === 'ComDeficiencia') {
-              cell.innerHTML = item[header] === 'TRUE' ? 'Sim' : 'Não';
-            } else {
-              cell.innerHTML = item[header];
-            }
-          });
-          
-        });
-
-        // Add the table to the #descricao div
-        document.getElementById("descricao").innerHTML = '';
-        document.getElementById("descricao").appendChild(table);
       } catch (error) {
         console.log('error', error);
       }
     } else {
       console.log('Please select all options');
     }
+  };
+
+  const renderTable = (data) => {
+    if (!data.length) return null;
+
+    const headers = Object.keys(data[0]);
+    return (
+      <table className={style.table}>
+        <thead>
+          <tr>
+            {headers.map((header, index) => (
+              <th key={index}>{header}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((item, index) => (
+            <tr key={index}>
+              {headers.map((header, index) => (
+                <td key={index}>{item[header] === null ? "Não informado" : item[header]}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  
+
+  
   }
 
   // add event handlers for each select
@@ -83,7 +82,7 @@ const Home = () => {
   }
 
   const handleEtapaChange = (e) => {
-    console.log('ensinoTurma changed:', e.target.value);
+    console.log('Turma changed:', e.target.value);
     setEtapa(e.target.value);
   }
 
@@ -151,17 +150,15 @@ const Home = () => {
       <Header />
       <div className={style.filtro}>
         <label>
-          <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
+          <select className={style.button} name="ensino" value={Turma} onChange={handleEnsinoTurmaChange}>
             <option value="">EF1</option>
-            <option value="1%25E.F">1º Ano</option>
-            <option value="2%25E.F">2º Ano</option>
             <option value="3%25E.F">3º Ano</option>
             <option value="4%25E.F">4º Ano</option>
             <option value="5%25E.F">5º Ano</option >
           </select>
 
 
-          <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
+          <select className={style.button} name="ensino" value={Turma} onChange={handleEnsinoTurmaChange}>
             <option value="">EF2</option>
             <option value="6%25A%25">6º Ano A</option>
             <option value="6%25B%25">6º Ano B</option>
@@ -173,7 +170,7 @@ const Home = () => {
             <option value="9%25B%25">9º Ano B</option>
           </select>
 
-          <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
+          <select className={style.button} name="ensino" value={Turma} onChange={handleEnsinoTurmaChange}>
             <option value="">EM</option>
             <option value="1%25A%25">1º Ano A</option>
             <option value="1%25B%25">1º Ano B</option>
@@ -197,54 +194,29 @@ const Home = () => {
 
         <div className={style.ano}>
           <label>Ano</label>
-          <input className={style.input} value={ano} type='number' onChange={handleAnoChange} name="ano" />
+          <input className={style.input} value={Ano} type='number' onChange={handleAnoChange} name="ano" />
         </div>
 
-        <button onClick={getFilter} disabled={!ensinoTurma || !etapa || !ano}>
+        <button onClick={getFilter} disabled={!Turma || !etapa || !Ano}>
           Filtrar
         </button>
 
 
-       </div>
+      </div>
 
       <h1 className={style.text}>Quadro geral</h1>
 
-      {/* <div className="info">
-        <table className={style.table}>
-          <thead>
-            <tr>
-              <th className={style.th}>Aluno</th>
-              <th className={style.th}>RM</th>
-              <th className={style.th}>ETAPA</th>
-              <th className={style.th}>ANO</th>
-              <th className={style.th}>NOTA</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredStudents.map((student, index) => (
-              <tr key={index}>
-                <td className={style.td}>{student.aluno}</td>
-                <td className={style.td}>{student.rm}</td>
-                <td className={style.td}>{student.etapa}</td>
-                <td className={style.td}>{student.ano}</td>
-                <td className={style.td}>{student.nota}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className={style.botao}>
-          <button className={style.button} onClick={() => alert('Ação não implementada!')}>Editar</button>
-          <button className={style.button} onClick={() => alert('Ação não implementada!')}>Salvar</button>
-        </div>
-      </div> */}
+     
 
-      <div className="info">
-      <div className={style.table} id="descricao"></div>
-      <div className={style.botao}>
-          <button className={style.button} onClick={() => alert('Ação não implementada!')}>Editar</button>
-          <button className={style.button} onClick={() => alert('Ação não implementada!')}>Salvar</button>
-        </div>
-      </div>
+        {renderTable(tabela1Data)}
+
+        {renderTable(tabela2Data)}
+
+       
+        {renderTable(tabela3Data)}
+
+        
+      
       <Footer />
     </>
   );
