@@ -45,7 +45,7 @@ const Home = () => {
           if (header === 'NomeAluno') {
               th.innerHTML = 'Nome do Aluno';
           } else {
-              th.innerHTML = header.replace('1Etapa', '1ª Etapa ').replace('AR', 'Artes').replace('His', 'Historia').replace('CH', 'Ciências Humanas').replace('CN', 'Ciências Naturais').replace('EF', 'Educação Física').replace('LI', 'Língua Inglesa').replace('LP', 'Língua Portuguesa').replace('MAT', 'Matemática').replace('EIXO', 'Eixo').replace('PR', 'Programação').replace('GEO', 'Geografia').replace('ROB', 'Robótica');
+              th.innerHTML = header.replace('1Etapa', '1ª Etapa ').replace('AR', 'Artes').replace('CCE', 'CCE').replace('CH', 'Ciências Humanas').replace('CN', 'Ciências Naturais').replace('EF', 'Educação Física').replace('LI', 'Língua Inglesa').replace('LP', 'Língua Portuguesa').replace('MAT', 'Matemática').replace('PF', 'Pensamento Filosófico').replace('PR', 'Pensamento Religioso').replace('PSC', 'Psicologia').replace('ROB', 'Robótica');
           }
           headerRow.appendChild(th);
         });
@@ -76,70 +76,6 @@ const Home = () => {
     }
   }
 
-
-  const Home = () => {
-    const [ensinoTurma, setEnsinoTurma] = useState(''); // add state for each select
-    const [etapa, setEtapa] = useState('');
-    const [ano, setAno] = useState('');
-  
-    const getFilter = async () => {
-      if (ensinoTurma && etapa && ano) {
-        const url = `http://localhost:3001/${ensinoTurma}/${etapa}/${ano}`;  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
-        console.log(`Constructed URL: ${url}`);
-        console.log('Current state:', ensinoTurma, etapa, ano);
-        
-  
-        
-  
-        try {
-          const response = await fetch(url);
-          console.log(response);
-          const resData = await response.json();
-          console.log(resData);
-  
-          // Create a table element
-          // Create a table element
-          const table = document.createElement('table');
-          table.border = '1'; // add a border to the table
-  
-          // Create a header row
-          const headerRow = table.insertRow(0);
-          const headers = Object.keys(resData[0]);
-          headers.forEach((header, index) => {
-            const th = document.createElement('th');
-            if (header === 'NomeAluno') {
-                th.innerHTML = 'Nome do Aluno';
-            } else {
-                th.innerHTML = header.replace('1Etapa', '1ª Etapa ').replace('AR', 'Artes').replace('CCE', 'CCE').replace('CH', 'Ciências Humanas').replace('CN', 'Ciências Naturais').replace('EF', 'Educação Física').replace('LI', 'Língua Inglesa').replace('LP', 'Língua Portuguesa').replace('MAT', 'Matemática').replace('PF', 'Pensamento Filosófico').replace('PR', 'Pensamento Religioso').replace('PSC', 'Psicologia').replace('ROB', 'Robótica');
-            }
-            headerRow.appendChild(th);
-          });
-  
-          // Create rows for each data item
-          resData.forEach((item) => {
-            const row = table.insertRow();
-            headers.forEach((header) => {
-              const cell = row.insertCell();
-              if (item[header] === null) {
-                cell.innerHTML = "Não informado";
-              } else if (header === 'Ebep' || header === 'ComDeficiencia') {
-                cell.innerHTML = item[header] === 'TRUE' ? 'Sim' : 'Não';
-              } else {
-                cell.innerHTML = item[header];
-              }
-            });
-          });
-  
-          // Add the table to the #descricao div
-          document.getElementById("descricao").innerHTML = '';
-          document.getElementById("descricao").appendChild(table);
-        } catch (error) {
-          console.log('error', error);
-        }
-      } else {
-        console.log('Please select all options');
-      }
-    }
   // add event handlers for each select
   const handleEnsinoTurmaChange = (e) => {
     console.log('etapa changed:', e.target.value);
@@ -314,12 +250,5 @@ const Home = () => {
     </>
   );
 };
-};
 
 export default Home;
-
-
-
-
-
-
