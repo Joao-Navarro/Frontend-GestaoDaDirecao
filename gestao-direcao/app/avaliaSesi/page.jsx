@@ -4,6 +4,7 @@ import style from "./page.module.css";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { render } from 'react-dom';
+import Link from 'next/link';
 
 
 const Home = () => {
@@ -139,6 +140,9 @@ const Home = () => {
   return (
     <>
       <Header />
+
+      <h1 className={style.text}>Avalia Sesi</h1>
+
       <div className={style.filtro}>
         <label>
           <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
@@ -191,12 +195,15 @@ const Home = () => {
 
 
 
-        <button className={style.button} onClick={getFilter} disabled={!ensinoTurma || !etapa || !ano}>Filtrar</button>
+<button className={style.button} onClick={getFilter} disabled={!ensinoTurma || !etapa || !ano}>Filtrar</button>
+
+
+        
+      <Link  href="https://app.powerbi.com/home?experience=power-bi&culture=pt-br&country=br&ScenarioId=Signup" className={style.button}>Power BI</Link>     
+
 
 
       </div>
-
-      <h1 className={style.text}>Avalia Sesi</h1>
 
      
         <div className={style.table} id='descricao' ref={descricaoRef} />
