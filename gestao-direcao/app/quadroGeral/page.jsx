@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 
 
 const Home = () => {
-  
+
   const [Turma, setEnsinoTurma] = useState(''); // add state for each select
   const [etapa, setEtapa] = useState('');
   const [Ano, setAno] = useState('');
@@ -48,32 +48,74 @@ const Home = () => {
 
   const renderTable = (data) => {
     if (!data.length) return null;
+  
+    // Filtra as chaves que contêm a palavra "nota" (independente de maiúsculas/minúsculas)
+    const notaHeaders = Object.keys(data[0]).filter(key => key.toLowerCase().includes('nota'));
+    const avaliaHeaders = Object.keys(data[0]).filter(key => key.toLowerCase().includes('s'));
 
-    const headers = Object.keys(data[0]);
+  
     return (
+      <div style={{ overflow: 'auto' }}>
       <table className={style.table}>
         <thead>
           <tr>
-            {headers.map((header, index) => (
+          {Object.keys(data[0]).map((header, index) => (
               <th key={index}>{header}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {data.map((item, index) => (
-            <tr key={index}>
-              {headers.map((header, index) => (
-                <td key={index}>{item[header] === null ? "Não informado" : item[header]}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
-  
+          {data.map((item, rowIndex) => (
+            <tr key={rowIndex}>
+            {Object.keys(data[0]).map((header, cellIndex) => {
+               const value = item[header];
+               // Define a cor de fundo apenas para as colunas que contêm "nota"
+               const isNotaColumn = notaHeaders.includes(header);
+               const isAvaliaColumn = avaliaHeaders.includes(header);
 
-  
-  }
+
+              const cellStyle = {};
+              if (isNotaColumn) {
+                // Para colunas "nota", aplica vermelho se o valor for menor que 7, senão verde
+                if (value === null || value === "Não informado") {
+                  // Não aplica estilo se o valor for "Não informado"
+                  cellStyle.backgroundColor = ''; // ou você pode omitir esta linha
+                  cellStyle.color = ''; // ou você pode omitir esta linha
+                } else if (value < 7) {
+                  cellStyle.backgroundColor = 'red';
+                  cellStyle.color = 'white';
+                } else if (value >= 7) {
+                  cellStyle.backgroundColor = 'green';
+                  cellStyle.color = 'white';
+                }
+              
+              } else if (isAvaliaColumn) {
+                // Para colunas "avalia", aplica vermelho se o valor for "Nível 1" ou "Nível 2", senão verde
+                if (value === 'Nível 1' || value === 'Nível 2') {
+                  cellStyle.backgroundColor = 'red';
+                  cellStyle.color = 'white';
+                } else if (value === 'Nível 3' || value === 'Nível 4'){
+                  cellStyle.backgroundColor = 'green';
+                  cellStyle.color = 'white';
+                }
+              }
+
+               return (
+                 <td key={cellIndex} style={cellStyle}>
+                   {value === null ? "Não informado" : value}
+                 </td>
+               );
+             })}
+           </tr>
+         ))}
+       </tbody>
+      </table>
+      </div>
+    );
+  };
+
+    
+   
 
   // add event handlers for each select
   const handleEnsinoTurmaChange = (e) => {
@@ -206,17 +248,13 @@ const Home = () => {
 
       <h1 className={style.text}>Quadro geral</h1>
 
-     
 
-        {renderTable(tabela1Data)}
+      {renderTable(tabela1Data)}
+      {renderTable(tabela2Data)}
+      {renderTable(tabela3Data)}
 
-        {renderTable(tabela2Data)}
+      <button onclick="window.print()">Imprimir / Salvar PDF</button>
 
-       
-        {renderTable(tabela3Data)}
-
-        
-      
       <Footer />
     </>
   );
