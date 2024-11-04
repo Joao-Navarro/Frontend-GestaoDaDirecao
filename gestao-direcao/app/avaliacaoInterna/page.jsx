@@ -205,12 +205,13 @@ const Home = () => {
 
        </div>
 
-      <h1 className={style.text}>Avalia Sesi</h1>
+      <h1 className={style.text}>Avaliação Interna</h1>
 
       
 
       <div className="info">
-      <div className={style.table} id="descricao"></div>
+      <div style={{ overflow: 'auto' }} className={style.table} id="descricao"></div>
+     
      
       </div>
       <Footer />
