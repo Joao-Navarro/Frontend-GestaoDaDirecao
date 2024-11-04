@@ -82,7 +82,7 @@ const Home = () => {
                   cellStyle.backgroundColor = ''; // ou você pode omitir esta linha
                   cellStyle.color = ''; // ou você pode omitir esta linha
                 } else if (value < 7) {
-                  cellStyle.backgroundColor = 'red';
+                  cellStyle.backgroundColor = '#730d0d';
                   cellStyle.color = 'white';
                 } else if (value >= 7) {
                   cellStyle.backgroundColor = 'green';
@@ -92,7 +92,7 @@ const Home = () => {
               } else if (isAvaliaColumn) {
                 // Para colunas "avalia", aplica vermelho se o valor for "Nível 1" ou "Nível 2", senão verde
                 if (value === 'Nível 1' || value === 'Nível 2') {
-                  cellStyle.backgroundColor = 'red';
+                  cellStyle.backgroundColor = '#730d0d';
                   cellStyle.color = 'white';
                 } else if (value === 'Nível 3' || value === 'Nível 4'){
                   cellStyle.backgroundColor = 'green';
@@ -196,10 +196,9 @@ const Home = () => {
             <option value="">EF1</option>
             <option value="3%25E.F">3º Ano</option>
             <option value="4%25E.F">4º Ano</option>
-            <option value="5%25E.F">5º Ano</option >
+            <option value="5%25E.F">5º Ano</option>
           </select>
-
-
+  
           <select className={style.button} name="ensino" value={Turma} onChange={handleEnsinoTurmaChange}>
             <option value="">EF2</option>
             <option value="6%25A%25">6º Ano A</option>
@@ -211,20 +210,16 @@ const Home = () => {
             <option value="9%25A%25">9º Ano A</option>
             <option value="9%25B%25">9º Ano B</option>
           </select>
-
+  
           <select className={style.button} name="ensino" value={Turma} onChange={handleEnsinoTurmaChange}>
             <option value="">EM</option>
             <option value="1%25A%25">1º Ano A</option>
             <option value="1%25B%25">1º Ano B</option>
             <option value="2%25E.M">2º Ano</option>
             <option value="3%25E.M">3º Ano</option>
-
           </select>
-
-
         </label>
-
-
+  
         <label>
           <select className={style.button} name="etapa" onChange={handleEtapaChange} value={etapa}>
             <option value="">Selecione</option>
@@ -233,17 +228,25 @@ const Home = () => {
             <option value="3S">3</option>
           </select>
         </label>
-
+  
         <div className={style.ano}>
           <label>Ano</label>
-          <input className={style.input} value={Ano} type='number' onChange={handleAnoChange} name="ano" />
+          <input
+            className={style.input}
+            value={Ano}
+            type='number'
+            onChange={handleAnoChange}
+            name="ano"
+          />
+          {/* Verificação do ano digitado */}
+          {Ano && (Ano < 2024 || Ano > 2024) && (
+            <p style={{ color: 'crimson' }}>Ano não encontrado</p>
+          )}
         </div>
-
+  
         <button onClick={getFilter} disabled={!Turma || !etapa || !Ano}>
           Filtrar
         </button>
-
-
       </div>
 
       <h1 className={style.text}>Quadro geral</h1>
