@@ -253,7 +253,6 @@ const Home = () => {
       {renderTable(tabela2Data)}
       {renderTable(tabela3Data)}
 
-      <button onclick="window.print()">Imprimir / Salvar PDF</button>
 
       <Footer />
     </>
