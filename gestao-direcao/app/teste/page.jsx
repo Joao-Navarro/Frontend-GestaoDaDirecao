@@ -22,8 +22,9 @@ const Home = () => {
 
                 // Create a table element
                 const table = document.createElement('table');
-                table.border = '1'; // add a border to the table
+                table.border = '1'; 
 
+                // add a border to the table
                 // Create a header row
                 const headerRow = table.insertRow(0);
                 const headers = Object.keys(resData[0]);
