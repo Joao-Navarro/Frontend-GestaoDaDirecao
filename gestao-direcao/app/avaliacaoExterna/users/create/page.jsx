@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './createUser.module.css';
+import Header from '@/components/Header';
 
 export default function CreateUserPage() {
   const [rm, setRm] = useState('');
@@ -50,16 +51,11 @@ export default function CreateUserPage() {
 
   return (
     <div className={styles.container}>
-      <h1>Criar Novo Usuário</h1>
+      <Header />
+      <h1 className={styles.h1}>Lançar Nova Nota</h1>
       <form onSubmit={createUser} className={styles.form}>
-        <input
-          type="number"
-          placeholder="RM"
-          value={rm}
-          onChange={(e) => setRm(e.target.value)}
-          className={styles.input}
-        />
-       
+
+
         <div className={styles.filtro}>
           <label>
             <select className={styles.button} name="ensino" value={Turma} onChange={handleTurmaChange}>
@@ -119,22 +115,35 @@ export default function CreateUserPage() {
           </label>
 
 
-          <div className={styles.ano}>
-            <label>Ano</label>
-            <input className={styles.input} value={ano} type='number' onChange={handleAnoChange} name="ano" />
-          </div>
+          <input placeholder='Ano' value={ano} type='number' onChange={handleAnoChange} name="ano" />
 
-          <input
-          type="number"
-          placeholder="Nota"
-          value={notaExt}
-          onChange={(e) => setNotaExt(e.target.value)}
-          className={styles.input}
-        />
+         
 
         </div>
 
-        <button type="submit" className={styles.button} disabled={!Turma || !etapa || !ano || !tipoprova}>Criar</button>
+        <div className={styles.create}>
+          <input
+            type="number"
+            placeholder="RM do Aluno"
+            value={rm}
+            onChange={(e) => setRm(e.target.value)}
+            className={styles.input}
+          />
+           <input
+            type="number"
+            placeholder="Nota do Aluno"
+            value={notaExt}
+            onChange={(e) => setNotaExt(e.target.value)}
+            className={styles.input}
+
+          />
+
+          <button type="submit" className={styles.button} disabled={!Turma || !etapa || !ano || !tipoprova}>Criar</button>
+
+        </div>
+
+
+
       </form>
     </div>
   );
