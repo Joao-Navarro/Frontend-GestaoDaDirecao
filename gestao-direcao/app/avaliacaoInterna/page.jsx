@@ -207,41 +207,11 @@ const Home = () => {
 
       <h1 className={style.text}>Avalia Sesi</h1>
 
-      {/* <div className="info">
-        <table className={style.table}>
-          <thead>
-            <tr>
-              <th className={style.th}>Aluno</th>
-              <th className={style.th}>RM</th>
-              <th className={style.th}>ETAPA</th>
-              <th className={style.th}>ANO</th>
-              <th className={style.th}>NOTA</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredStudents.map((student, index) => (
-              <tr key={index}>
-                <td className={style.td}>{student.aluno}</td>
-                <td className={style.td}>{student.rm}</td>
-                <td className={style.td}>{student.etapa}</td>
-                <td className={style.td}>{student.ano}</td>
-                <td className={style.td}>{student.nota}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className={style.botao}>
-          <button className={style.button} onClick={() => alert('Ação não implementada!')}>Editar</button>
-          <button className={style.button} onClick={() => alert('Ação não implementada!')}>Salvar</button>
-        </div>
-      </div> */}
+      
 
       <div className="info">
       <div className={style.table} id="descricao"></div>
-      <div className={style.botao}>
-          <button className={style.button} onClick={() => alert('Ação não implementada!')}>Editar</button>
-          <button className={style.button} onClick={() => alert('Ação não implementada!')}>Salvar</button>
-        </div>
+     
       </div>
       <Footer />
     </>
