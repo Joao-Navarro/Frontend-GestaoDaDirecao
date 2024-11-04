@@ -63,6 +63,12 @@
   
   
   }
+
+  .button option:hover {
+  
+    background-color: #000;
+  
+  }
   
   
   .ano {
@@ -103,9 +109,6 @@
   
   
   }
-  
-  
-  
   
   
   

@@ -3,10 +3,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import style from "./page.module.css";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { render } from 'react-dom';
-
-
-
 
 const Home = () => {
   const [Turma, setTurma] = useState(''); // add state for each select
@@ -26,7 +22,7 @@ const Home = () => {
 
 
   const getFilter = async () => {
-    if (Turma && etapa && ano) {
+    if (Turma && etapa && ano && tipoprova ) {
       const url = `http://localhost:3001/avalia/${etapa}/${Turma}/${ano}/${tipoprova}`;  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
       console.log(`Constructed URL: ${url}`);
       console.log('Current state:', etapa, Turma, ano, tipoprova);
@@ -53,13 +49,9 @@ const Home = () => {
           const th = document.createElement('th');
           if (header === 'rm') {
             th.innerHTML = 'RM';
-          } else if (header === 'etapa') {
-            th.innerHTML = 'Etapa';
-          } else if (header === 'ano') {
-            th.innerHTML = 'Ano';
-          } else if (header === 'tipoprova') {
-            th.innerHTML = 'Tipo de Prova';
-          } 
+          } else if (header === 'NomeAluno') {
+            th.innerHTML = 'Nome do Aluno';
+          }
           else if (header === 'notaExt') {
             th.innerHTML = 'Nota';
           } 
@@ -76,9 +68,7 @@ const Home = () => {
             const cell = row.insertCell();
             if (item[header] === null) {
               cell.innerHTML = "Não informado";
-            } else if (header === 'Ebep' || header === 'ComDeficiencia') {
-              cell.innerHTML = item[header] === 'TRUE' ? 'Sim' : 'Não';
-            } else {
+            }else {
               cell.innerHTML = item[header];
             }
           });
