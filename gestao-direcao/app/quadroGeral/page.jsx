@@ -48,74 +48,74 @@ const Home = () => {
 
   const renderTable = (data) => {
     if (!data.length) return null;
-  
+
     // Filtra as chaves que contêm a palavra "nota" (independente de maiúsculas/minúsculas)
     const notaHeaders = Object.keys(data[0]).filter(key => key.toLowerCase().includes('nota'));
     const avaliaHeaders = Object.keys(data[0]).filter(key => key.toLowerCase().includes('s'));
 
-  
+
     return (
       <div style={{ overflow: 'auto' }}>
-      <table className={style.table}>
-        <thead>
-          <tr>
-          {Object.keys(data[0]).map((header, index) => (
-              <th key={index}>{header}</th>
+        <table id='tabelas' className={style.table}>
+          <thead>
+            <tr>
+              {Object.keys(data[0]).map((header, index) => (
+                <th key={index}>{header}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, rowIndex) => (
+              <tr key={rowIndex}>
+                {Object.keys(data[0]).map((header, cellIndex) => {
+                  const value = item[header];
+                  // Define a cor de fundo apenas para as colunas que contêm "nota"
+                  const isNotaColumn = notaHeaders.includes(header);
+                  const isAvaliaColumn = avaliaHeaders.includes(header);
+
+
+                  const cellStyle = {};
+                  if (isNotaColumn) {
+                    // Para colunas "nota", aplica vermelho se o valor for menor que 7, senão verde
+                    if (value === null || value === "Não informado") {
+                      // Não aplica estilo se o valor for "Não informado"
+                      cellStyle.backgroundColor = ''; // ou você pode omitir esta linha
+                      cellStyle.color = ''; // ou você pode omitir esta linha
+                    } else if (value < 7) {
+                      cellStyle.backgroundColor = 'red';
+                      cellStyle.color = 'white';
+                    } else if (value >= 7) {
+                      cellStyle.backgroundColor = 'green';
+                      cellStyle.color = 'white';
+                    }
+
+                  } else if (isAvaliaColumn) {
+                    // Para colunas "avalia", aplica vermelho se o valor for "Nível 1" ou "Nível 2", senão verde
+                    if (value === 'Nível 1' || value === 'Nível 2') {
+                      cellStyle.backgroundColor = 'red';
+                      cellStyle.color = 'white';
+                    } else if (value === 'Nível 3' || value === 'Nível 4') {
+                      cellStyle.backgroundColor = 'green';
+                      cellStyle.color = 'white';
+                    }
+                  }
+
+                  return (
+                    <td key={cellIndex} style={cellStyle}>
+                      {value === null ? "Não informado" : value}
+                    </td>
+                  );
+                })}
+              </tr>
             ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item, rowIndex) => (
-            <tr key={rowIndex}>
-            {Object.keys(data[0]).map((header, cellIndex) => {
-               const value = item[header];
-               // Define a cor de fundo apenas para as colunas que contêm "nota"
-               const isNotaColumn = notaHeaders.includes(header);
-               const isAvaliaColumn = avaliaHeaders.includes(header);
-
-
-              const cellStyle = {};
-              if (isNotaColumn) {
-                // Para colunas "nota", aplica vermelho se o valor for menor que 7, senão verde
-                if (value === null || value === "Não informado") {
-                  // Não aplica estilo se o valor for "Não informado"
-                  cellStyle.backgroundColor = ''; // ou você pode omitir esta linha
-                  cellStyle.color = ''; // ou você pode omitir esta linha
-                } else if (value < 7) {
-                  cellStyle.backgroundColor = 'red';
-                  cellStyle.color = 'white';
-                } else if (value >= 7) {
-                  cellStyle.backgroundColor = 'green';
-                  cellStyle.color = 'white';
-                }
-              
-              } else if (isAvaliaColumn) {
-                // Para colunas "avalia", aplica vermelho se o valor for "Nível 1" ou "Nível 2", senão verde
-                if (value === 'Nível 1' || value === 'Nível 2') {
-                  cellStyle.backgroundColor = 'red';
-                  cellStyle.color = 'white';
-                } else if (value === 'Nível 3' || value === 'Nível 4'){
-                  cellStyle.backgroundColor = 'green';
-                  cellStyle.color = 'white';
-                }
-              }
-
-               return (
-                 <td key={cellIndex} style={cellStyle}>
-                   {value === null ? "Não informado" : value}
-                 </td>
-               );
-             })}
-           </tr>
-         ))}
-       </tbody>
-      </table>
+          </tbody>
+        </table>
       </div>
     );
   };
 
-    
-   
+
+
 
   // add event handlers for each select
   const handleEnsinoTurmaChange = (e) => {
@@ -187,6 +187,69 @@ const Home = () => {
     setFilteredStudents(newFilteredStudents);
   };
 
+  const gerarPDF = () => {
+
+    const tabela = document.getElementById('tabelas');
+
+    const novaJanela = window.open('', '', 'width=800,height=600');
+
+    novaJanela.document.write('<html><head><title>Quadro Geral PDF</title>');
+    novaJanela.document.write(`<style>
+
+        @page {
+
+          size: landscape; 
+
+        }
+
+        table {
+
+          width: 100%;
+
+          table-layout: fixed;
+
+          border-collapse: collapse;
+
+          font-size: x-small;
+
+        }
+
+        th, td {
+
+           border: 1px solid black;
+
+          padding: 8px;
+
+          text-align: center;
+
+          word-wrap: break-word; /* Permite que o texto quebre em várias linhas */
+
+          overflow-wrap: break-word; /* Para compatibilidade com navegadores */
+
+          white-space: pre-wrap; /* Permite que o texto quebre em várias linhas */
+
+        }
+
+        th {
+        
+        background-color:#f4f4f4;
+        
+        }
+
+      </style>`);
+
+    novaJanela.document.write('</head><body>');
+
+    novaJanela.document.write(tabela.outerHTML);
+
+    novaJanela.document.write('</body></html>');
+
+    novaJanela.document.close();
+
+    novaJanela.print();
+
+  };
+
   return (
     <>
       <Header />
@@ -248,10 +311,13 @@ const Home = () => {
 
       <h1 className={style.text}>Quadro geral</h1>
 
+      <div id='tabelas'>
+        {renderTable(tabela1Data)}
+        {renderTable(tabela2Data)}
+        {renderTable(tabela3Data)}
+      </div>
 
-      {renderTable(tabela1Data)}
-      {renderTable(tabela2Data)}
-      {renderTable(tabela3Data)}
+      <button onClick={gerarPDF}>Gerar PDF</button>
 
 
       <Footer />
