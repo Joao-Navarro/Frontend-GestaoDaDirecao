@@ -234,7 +234,7 @@ const Home = () => {
 
 
      
-        <div className={style.table} id='descricao' ref={descricaoRef} />
+        <div style={{ overflow: 'auto' }}  className={style.table} id='descricao' ref={descricaoRef} />
        
               <div className={style.footer}>
 
