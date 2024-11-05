@@ -3,7 +3,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import style from "./page.module.css";
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import { render } from 'react-dom';
 
 
@@ -117,7 +116,7 @@ const Home = () => {
       <Header />
 
       <h1 className={style.text}>Gerenciamento de alunos</h1>
-      
+
       <div className={style.filtro}>
         <label>
           <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
@@ -169,19 +168,17 @@ const Home = () => {
 
       </div>
 
-      
+
 
 
       <div className={style.table} id='descricao' ref={descricaoRef} />
 
       <div className={style.card}>
 
-</div>
+      </div>
 
 
       <div className={style.footer}>
-
-        <Footer />
       </div>
 
 

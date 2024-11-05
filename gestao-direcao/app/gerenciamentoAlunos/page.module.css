@@ -1,35 +1,53 @@
 .container {
-  text-align: center;  /* Centraliza o texto dentro do container */
- 
+  text-align: center;
+
+  height: 100px;
+}
+
+.h1 {
+
+  margin-top: 5%;
+
 }
 
 .links {
-  display: flex;  /* Usa Flexbox para alinhar os itens dentro da div */
-  justify-content: space-around;  /* Centraliza os itens horizontalmente */
-  margin-top: 5%;  /* Adiciona um espaçamento superior de 40px */
-
-
-
-  
-
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5%;
 
 }
 
-.linkItem p {
-  text-align: center;  /* Centraliza o conteúdo de texto dentro de cada link */
-  cursor: pointer;  /* Altera o cursor para "pointer" (mãozinha), indicando que o item é clicável */
-  color: rgb(0, 0, 0);  /* Define a cor do texto como preto */
-  text-decoration: none; 
-  
+.linkItem {
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  padding: 25px;
+  border-radius: 10px;
+
 }
+
+
+.linkItem:hover {
+
+  border: solid 1px #e5e4e4;
+
+  transform: scale(1.1);
+
+  transition: 300ms;
+
+  box-shadow: 0 20px 30px rgb(0, 0, 0);
+
+}
+
 
 
 .linkItem a {
-  text-decoration: none; /* Remove o sublinhado do link */
+  text-decoration: none;
+  color: black;
 }
 
 .icon {
-  margin-bottom: 10px;  /* Adiciona um espaçamento inferior de 10px abaixo do ícone */
-  color:#e30613;  /* Define a cor do ícone como azul (#0070f3) */
- 
+  margin-bottom: 10px;
+  color: #e30613;
 }
