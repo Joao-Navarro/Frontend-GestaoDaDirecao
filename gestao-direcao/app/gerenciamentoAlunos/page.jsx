@@ -31,7 +31,7 @@ export default function HomePage() {
 
        
         
-        <h1 className={style.text}>Gerenciamento de alunos</h1>
+        <h1 className={styles.text}>Gerenciamento de alunos</h1>
 
 
 
