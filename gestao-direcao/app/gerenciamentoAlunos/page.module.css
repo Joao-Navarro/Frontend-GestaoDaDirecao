@@ -1,13 +1,15 @@
 .container {
   text-align: center;  /* Centraliza o texto dentro do container */
-  margin-top: 50px;  /* Adiciona um espaçamento superior de 50px */
+ 
 }
 
 .links {
   display: flex;  /* Usa Flexbox para alinhar os itens dentro da div */
-  justify-content: center;  /* Centraliza os itens horizontalmente */
-  gap: 40px;  /* Define um espaçamento de 40px entre os itens */
-  margin-top: 40px;  /* Adiciona um espaçamento superior de 40px */
+  justify-content: space-around;  /* Centraliza os itens horizontalmente */
+  margin-top: 5%;  /* Adiciona um espaçamento superior de 40px */
+
+
+
   
 
 
@@ -28,6 +30,6 @@
 
 .icon {
   margin-bottom: 10px;  /* Adiciona um espaçamento inferior de 10px abaixo do ícone */
-  color:red;  /* Define a cor do ícone como azul (#0070f3) */
+  color:#e30613;  /* Define a cor do ícone como azul (#0070f3) */
  
 }

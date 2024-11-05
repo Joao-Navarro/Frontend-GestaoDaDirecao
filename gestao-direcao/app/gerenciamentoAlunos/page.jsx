@@ -2,8 +2,9 @@
 'use client'
 
 import Link from 'next/link'
-import { HiOutlinePlusCircle } from "react-icons/hi2";
-import { HiOutlineUserGroup } from "react-icons/hi2";
+import { MdGroupAdd } from "react-icons/md";
+import { MdGroups } from "react-icons/md";
+
 import styles from './page.module.css';
  
 export default function HomePage() {
@@ -15,16 +16,16 @@ export default function HomePage() {
 
       <div className={styles.linkItem}>
         <Link href="gerenciamentoAlunos/users">  
-            <HiOutlinePlusCircle size={150} className={styles.icon} />
-            <p>ADICIONAR</p>
+        <MdGroupAdd size={250} className={styles.icon} />
+            <p>Listar Alunos</p>
         </Link>
         </div>
   
 
         <div className={styles.linkItem}>
         <Link href="gerenciamentoAlunos/users/create">
-            <HiOutlineUserGroup size={150} className={styles.icon} />
-            <p>LISTAR ALUNOS</p> 
+            <MdGroups size={250} className={styles.icon} />
+            <p>Adicionar Alunos</p> 
         </Link>
         </div>
 
