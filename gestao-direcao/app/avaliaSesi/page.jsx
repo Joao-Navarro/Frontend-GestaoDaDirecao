@@ -21,6 +21,14 @@ const Home = () => {
 
 
   const getFilter = async () => {
+  
+
+    if (!ensinoTurma || !etapa || !ano) {
+      alert('Por favor, selecione todas as opções!');
+      return; // Interrompe a execução da função se algum campo estiver vazio
+    }
+
+    
     if (ensinoTurma && etapa && ano) {
       const url = `http://localhost:3001/avaliasesi/${etapa}/${ensinoTurma}/${ano}`;  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
       console.log(`Constructed URL: ${url}`);
@@ -83,8 +91,12 @@ const Home = () => {
         console.log('error', error);
       }
     } else {
-      console.log('Please select all options');
+      alert('Por favor, selecione todas as opções!');
     }
+
+
+
+
   }
 
   // add event handlers for each select
@@ -103,41 +115,41 @@ const Home = () => {
     setAno(e.target.value);
   }
 
-  const [filter, setFilter] = useState({
-    ensino: '',
-    etapa: '',
-    ano: '',
-  });
+  // const [filter, setFilter] = useState({
+  //   ensino: '',
+  //   etapa: '',
+  //   ano: '',
+  // });
 
  
 
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilter((prevFilter) => ({
-      ...prevFilter,
-      [name]: value,
-    }));
+  // const handleFilterChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFilter((prevFilter) => ({
+  //     ...prevFilter,
+  //     [name]: value,
+  //   }));
 
-    // Atualiza as etapas disponíveis com base no ensino selecionado
-    if (name === 'ensino') {
-      setFilter((prevFilter) => ({
-        ...prevFilter,
-        etapa: '', // Reseta a etapa ao mudar o ensino
-      }));
-      setAvailableEtapas(getEtapas(value));
-    }
-  };
+  //   // Atualiza as etapas disponíveis com base no ensino selecionado
+  //   if (name === 'ensino') {
+  //     setFilter((prevFilter) => ({
+  //       ...prevFilter,
+  //       etapa: '', // Reseta a etapa ao mudar o ensino
+  //     }));
+  //     setAvailableEtapas(getEtapas(value));
+  //   }
+  // };
 
 
 
-  const handleFilter = () => {
-    const newFilteredStudents = studentsData.filter((student) =>
-      (filter.ensino ? student.ensino === filter.ensino : true) &&
-      (filter.etapa ? student.etapa === filter.etapa : true) &&
-      (filter.ano ? student.ano === filter.ano : true)
-    );
-    setFilteredStudents(newFilteredStudents);
-  };
+  // const handleFilter = () => {
+  //   const newFilteredStudents = studentsData.filter((student) =>
+  //     (filter.ensino ? student.ensino === filter.ensino : true) &&
+  //     (filter.etapa ? student.etapa === filter.etapa : true) &&
+  //     (filter.ano ? student.ano === filter.ano : true)
+  //   );
+  //   setFilteredStudents(newFilteredStudents);
+  // };
 
   return (
     <>
@@ -197,7 +209,7 @@ const Home = () => {
 
         
 
-<button className={style.button} onClick={getFilter} disabled={!ensinoTurma || !etapa || !ano}>Filtrar</button>
+<button className={style.button} onClick={getFilter} >Filtrar</button>
 
 
         
