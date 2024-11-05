@@ -2,8 +2,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import style from "./page.module.css";
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-
+import Link from 'next/link';
 const Home = () => {
   const [Turma, setTurma] = useState(''); // add state for each select
   const [etapa, setEtapa] = useState('');
@@ -111,7 +110,7 @@ const Home = () => {
 
 
   return (
-    <>
+    <div className={style.body}>
       <Header />
       <div className={style.filtro}>
         <label>
@@ -171,10 +170,7 @@ const Home = () => {
         </label>
 
 
-        <div className={style.ano}>
-          <label>Ano</label>
-          <input className={style.input} value={ano} type='number' onChange={handleAnoChange} name="ano" />
-        </div>
+          <input placeholder='Ano' value={ano} type='number' onChange={handleAnoChange} name="ano" />
 
 
 
@@ -189,17 +185,13 @@ const Home = () => {
       </div>
 
 
-      <h1 className={style.text}>Avalia Externa</h1>
+      <h1 className={style.text}>Avaliação Externa</h1>
 
       <div className={style.table} id='descricao' ref={descricaoRef} />
 
-      <div className={style.footer}>
+      <Link href= '/avaliacaoExterna'><button className={style.back} >Voltar</button></Link>
 
-        <Footer />
-      </div>
-
-
-    </>
+    </div>
   );
 };
 

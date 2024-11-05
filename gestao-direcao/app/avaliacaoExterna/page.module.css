@@ -12,6 +12,7 @@
 .links {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
   margin-top: 5%;
 }
 
@@ -48,4 +49,10 @@
 .icon {
   margin-bottom: 10px;
   color: #e30613;
+}
+
+@media only screen and (max-width: 800px) {
+
+
+
 }

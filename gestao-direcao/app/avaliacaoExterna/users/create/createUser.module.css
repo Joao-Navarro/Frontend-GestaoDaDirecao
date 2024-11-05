@@ -125,4 +125,40 @@
 
     width: 100%;
 
+    text-align: center;
+
+    justify-content: center;
+
+    display: flex;
+  }
+
+  .back {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    width: 50%;
+
+    cursor: pointer;
+
+    background-color: #878787;
+   
+    border-radius: 5%;
+  
+    padding: 10px;
+  
+    border-radius: 10px;
+
+    margin-left: 25%;
+  }
+
+  .back a {
+
+    text-decoration: none;
+
+    color: black;
+
   }

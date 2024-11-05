@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './createUser.module.css';
 import Header from '@/components/Header';
+import Link from 'next/link';
 
 export default function CreateUserPage() {
   const [rm, setRm] = useState('');
@@ -145,6 +146,9 @@ export default function CreateUserPage() {
 
 
       </form>
+
+      <Link href='/avaliacaoExterna' ><button className={styles.back}>Voltar</button></Link>
+
     </div>
   );
 }

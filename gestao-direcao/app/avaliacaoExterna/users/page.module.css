@@ -1,3 +1,10 @@
+.body {
+
+  height: 900px
+
+}
+
+
 .text{
     justify-content: center;
     align-items: center;
@@ -29,6 +36,20 @@
     margin-bottom: 3%;
   }
   
+      
+  .filtro input {
+  
+    border-radius: 5px;
+  
+    border-color: solid black 2px;  
+
+    text-align: center;
+  
+    background-color: #acacac;
+  
+    padding: 10px;
+  
+  }
   
   .button {
   
@@ -49,9 +70,7 @@
   
     border-radius: 10px;
   
-  
-  
-  
+
   }
   
   
@@ -125,12 +144,35 @@
   
   
   }
+
+  .back {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    width: 50%;
+
+    cursor: pointer;
+
+    background-color: #878787;
+   
+    border-radius: 5%;
+  
+    padding: 10px;
+  
+    border-radius: 10px;
+
+    margin-left: 25%;
+  }
   
   
   .table {
   
   
-    width: 100%;
+    width: 90%;
     border-collapse: collapse;
     margin: 0 auto;
     font-size: 16px;
@@ -155,16 +197,7 @@
     border-bottom: 1px solid #000000;
   }
   
-  
-  .footer {
-    position: relative;
-    bottom: 0;
-    width: 100%;
-  }
-  
-  
-  
-  
+   
   
   
   @media only screen and (max-width: 800px) {
@@ -187,21 +220,20 @@
      
       justify-content: space-around;
      
-      margin: 6.7%;
+      margin: 6%;
     }
     .ano {
-      width: 100px;
+      width: 50%;
     }
     .input {
       width: 100%;
     }
     .botao {
-      flex-direction: row;
       width: 100%;
       margin-bottom: 9%;
     }
     .table {
-      font-size: 7px;
+      font-size: 1.2rem;
       width: auto;
       height: auto;
     }
