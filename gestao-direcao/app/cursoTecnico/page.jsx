@@ -26,7 +26,7 @@ const Home = () => {
 
   const getFilter = async () => {
     if (ensinoTurma && etapa && ano) {
-      const url = `http://localhost:3001/avaliasesi/${etapa}/${ensinoTurma}/${ano}`;  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
+      const url = `http://localhost:3001/cursotec/${etapa}/${ensinoTurma}/${ano}`;  //http://localhost:3001/cursotec/1S/3%25E.M/2024
       console.log(`Constructed URL: ${url}`);
       console.log('Current state:', etapa, ensinoTurma, ano);
 
