@@ -186,7 +186,7 @@ const Home = () => {
 
         <label>
           <select className={style.button} name="etapa" onChange={handleEtapaChange} value={etapa}>
-            <option value="">Selecione</option>
+            <option value="">Etapa</option>
             <option value="%251etapa">1</option>
             <option value="%252etapa">2</option>
             <option value="%253etapa">3</option>
