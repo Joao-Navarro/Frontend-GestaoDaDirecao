@@ -220,12 +220,9 @@ const Home = () => {
 
       </div>
     
-        <div className={style.table} id='descricao' ref={descricaoRef} />
+        <div className={style.table}style={{ overflow: 'auto' }} id='descricao' ref={descricaoRef} />
         
-              <div className={style.footer}>
-
-      <Footer />
-      </div>
+          
 
     </>
   );
