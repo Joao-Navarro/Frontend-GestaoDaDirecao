@@ -26,6 +26,8 @@ const Home = () => {
       console.log(`Constructed URL: ${url}`);
       console.log('Current state:', etapa, ensinoTurma, ano);
 
+      
+
       try {
         const response = await fetch(url);
         console.log(response);
@@ -193,7 +195,7 @@ const Home = () => {
           <input className={style.input} value={ano} type='number' onChange={handleAnoChange} name="ano" />
         </div>
 
-
+        
 
 <button className={style.button} onClick={getFilter} disabled={!ensinoTurma || !etapa || !ano}>Filtrar</button>
 
@@ -201,11 +203,11 @@ const Home = () => {
         
       <Link  href="https://app.powerbi.com/home?experience=power-bi&culture=pt-br&country=br&ScenarioId=Signup" className={style.button}>Power BI</Link>     
 
+      
 
 
       </div>
-
-     
+    
         <div className={style.table} id='descricao' ref={descricaoRef} />
         
               <div className={style.footer}>
