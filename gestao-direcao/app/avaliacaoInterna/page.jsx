@@ -87,6 +87,9 @@ const Home = () => {
   const handleAnoChange = (e) => {
     console.log('ano changed:', e.target.value);
     setAno(e.target.value);
+    if (ano > 2024) {
+      return res.status(400).send("Ano não pode ser superior a 2024.");
+    }
   }
 
   const [filter, setFilter] = useState({
@@ -205,7 +208,7 @@ const Home = () => {
 
        </div>
 
-      <h1 className={style.text}>Avalia Sesi</h1>
+      <h1 className={style.text}>Avaliação Interna</h1>
 
       
 
