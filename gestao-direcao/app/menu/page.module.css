@@ -46,14 +46,13 @@
     width: 100%;
 
     margin-bottom: 2%;
+
     
 }
 
 .ButtonGeral {
 
     color: black;
-  
-    align-items: center;
   
     padding: 15px;
 
@@ -69,6 +68,8 @@
 
     justify-content: center;
 
+    margin-left: -30%;
+    
   }
 
   .ButtonGeral:hover {
@@ -76,20 +77,30 @@
     cursor: pointer;
 
     background-color: #b1b0b0;
-    
+
+  
   }
 
   .ButtonAlunos {
 
     color: black;
   
-    align-items: center;
-  
     padding: 15px;
 
-    background-color:#878787;
+    margin: 5%;
 
+    background-color:#878787; 
+ 
     border-radius: 10px;
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-left: -25%;
+
 
   
 
@@ -121,24 +132,26 @@
     
     .card {
     
-        margin: 2%;
-    
-        width: 50%;
+        width: 40%;
     
         display: flex;
     
         flex-direction: column;
 
         text-align: center;
-    
+
+        margin-right: 7%;
+
+       
     }
     
     .card h3 {
-        font-size: 2rem;
+      
+        font-size: 1rem;
     
         color: #000000;
 
-        margin-left: 50%;
+        margin-left: 5%;
       
     }
 
@@ -147,7 +160,7 @@
         height: 200px;
         object-fit: cover;
         margin-bottom: 2%;
-        margin-left: 30%;
+        margin-left: 7%;
     }
     
   
@@ -176,6 +189,8 @@
         padding: 10px;
     
         margin: 2%;
+
+        margin-left: 4%;
     
     
       }
@@ -193,6 +208,8 @@
         align-items: center;
       
         padding: 10px;
+
+        margin-left: 2%;
     
 
       }

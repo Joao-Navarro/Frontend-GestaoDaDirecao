@@ -72,8 +72,6 @@ function Home() {
   
 
 
-      <Footer />
-
     </>
 
   )
