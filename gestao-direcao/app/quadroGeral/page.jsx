@@ -301,11 +301,11 @@ const Home = () => {
             onChange={handleAnoChange}
             name="ano"
           />
-          {/* Verificação do ano digitado */}
+         <div className={style.anoerrado}>
           {Ano && (Ano < 2024 || Ano > 2024) && (
-            <p style={{ color: 'crimson' }}>Ano não encontrado</p>
+            <p>Ano não encontrado</p>
           )}
-        </div>
+       </div> </div>
   
         <button onClick={getFilter} disabled={!Turma || !etapa || !Ano}>
           Filtrar

@@ -59,6 +59,22 @@
     justify-content: space-around;
   
     width: 15%;
+
+    flex-direction: column;
+
+  }
+
+  .anoerrado {
+  
+    display: flex;
+  
+    justify-content: space-around;
+
+    flex-direction: column;
+
+    margin-left: 20%;
+
+    color: #730d0d;
   }
   
   .input {
