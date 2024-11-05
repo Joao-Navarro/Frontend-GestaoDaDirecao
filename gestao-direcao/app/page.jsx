@@ -1,95 +1,100 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
+import { useState, useEffect } from 'react';
+import Head from 'next/head';
+import Image from 'next/image';
+import style from "@/app/page.module.css"
+const SignIn = () => {
+  const [usuario, setUsuario] = useState('');
+  const [senha, setSenha] = useState('');
+  const [msgError, setMsgError] = useState('');
+  const [senhaVisivel, setSenhaVisivel] = useState(false);
 
-export default function Home() {
+  const entrar = () => {
+    // Definindo credenciais fixas
+    const usuarioFixo = 'Gestão';
+    const senhaFixa = '2024';
+
+    // Verificar se os campos estão preenchidos
+    if (!usuario || !senha) {
+      setMsgError('Por favor, preencha todos os campos.');
+      return;
+    }
+
+    // Comparar as credenciais inseridas com as fixas
+    if (usuario === usuarioFixo && senha === senhaFixa) {
+      const token = Math.random().toString(16).substr(2) + Math.random().toString(16).substr(2) + "Amamos_DS_;-)";
+      localStorage.setItem("token", token);
+      localStorage.setItem("userLogado", JSON.stringify({ userCad: usuarioFixo, senhaCad: senhaFixa }));
+      window.location.href = "../menu"; // Redirecionar após login
+    } else {
+      setMsgError('Usuário ou senha incorretos');
+      setUsuario('');
+      setSenha('');
+    }
+  };
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <div>
+      <Head>
+        <title>Login</title>
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+      </Head>
+      <header>
+        <a href="../index.html">
+        <Image className={style.img}  src="/LOGOSESI.png" width={500} height={300}/>
+        </a>
+      </header>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+      <div className={style.container}>
+        <div className={style.card}>
+          <h1 className={style.p}>Entrar</h1>
+
+          {msgError && <div id="msgError" style={{ color: 'red' }}>{msgError}</div>}
+
+          <div className={style.labelFloat}>
+            <input className={style.input}
+              type="text"
+              id="usuario"
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
+              required
+              placeholder='Digite seu usuario'
             />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+          </div>
+
+          <div className={style.labelFloat}>
+            <input className={style.input}
+              type={senhaVisivel ? 'text' : 'password'}
+              id="senha"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              required
+              placeholder='Digite sua senha'
+            />
+            <i
+              className={`fa fa-eye${senhaVisivel ? '' : '-slash'}`}
+              aria-hidden="true"
+              onClick={() => setSenhaVisivel(!senhaVisivel)} // Alternar visibilidade da senha
+              style={{ cursor: 'pointer' }}
+            ></i>
+          </div>
+
+          <div className={style.justifyCenter}>
+            <button className={style.button} onClick={entrar}>Entrar</button>
+          </div>
+
+          <div className={style.justifyCenter}>
+            <hr />
+          </div>
+
+          
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
     </div>
   );
-}
+};
+
+
+export default SignIn;
