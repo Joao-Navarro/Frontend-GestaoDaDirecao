@@ -65,6 +65,13 @@
 
   }
 
+  .ButtonGeral:hover {
+
+    cursor: pointer;
+
+    background-color: #b1b0b0;
+  }
+
   .ButtonAlunos {
 
     color: black;
@@ -79,6 +86,13 @@
 
   }
 
+  .ButtonAlunos:hover {
+
+    cursor: pointer;
+
+    background-color: #b1b0b0   ;
+
+  }
   
 
   
@@ -150,11 +164,17 @@
       
         align-items: center;
       
-        padding: 1%;
+        padding: 10px;
     
         margin: 2%;
     
     
+      }
+
+      .ButtonGeral:hover {
+
+        cursor: pointer;
+
       }
     
       .ButtonAlunos {
@@ -163,8 +183,17 @@
       
         align-items: center;
       
-        padding: 1%;
+        padding: 10px;
     
+
+      }
+
+      .ButtonAlunos:hover {
+
+        cursor: pointer;
+
+        background-color: #000000   ;
+
       }
 
     }
