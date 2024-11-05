@@ -1,6 +1,8 @@
 "use client"
 
 import Image from 'next/image';
+import '@/app/globals.css';
+import Link from 'next/link';
 
 
 function Header() {
@@ -14,13 +16,13 @@ function Header() {
 
                 <div className="usuario" >
 
-                    <Image src="/ICONEUSUARIO.png" alt="JSX Icon" width={80} height={80} />
+                    <Link href="/menu"><Image src="/ICONECASA.png" alt="JSX Icon" width={80} height={80} /></Link>
 
                 </div>
 
                 <div className="logo">
 
-                    <Image src="/LOGOSESI.png" alt="JSX Icon" width={180} height={100} />
+                    <Image src="/imagelogo.png" alt="JSX Icon" width='190' height='50' />
                 
                 </div>
 

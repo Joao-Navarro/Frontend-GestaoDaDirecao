@@ -1,0 +1,12 @@
+{
+  "name": "frontend-gestaodadirecao",
+  "version": "1.0.0",
+  "description": "Nesse repositório estarão as telas do frontend do nosso sistema de Gestão da Direção",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
