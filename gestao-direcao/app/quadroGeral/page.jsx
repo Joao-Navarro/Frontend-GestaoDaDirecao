@@ -82,7 +82,7 @@ const Home = () => {
                       cellStyle.backgroundColor = ''; // ou você pode omitir esta linha
                       cellStyle.color = ''; // ou você pode omitir esta linha
                     } else if (value < 7) {
-                      cellStyle.backgroundColor = 'red';
+                      cellStyle.backgroundColor = '#730d0d';
                       cellStyle.color = 'white';
                     } else if (value >= 7) {
                       cellStyle.backgroundColor = 'green';
@@ -92,7 +92,7 @@ const Home = () => {
                   } else if (isAvaliaColumn) {
                     // Para colunas "avalia", aplica vermelho se o valor for "Nível 1" ou "Nível 2", senão verde
                     if (value === 'Nível 1' || value === 'Nível 2') {
-                      cellStyle.backgroundColor = 'red';
+                      cellStyle.backgroundColor = '#730d0d';
                       cellStyle.color = 'white';
                     } else if (value === 'Nível 3' || value === 'Nível 4') {
                       cellStyle.backgroundColor = 'green';
