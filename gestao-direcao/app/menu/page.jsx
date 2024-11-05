@@ -62,11 +62,11 @@ function Home() {
 
 
 
-      <Link href="/quadroGeral" ><button className={styles.ButtonGeral} type="submit">GERAL</button></Link>
+      <Link href="/quadroGeral" ><button className={styles.ButtonGeral} type="submit">Quadro Geral</button></Link>
 
 
 
-      <Link href="/gerenciamentoAlunos" ><button className={styles.ButtonAlunos} type="submit">GERENCIAR ALUNOS</button></Link>
+      <Link href="/gerenciamentoAlunos" ><button className={styles.ButtonAlunos} type="submit">Gerenciar Alunos</button></Link>
 
       </div>
   
