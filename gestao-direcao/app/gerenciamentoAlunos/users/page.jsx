@@ -24,6 +24,10 @@ const Home = () => {
 
 
 
+// document.getElementById("descricao").innerHTML = ''; 
+
+
+
 
   const getFilter = async () => {
     if (ensinoTurma && ano) {
@@ -36,6 +40,12 @@ const Home = () => {
         console.log(response);
         const resData = await response.json();
         console.log(resData);
+
+        if (Array.isArray(resData) && resData.length === 0) {
+          alert('Banco de dados vazio');
+        } else {
+          alert('Tabela carregada');
+        }
 
 
         const table = document.createElement('table');
@@ -90,10 +100,13 @@ const Home = () => {
         document.getElementById("descricao").appendChild(table);
       } catch (error) {
         console.log('error', error);
+        alert('Valor inexistente ou Banco de dados vazio', error);
       }
+      
     } else {
       console.log('Please select all options');
     }
+
   }
 
   // add event handlers for each select
