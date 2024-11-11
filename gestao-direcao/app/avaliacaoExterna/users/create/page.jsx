@@ -15,35 +15,40 @@ export default function CreateUserPage() {
   const [Turma, setTurma] = useState('');
   const router = useRouter();
 
-  const createUser = async (e) => {
+
+
+  const createUser  = async (e) => {
     e.preventDefault();
-
-    
-
+  
+    try {
       const res = await fetch('http://localhost:3001/avalia', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ rm, etapa, ano, tipoprova, notaExt }),
       });
-      
-      try {
-      
-        if (res.ok) {
-
-        setAno('')
-        setEtapa('')
-        setRm('')
-        setTipoprova('')
-        setTurma('')
-        setNotaExt('')
-
-        alert('User created successfully')
+  
+      // Verifica se a resposta não foi bem-sucedida
+      if (!res.ok) {
+        const errorMessage = await res.text(); // Obtém a mensagem de erro do servidor
+        alert(`User  creation failed: O Usuário já existe`); // Exibe a mensagem de erro no alert
+        return; // Sai da função se a criação do usuário falhar
       }
-    }catch (err){
-
-        res.status(500).alert('User created failed')
-
-      }
+  
+      // Se a resposta for bem-sucedida
+      setAno('');
+      setEtapa('');
+      setRm('');
+      setTipoprova('');
+      setTurma('');
+      setNotaExt('');
+  
+      alert('Usuário criado com sucesso!');
+    } catch (err) {
+      // Captura erros que não estão relacionados à resposta da API
+      alert('User  creation failed: ' + err.message); // Exibe erro de rede ou outro erro
+    }
+  
+    // Adicione manipuladores de eventos para cada select, se necessário
 
 
   // add event handlers for each select

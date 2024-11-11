@@ -35,25 +35,12 @@ fetchUser();
      <form onSubmit={updateUser} className={styles.form}>
        <input
          type="text"
-         placeholder="Nome"
-         value={user.name}
-         onChange={(e) => setUser({ ...user, name: e.target.value })}
+         placeholder="Nota"
+         value={user.notaExt}
+         onChange={(e) => setUser({ ...user, notaExt: e.target.value })}
          className={styles.input}
        />
-       <input
-         type="email"
-         placeholder="Email"
-         value={user.email}
-         onChange={(e) => setUser({ ...user, email: e.target.value })}
-         className={styles.input}
-       />
-       <input
-         type="number"
-         placeholder="Idade"
-         value={user.age}
-         onChange={(e) => setUser({ ...user, age: e.target.value })}
-         className={styles.input}
-       />
+      
        <button type="submit" className={styles.button}>Salvar</button>
      </form>
    </div>
