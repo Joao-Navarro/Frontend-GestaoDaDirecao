@@ -8,6 +8,7 @@ const Home = () => {
   const [etapa, setEtapa] = useState('');
   const [ano, setAno] = useState('');
   const [tipoprova, setTipoprova] = useState('');
+  const [rm, setRm] = useState([]);
   const descricaoRef = useRef(null);
 
 
@@ -21,7 +22,7 @@ const Home = () => {
 
 
   const getFilter = async () => {
-    if (Turma && etapa && ano && tipoprova ) {
+    if (Turma && etapa && ano && tipoprova) {
       const url = `http://localhost:3001/avalia/${etapa}/${Turma}/${ano}/${tipoprova}`;  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
       console.log(`Constructed URL: ${url}`);
       console.log('Current state:', etapa, Turma, ano, tipoprova);
@@ -53,10 +54,10 @@ const Home = () => {
           }
           else if (header === 'notaExt') {
             th.innerHTML = 'Nota';
-          } 
+          }
 
           headerRow.appendChild(th);
-        
+
         });
 
 
@@ -67,10 +68,16 @@ const Home = () => {
             const cell = row.insertCell();
             if (item[header] === null) {
               cell.innerHTML = "Não informado";
-            }else {
+            } else {
               cell.innerHTML = item[header];
             }
           });
+
+          const actionCell = row.insertCell();
+          const editLink = document.createElement('a');
+          editLink.href = `avaliacaoExterna/users/[${item.rm}]/edit`; // Supondo que o campo users_ID existe
+          editLink.innerText = 'Editar';
+          actionCell.appendChild(editLink);
         });
 
 
@@ -170,7 +177,7 @@ const Home = () => {
         </label>
 
 
-          <input placeholder='Ano' value={ano} type='number' onChange={handleAnoChange} name="ano" />
+        <input placeholder='Ano' value={ano} type='number' onChange={handleAnoChange} name="ano" />
 
 
 
@@ -189,7 +196,7 @@ const Home = () => {
 
       <div className={style.table} id='descricao' ref={descricaoRef} />
 
-      <Link href= '/avaliacaoExterna'><button className={style.back} >Voltar</button></Link>
+      <Link href='/avaliacaoExterna'><button className={style.back} >Voltar</button></Link>
 
     </div>
   );
