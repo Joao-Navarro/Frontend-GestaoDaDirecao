@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "create-next-app": "^14.2.13",
     "icons": "^1.0.0",
     "jspdf": "^2.5.2",
