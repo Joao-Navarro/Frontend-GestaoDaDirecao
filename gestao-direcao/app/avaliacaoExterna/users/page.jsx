@@ -191,7 +191,7 @@ const Home = () => {
 
       <h1 className={style.text}>Avalia Externa</h1>
 
-      <div className={style.table} id='descricao' ref={descricaoRef} />
+      <div style={{ overflow: 'auto' }} className={style.table} id='descricao' ref={descricaoRef} />
 
       <div className={style.footer}>
 

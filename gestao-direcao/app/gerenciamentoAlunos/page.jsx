@@ -29,7 +29,10 @@ export default function HomePage() {
             <MdGroups size={250} className={styles.icon} />
             <p>Adicionar Alunos</p>
           </Link>
-        </div>
+        </div>       
+        
+        <h1 className={styles.text}>Gerenciamento de alunos</h1>
+
       </div>
     </div>
   );
