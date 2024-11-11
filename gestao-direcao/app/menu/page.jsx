@@ -60,19 +60,17 @@ function Home() {
 
       <div className={styles.Button}>
 
+<div className={styles.LinkItem}>
 
+      <Link href="/quadroGeral" ><button className={styles.ButtonGeral} type="submit">Quadro Geral</button></Link>
 
-      <Link href="/quadroGeral" ><button className={styles.ButtonGeral} type="submit">GERAL</button></Link>
+      </div>
 
-
-
-      <Link href="/gerenciamentoAlunos" ><button className={styles.ButtonAlunos} type="submit">GERENCIAR ALUNOS</button></Link>
+      <Link href="/gerenciamentoAlunos" ><button className={styles.ButtonAlunos} type="submit">Gerenciar Alunos</button></Link>
 
       </div>
   
 
-
-      <Footer />
 
     </>
 

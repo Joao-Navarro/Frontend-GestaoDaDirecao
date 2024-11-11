@@ -3,15 +3,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import style from "./page.module.css";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { render } from 'react-dom';
-
-
-
 
 const Home = () => {
-  const [ensinoTurma, setEnsinoTurma] = useState(''); // add state for each select
+  const [Turma, setTurma] = useState(''); // add state for each select
   const [etapa, setEtapa] = useState('');
   const [ano, setAno] = useState('');
+  const [tipoprova, setTipoprova] = useState('');
   const descricaoRef = useRef(null);
 
 
@@ -25,10 +22,10 @@ const Home = () => {
 
 
   const getFilter = async () => {
-    if (ensinoTurma && etapa && ano) {
-      const url = `http://localhost:3001/cursotec/${etapa}/${ensinoTurma}/${ano}`;  //http://localhost:3001/cursotec/1S/3%25E.M/2024
+    if (Turma && etapa && ano && tipoprova ) {
+      const url = `http://localhost:3001/avalia/${etapa}/${Turma}/${ano}/${tipoprova}`;  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
       console.log(`Constructed URL: ${url}`);
-      console.log('Current state:', etapa, ensinoTurma, ano);
+      console.log('Current state:', etapa, Turma, ano, tipoprova);
 
 
       try {
@@ -45,26 +42,22 @@ const Home = () => {
         const table = document.createElement('table');
         table.className = style.table;
         // Verifique se a classe foi adicionada
-        // add a border to the table
-
-
-        // Create a header row
+        // add a border to the table// Create a header row
         const headerRow = table.insertRow(0);
         const headers = Object.keys(resData[0]);
         headers.forEach((header, index) => {
           const th = document.createElement('th');
           if (header === 'rm') {
             th.innerHTML = 'RM';
-          } else if (header === 'Turma') {
-            th.innerHTML = 'Turma';
-          } else if (header === 'PorcentagemAcertoIngles') {
-            th.innerHTML = 'Porcentagem Acerto Inglês';
-          } else if (header === 'Ebep' || header === 'ComDeficiencia') {
-            th.innerHTML = header.replace('Ebep', 'E.B.E.P').replace('ComDeficiencia', 'Com Deficiência');
-          } else {
-            th.innerHTML = header.replace('1S-', '1ª Etapa ').replace('2S-', '2ª Etapa ').replace('3S-', '3ª Etapa ').replace('CH', 'Ciências Humanas').replace('CN', 'Ciências Naturais').replace('LI', 'Língua Inglesa').replace('LP', 'Língua Portuguesa').replace('MAT', 'Matemática');
+          } else if (header === 'NomeAluno') {
+            th.innerHTML = 'Nome do Aluno';
           }
+          else if (header === 'notaExt') {
+            th.innerHTML = 'Nota';
+          } 
+
           headerRow.appendChild(th);
+        
         });
 
 
@@ -75,17 +68,14 @@ const Home = () => {
             const cell = row.insertCell();
             if (item[header] === null) {
               cell.innerHTML = "Não informado";
-            } else if (header === 'Ebep' || header === 'ComDeficiencia') {
-              cell.innerHTML = item[header] === 'TRUE' ? 'Sim' : 'Não';
-            } else {
+            }else {
               cell.innerHTML = item[header];
             }
           });
         });
 
 
-        // Add the table to the #descricao div
-        document.getElementById("descricao").innerHTML = '';
+        // Add the table to the #descricao divdocument.getElementById("descricao").innerHTML = '';
         document.getElementById("descricao").appendChild(table);
       } catch (error) {
         console.log('error', error);
@@ -97,9 +87,9 @@ const Home = () => {
 
 
   // add event handlers for each select
-  const handleEnsinoTurmaChange = (e) => {
+  const handleTurmaChange = (e) => {
     console.log('etapa changed:', e.target.value);
-    setEnsinoTurma(e.target.value);
+    setTurma(e.target.value);
   }
 
 
@@ -114,48 +104,10 @@ const Home = () => {
     setAno(e.target.value);
   }
 
-
-  const [filter, setFilter] = useState({
-    ensino: '',
-    etapa: '',
-    ano: '',
-  });
-
-
- 
-
-
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilter((prevFilter) => ({
-      ...prevFilter,
-      [name]: value,
-    }));
-
-
-    // Atualiza as etapas disponíveis com base no ensino selecionado
-    if (name === 'ensino') {
-      setFilter((prevFilter) => ({
-        ...prevFilter,
-        etapa: '', // Reseta a etapa ao mudar o ensino
-      }));
-      setAvailableEtapas(getEtapas(value));
-    }
-  };
-
-
-
-
-
-
-  const handleFilter = () => {
-    const newFilteredStudents = studentsData.filter((student) =>
-      (filter.ensino ? student.ensino === filter.ensino : true) &&
-      (filter.etapa ? student.etapa === filter.etapa : true) &&
-      (filter.ano ? student.ano === filter.ano : true)
-    );
-    setFilteredStudents(newFilteredStudents);
-  };
+  const handleTipoprovaChange = (e) => {
+    console.log('tipo prova changed:', e.target.value);
+    setTipoprova(e.target.value);
+  }
 
 
   return (
@@ -163,7 +115,7 @@ const Home = () => {
       <Header />
       <div className={style.filtro}>
         <label>
-          <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
+          <select className={style.button} name="ensino" value={Turma} onChange={handleTurmaChange}>
             <option value="">EF1</option>
             <option value="3%25E.F">3º Ano</option>
             <option value="4%25E.F">4º Ano</option>
@@ -175,14 +127,13 @@ const Home = () => {
 
 
         <label>
-          <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
+          <select className={style.button} name="ensino" value={Turma} onChange={handleTurmaChange}>
             <option value="">EF2</option>
             <option value="6%25A%25">6º Ano A</option>
             <option value="6%25B%25">6º Ano B</option>
             <option value="7%25A%25">7º Ano A</option>
             <option value="7%25B%25">7º Ano B</option>
-            <option value="8%25A%25">8º Ano A</option>
-            <option value="8%25B%25">8º Ano B</option>
+            <option value="8%25A%25">8º Ano A</option><option value="8%25B%25">8º Ano B</option>
             <option value="9%25A%25">9º Ano A</option>
             <option value="9%25B%25">9º Ano B</option>
           </select>
@@ -190,7 +141,7 @@ const Home = () => {
 
 
         <label>
-          <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
+          <select className={style.button} name="ensino" value={Turma} onChange={handleTurmaChange}>
             <option value="">EM</option>
             <option value="1%25A%25">1º Ano A</option>
             <option value="1%25B%25">1º Ano B</option>
@@ -211,6 +162,14 @@ const Home = () => {
           </select>
         </label>
 
+        <label>
+          <select className={style.button} name="etapa" onChange={handleTipoprovaChange} value={tipoprova}>
+            <option value="">Tipo de Prova</option>
+            <option value="SARESP">SARESP</option>
+            <option value="DESBRAVA">DESBRAVENEM</option>
+          </select>
+        </label>
+
 
         <div className={style.ano}>
           <label>Ano</label>
@@ -222,7 +181,7 @@ const Home = () => {
 
 
 
-        <button className={style.button} onClick={getFilter} disabled={!ensinoTurma || !etapa || !ano}>Filtrar</button>
+        <button className={style.button} onClick={getFilter} disabled={!Turma || !etapa || !ano || !tipoprova}>Filtrar</button>
 
 
 
@@ -230,16 +189,13 @@ const Home = () => {
       </div>
 
 
-      <h1 className={style.text}>Curso Técnico</h1>
+      <h1 className={style.text}>Avalia Externa</h1>
 
+      <div style={{ overflow: 'auto' }} className={style.table} id='descricao' ref={descricaoRef} />
 
-     
-        <div style={{ overflow: 'auto' }}  className={style.table} id='descricao' ref={descricaoRef} />
-       
-              <div className={style.footer}>
+      <div className={style.footer}>
 
-
-      <Footer />
+        <Footer />
       </div>
 
 
@@ -249,4 +205,3 @@ const Home = () => {
 
 
 export default Home;
-

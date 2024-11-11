@@ -33,23 +33,12 @@ const SignIn = () => {
     }
   };
   return (
-    <div>
-      <Head>
-        <title>Login</title>
-        <link
-          rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-        />
-      </Head>
-      <header>
-        <a href="../index.html">
-        <Image className={style.img}  src="/LOGOSESI.png" width={500} height={300}/>
-        </a>
-      </header>
+    <div className={style.body}>
+    
 
       <div className={style.container}>
         <div className={style.card}>
-          <h1 className={style.p}>Entrar</h1>
+          <h1 className={style.p}>Login</h1>
 
           {msgError && <div id="msgError" style={{ color: 'red' }}>{msgError}</div>}
 
