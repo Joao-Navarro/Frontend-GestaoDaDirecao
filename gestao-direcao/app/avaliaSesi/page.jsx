@@ -43,8 +43,10 @@ const Home = () => {
         console.log(resData);
 
         if (Array.isArray(resData) && resData.length === 0) {
+          document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
           alert('Banco de dados vazio');
       } else {
+        document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
           alert('Tabela carregada');
       }
 
