@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import style from "./page.module.css";
 import Header from '@/components/Header';
 import { render } from 'react-dom';
+import Link from 'next/link';
 
 
 
@@ -176,6 +177,8 @@ const Home = () => {
       <div className={style.card}>
 
       </div>
+
+      <Link href= '/gerenciamentoAlunos'><button className={style.back} >Voltar</button></Link>
 
 
       <div className={style.footer}>
