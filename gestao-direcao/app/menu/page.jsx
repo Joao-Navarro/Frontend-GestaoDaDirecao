@@ -26,7 +26,7 @@ function Home() {
 
           <Link href="/avaliacaoInterna" ><Image className={styles.imginterna} src="/INTERNA.png" alt="avaliação interna" width={300} height={300} /></Link>
 
-          <h3>AVALIAÇÃO INTERNA</h3>
+          <h3>AVALIAÇÃO INTERNA - CE 242</h3>
 
         </div>
 
@@ -34,7 +34,7 @@ function Home() {
 
           <Link href="/avaliacaoExterna" ><Image className={styles.imginterna} src="/EXTERNA.png" alt="avaliação externa" width={300} height={300} /></Link>
 
-          <h3>AVALIAÇÃO EXTERNA</h3>
+          <h3>DESBRAVENEM E SARESP</h3>
 
         </div>
 
