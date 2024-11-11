@@ -149,9 +149,8 @@ const Home = () => {
 
   return (
     <>
-      <Header />
+      <Header/>
       <div className={style.filtro}>
-        <label>
         <select className={style.button} value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
                 <option value="">EF1</option>
                 <option value="notasEF1/1%25E.F">1º Ano</option>
@@ -184,12 +183,11 @@ const Home = () => {
           </select>
 
 
-        </label>
 
 
         <label>
           <select className={style.button} name="etapa" onChange={handleEtapaChange} value={etapa}>
-            <option value="">Selecione</option>
+            <option value="">Etapa</option>
             <option value="%251etapa">1</option>
             <option value="%252etapa">2</option>
             <option value="%253etapa">3</option>
@@ -201,7 +199,7 @@ const Home = () => {
           <input className={style.input} value={ano} type='number' onChange={handleAnoChange} name="ano" />
         </div>
 
-        <button onClick={getFilter} disabled={!ensinoTurma || !etapa || !ano}>
+        <button className={style.button} onClick={getFilter} disabled={!ensinoTurma || !etapa || !ano}>
           Filtrar
         </button>
 
@@ -213,10 +211,11 @@ const Home = () => {
       
 
       <div className="info">
-      <div className={style.table} id="descricao"></div>
+      <div style={{ overflow: 'auto' }} className={style.table} id="descricao"></div>
+     
      
       </div>
-      <Footer />
+      <Footer/>
     </>
   );
 };

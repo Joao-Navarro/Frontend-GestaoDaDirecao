@@ -1,0 +1,128 @@
+   .container {
+     margin: 0;
+   }
+
+   .h1 {
+
+     margin: 4%;
+
+     text-align: center;
+
+   }
+
+   .form {
+     display: flex;
+     flex-direction: column;
+   }
+
+
+
+   .button {
+
+     display: flex;
+
+     margin-right: 5%;
+
+     background-color: #878787;
+
+     border-radius: 5%;
+
+     padding: 10px;
+
+     border-radius: 10px;
+
+     text-align: center;
+
+     margin: 5%;
+
+   }
+
+   .filtro {
+
+
+     display: flex;
+
+
+     justify-content: space-around;
+
+
+     width: 100%;
+
+
+     align-items: center;
+
+
+     flex-wrap: wrap;
+
+
+     margin-top: 4%;
+
+
+     margin-bottom: 3%;
+   }
+
+   .ano {
+
+
+     display: flex;
+
+
+     background-color: #878787;
+
+
+     padding: 10px;
+
+
+     border-radius: 10px;
+
+
+     justify-content: space-around;
+
+
+     width: 15%;
+   }
+
+
+   .filtro input {
+
+     border-radius: 5px;
+
+     border-color: solid black 2px;
+
+     text-align: center;
+
+     background-color: #acacac;
+
+     padding: 10px;
+
+   }
+
+   .input {
+
+
+     display: flex;
+
+     justify-content: center;
+
+     align-items: center;
+
+     border-radius: 10px;
+
+     padding: 5px;
+   }
+
+   .create {
+
+     display: flex;
+
+     flex-wrap: wrap;
+
+     justify-content: space-around;
+
+   }
+
+   .create button {
+
+     width: 100%;
+
+   }
