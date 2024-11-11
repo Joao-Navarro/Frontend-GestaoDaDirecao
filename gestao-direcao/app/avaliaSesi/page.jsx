@@ -42,6 +42,12 @@ const Home = () => {
         const resData = await response.json();
         console.log(resData);
 
+        if (Array.isArray(resData) && resData.length === 0) {
+          alert('Banco de dados vazio');
+      } else {
+          alert('Tabela carregada');
+      }
+
         // Create a table element
         // Create a table element
 
@@ -87,9 +93,12 @@ const Home = () => {
         // Add the table to the #descricao div
         document.getElementById("descricao").innerHTML = '';
         document.getElementById("descricao").appendChild(table);
+
+       
       } catch (error) {
-        console.log('error', error);
+        alert('Erro com o banco de dados, algum dado está incorreto', error);
       }
+
     } else {
       alert('Por favor, selecione todas as opções!');
     }
@@ -164,6 +173,7 @@ const Home = () => {
             <option value="3%25E.F">3º Ano</option>
             <option value="4%25E.F">4º Ano</option>
             <option value="5%25E.F">5º Ano</option >
+
           </select>
         </label>
 
