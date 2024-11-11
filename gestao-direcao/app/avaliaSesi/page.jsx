@@ -8,6 +8,8 @@ import Link from 'next/link';
 
 
 const Home = () => {
+  const [msgSucesso, setMsgSucesso] = useState('');
+  const [msgErro, setMsgErro] = useState('');
   const [ensinoTurma, setEnsinoTurma] = useState(''); // add state for each select
   const [etapa, setEtapa] = useState('');
   const [ano, setAno] = useState('');
@@ -43,10 +45,13 @@ const Home = () => {
         console.log(resData);
 
         if (Array.isArray(resData) && resData.length === 0) {
+          setMsgErro('Erro ao carregar tabela')
+        setTimeout(() => setMsgErro(''), 3000)
           document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
       } else {
+        setMsgSucesso('Tabela carregada com sucesso!');
+        setTimeout(() => setMsgSucesso(''), 3000)
         document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
-          alert('Tabela carregada');
       }
 
         // Create a table element
@@ -54,6 +59,7 @@ const Home = () => {
 
         const table = document.createElement('table');
         table.className = style.table; 
+
         // Verifique se a classe foi adicionada
         // add a border to the table
 
@@ -95,9 +101,11 @@ const Home = () => {
         document.getElementById("descricao").innerHTML = '';
         document.getElementById("descricao").appendChild(table);
 
+        
+
        
       } catch (error) {
-        alert('Erro com o banco de dados, algum dado está incorreto ou ele está vazio', error);
+        console.log('error', error)
       }
 
     } else {
@@ -163,6 +171,14 @@ const Home = () => {
 
   return (
     <>
+    { msgSucesso && (
+        <div className={style.msgSucesso}>
+          {msgSucesso}
+          </div>)}
+          { msgErro && (
+        <div className={style.msgErro}>
+          {msgErro}
+          </div>)}
       <Header />
 
       <h1 className={style.text}>Avalia Sesi</h1>
