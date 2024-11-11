@@ -25,7 +25,7 @@ function Home() {
 
           <Link href="/avaliacaoInterna" ><Image className={styles.imginterna} src="/INTERNA.png" alt="avaliação interna" width={300} height={300} /></Link>
 
-          <h3>AVALIAÇÃO INTERNA</h3>
+          <h3>Avaliação Interna</h3>
 
         </div>
 
@@ -33,7 +33,7 @@ function Home() {
 
           <Link href="/avaliacaoExterna" ><Image className={styles.imginterna} src="/EXTERNA.png" alt="avaliação externa" width={300} height={300} /></Link>
 
-          <h3>AVALIAÇÃO EXTERNA</h3>
+          <h3>Avaliação Externa</h3>
 
         </div>
 
@@ -41,7 +41,7 @@ function Home() {
 
           <Link href="/cursoTecnico" ><Image className={styles.imginterna} src="/SENAI.png" alt="curso tecnico" width={300} height={300} /></Link>
 
-          <h3>CURSO TECNICO</h3>
+          <h3>Curso Técnico</h3>
 
         </div>
 
@@ -50,24 +50,29 @@ function Home() {
 
           <Link href="/avaliaSesi" ><Image className={styles.imginterna} src="/AVALIA.png" alt="avalia sesi" width={300} height={300} /></Link>
 
-          <h3>AVALIA SESI</h3>
+          <h3>Avalia Sesi</h3>
 
         </div>
+
+        <div className={styles.cards}>
+          
+          <Link href="/geral" ><Image className={styles.imginterna} src="/GERAL.png" alt="Quadro Geral" width={300} height={300} /></Link>
+          
+          <h3>Quadro Geral</h3>
+          
+          </div>
+
+          <div className={styles.cards}>
+          
+          <Link href="/gerenciamento" ><Image className={styles.imginterna} src="/GERENCIAMENTO.png" alt="Gerenciamento de alunos" width={300} height={300} /></Link>
+          
+          <h3>Gerenciar Alunos</h3>
+          
+          </div>
+
+
         
       </div>
-
-
-      <div className={styles.Button}>
-
-
-      <Link href="/quadroGeral" ><button className={styles.ButtonGeral} type="submit">Quadro Geral</button></Link>
-
-     
-
-      <Link href="/gerenciamentoAlunos" ><button className={styles.ButtonAlunos} type="submit">Gerenciar Alunos</button></Link>
-
-      </div>
-  
 
 
     </>
