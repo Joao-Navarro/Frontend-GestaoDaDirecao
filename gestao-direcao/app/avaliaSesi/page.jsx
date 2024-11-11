@@ -96,7 +96,7 @@ const Home = () => {
 
        
       } catch (error) {
-        alert('Erro com o banco de dados, algum dado está incorreto', error);
+        alert('Erro com o banco de dados, algum dado está incorreto ou ele está vazio', error);
       }
 
     } else {
