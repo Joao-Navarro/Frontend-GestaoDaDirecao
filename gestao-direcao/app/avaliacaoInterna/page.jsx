@@ -11,6 +11,8 @@ const Home = () => {
   const [ensinoTurma, setEnsinoTurma] = useState(''); // add state for each select
   const [etapa, setEtapa] = useState('');
   const [ano, setAno] = useState('');
+  const [msgSucesso, setMsgSucesso] = useState('');
+  const [msgErro, setMsgErro] = useState('');
 
   const getFilter = async () => {
     if (ensinoTurma && etapa && ano) {
@@ -36,12 +38,7 @@ const Home = () => {
         const table = document.createElement('table');
         table.border = '1'; // add a border to the table
 
-
-        if (Array.isArray(resData) && resData.length === 0) {
-          alert('Banco de dados vazio');
-        } else {
-          alert('Tabela carregada');
-        }
+        document.getElementById('error').innerHTML = `Tabela existente  `;// Exibe a mensagem de erro no alert
         // Create a header row
         const headerRow = table.insertRow(0);
         const headers = Object.keys(resData[0]);
@@ -73,12 +70,21 @@ const Home = () => {
         // Add the table to the #descricao div
         document.getElementById("descricao").innerHTML = '';
         document.getElementById("descricao").appendChild(table);
-      } catch (error) {
-        console.log('error', error);
+
+        setMsgSucesso('Tabela carregada');
+        setTimeout(() => setMsgSucesso(''), 3000)
+
+      } 
+      
+      catch (error) {
+        setMsgErro('Erro ao carregar tabela')
+        setTimeout(() => setMsgErro(''), 3000)
       }
+
+      
     } else {
       console.log('Please select all options');
-      alert('Valor inexistente ou Banco de dados vazio', error);
+
     }
   }
   
@@ -159,6 +165,14 @@ const Home = () => {
 
   return (
     <>
+    { msgSucesso && (
+        <div className={style.msgSucesso}>
+          {msgSucesso}
+          </div>)}
+          { msgErro && (
+        <div className={style.msgErro}>
+          {msgErro}
+          </div>)}
       <Header/>
       <div className={style.filtro}>
         <select className={style.button} value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
@@ -222,7 +236,6 @@ const Home = () => {
 
       <div className="info">
       <div style={{ overflow: 'auto' }} className={style.table} id="descricao"></div>
-     
      
       </div>
       <Footer/>
