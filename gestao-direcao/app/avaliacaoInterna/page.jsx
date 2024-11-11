@@ -18,6 +18,8 @@ const Home = () => {
       console.log(`Constructed URL: ${url}`);
       console.log('Current state:', ensinoTurma, etapa, ano);
       
+    
+//     document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior**
 
       
 
@@ -34,6 +36,12 @@ const Home = () => {
         const table = document.createElement('table');
         table.border = '1'; // add a border to the table
 
+
+        if (Array.isArray(resData) && resData.length === 0) {
+          alert('Banco de dados vazio');
+        } else {
+          alert('Tabela carregada');
+        }
         // Create a header row
         const headerRow = table.insertRow(0);
         const headers = Object.keys(resData[0]);
@@ -70,8 +78,10 @@ const Home = () => {
       }
     } else {
       console.log('Please select all options');
+      alert('Valor inexistente ou Banco de dados vazio', error);
     }
   }
+  
 
   // add event handlers for each select
   const handleEnsinoTurmaChange = (e) => {
