@@ -212,7 +212,6 @@ const Home = () => {
      
      
       </div>
-      <Footer/>
     </>
   );
 };

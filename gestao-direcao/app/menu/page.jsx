@@ -56,7 +56,7 @@ function Home() {
 
         <div className={styles.cards}>
           
-          <Link href="/geral" ><Image className={styles.imginterna} src="/GERAL.png" alt="Quadro Geral" width={300} height={300} /></Link>
+          <Link href="/quadroGeral" ><Image className={styles.imginterna} src="/GERAL.png" alt="Quadro Geral" width={300} height={300} /></Link>
           
           <h3>Quadro Geral</h3>
           
@@ -64,7 +64,7 @@ function Home() {
 
           <div className={styles.cards}>
           
-          <Link href="/gerenciamento" ><Image className={styles.imginterna} src="/GERENCIAMENTO.png" alt="Gerenciamento de alunos" width={300} height={300} /></Link>
+          <Link href="/gerenciamentoAlunos" ><Image className={styles.imginterna} src="/GERENCIAMENTO.png" alt="Gerenciamento de alunos" width={300} height={300} /></Link>
           
           <h3>Gerenciar Alunos</h3>
           

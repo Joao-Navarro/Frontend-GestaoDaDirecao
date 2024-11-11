@@ -13,7 +13,7 @@ export default function HomePage() {
     
     <div className={styles.container}>
       <Header/>
-      <h1 className={styles.h1}>Bem-vindo a Sessão Avaliação Externa </h1>
+      <h1 className={styles.h1}>Bem-vindo a Sessão DesbravEnem e SARESP </h1>
 
       <div className={styles.links}>
         {/* Link para Listar Usuários */}
@@ -35,7 +35,6 @@ export default function HomePage() {
         </div>
 
       </div>
-      <Footer/>
     </div>
   );
 }
