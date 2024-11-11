@@ -34,6 +34,16 @@ const Home = () => {
         const resData = await response.json();
         console.log(resData);
 
+        if (Array.isArray(resData) && resData.length === 0) {
+
+          alert('Banco de Dados Vazio')
+
+        }
+
+        else {
+          alert('Tabela Carregada')
+        }
+
 
         // Create a table element
         // Create a table element
@@ -84,7 +94,7 @@ const Home = () => {
         // Add the table to the #descricao divdocument.getElementById("descricao").innerHTML = '';
         document.getElementById("descricao").appendChild(table);
       } catch (error) {
-        console.log('error', error);
+        console.log('Valor inexistente', error);
       }
     } else {
       console.log('Please select all options');

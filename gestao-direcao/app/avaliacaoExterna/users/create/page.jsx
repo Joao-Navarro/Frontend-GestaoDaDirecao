@@ -18,14 +18,17 @@ export default function CreateUserPage() {
   const createUser = async (e) => {
     e.preventDefault();
 
-    try {
+    
 
       const res = await fetch('http://localhost:3001/avalia', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ rm, etapa, ano, tipoprova, notaExt }),
       });
-      if (res.ok) {
+      
+      try {
+      
+        if (res.ok) {
 
         setAno('')
         setEtapa('')
