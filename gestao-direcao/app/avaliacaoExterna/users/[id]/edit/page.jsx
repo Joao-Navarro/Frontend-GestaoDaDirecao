@@ -27,12 +27,35 @@ fetchUser();
      body: JSON.stringify(user),
    });
 
+
+
  };
 
  return (
    <div className={styles.container}>
      <h1>Editar Usuário</h1>
      <form onSubmit={updateUser} className={styles.form}>
+     <input
+         type="text"
+         placeholder="RM"
+         value={user.rm}
+         onChange={(e) => setUser({ ...user, rm: e.target.value })}
+         className={styles.input}
+       />
+     <input
+         type="text"
+         placeholder="Ano"
+         value={user.ano}
+         onChange={(e) => setUser({ ...user, ano: e.target.value })}
+         className={styles.input}
+       />
+     <input
+         type="text"
+         placeholder="Tipo de Prova"
+         value={user.tipoprova}
+         onChange={(e) => setUser({ ...user, tipoprova: e.target.value })}
+         className={styles.input}
+       />
        <input
          type="text"
          placeholder="Nota"
