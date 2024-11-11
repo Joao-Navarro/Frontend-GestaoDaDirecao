@@ -292,6 +292,8 @@ const Home = () => {
             <option value="3S">3</option>
           </select>
         </label>
+
+        
    <div className={style.ano}>
           <input
             className={style.input}
