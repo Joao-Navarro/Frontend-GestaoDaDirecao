@@ -253,8 +253,10 @@ const Home = () => {
   return (
     <>
       <Header />
+
+      <h1 className={style.text}>Quadro geral</h1>
+
       <div className={style.filtro}>
-        <label>
           <select className={style.button} name="ensino" value={Turma} onChange={handleEnsinoTurmaChange}>
             <option value="">EF1</option>
             <option value="3%25E.F">3º Ano</option>
@@ -281,7 +283,6 @@ const Home = () => {
             <option value="2%25E.M">2º Ano</option>
             <option value="3%25E.M">3º Ano</option>
           </select>
-        </label>
   
         <label>
           <select className={style.button} name="etapa" onChange={handleEtapaChange} value={etapa}>
@@ -291,28 +292,29 @@ const Home = () => {
             <option value="3S">3</option>
           </select>
         </label>
-  
-        <div className={style.ano}>
-          <label>Ano</label>
+
+        
+   <div className={style.ano}>
           <input
             className={style.input}
             value={Ano}
             type='number'
             onChange={handleAnoChange}
             name="ano"
+            placeholder='Ano'
           />
-          {/* Verificação do ano digitado */}
+        
           {Ano && (Ano < 2024 || Ano > 2024) && (
-            <p style={{ color: 'crimson' }}>Ano não encontrado</p>
+            <p className={style.anoerrado}>Ano não encontrado</p>
           )}
-        </div>
+       </div> 
   
-        <button onClick={getFilter} disabled={!Turma || !etapa || !Ano}>
+        <button className={style.button} onClick={getFilter} disabled={!Turma || !etapa || !Ano}>
           Filtrar
         </button>
       </div>
 
-      <h1 className={style.text}>Quadro geral</h1>
+      
 
       <div id='tabelas'>
         {renderTable(tabela1Data)}
@@ -320,10 +322,10 @@ const Home = () => {
         {renderTable(tabela3Data)}
       </div>
 
-      <button onClick={gerarPDF}>Gerar PDF</button>
+      <button className={style.pdf} onClick={gerarPDF}>Gerar PDF</button>
 
 
-      <Footer />
+     
     </>
   );
 };
