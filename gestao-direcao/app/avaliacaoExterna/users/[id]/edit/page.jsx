@@ -6,14 +6,13 @@ import styles from './editUser.module.css';
 
 export default function EditUserPage({ params }) {
   const [user, setUser] = useState({ rm: '', etapa: '', ano: '', tipoprova: '', notaExt: ''  });
-  const router = useRouter();
 
   useEffect(() => {
 fetchUser();
 }, []);
 
  const fetchUser = async () => {
-   const res = await fetch(`http://localhost:3001/avalia/${params.rm}/${params.ano}/${params.tipoprova}`);
+   const res = await fetch(`http://localhost:3001/avalia/${params.rm}/${params.Ano}`);
    const data = await res.json();
    setUser(data);
  };
@@ -36,14 +35,14 @@ fetchUser();
      <h1>Editar Usuário</h1>
      <form onSubmit={updateUser} className={styles.form}>
      <input
-         type="text"
+         type="number"
          placeholder="RM"
          value={user.rm}
          onChange={(e) => setUser({ ...user, rm: e.target.value })}
          className={styles.input}
        />
      <input
-         type="text"
+         type="number"
          placeholder="Ano"
          value={user.ano}
          onChange={(e) => setUser({ ...user, ano: e.target.value })}
@@ -57,7 +56,7 @@ fetchUser();
          className={styles.input}
        />
        <input
-         type="text"
+         type="number"
          placeholder="Nota"
          value={user.notaExt}
          onChange={(e) => setUser({ ...user, notaExt: e.target.value })}
