@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import style from "./page.module.css";
 import Header from '@/components/Header';
+import Link from 'next/link';
 import { render } from 'react-dom';
 
 
@@ -157,10 +158,7 @@ const Home = () => {
           </select>
         </label>
 
-        <div className={style.ano}>
-          <label>Ano</label>
-          <input className={style.input} value={ano} type='number' onChange={handleAnoChange} name="ano" />
-        </div>
+          <input value={ano} type='number' onChange={handleAnoChange} name="ano"  placeholder='Ano'/>
 
 
 
@@ -175,12 +173,9 @@ const Home = () => {
 
       <div className={style.card}>
 
+      <Link href= '/gerenciamentoAlunos'><button className={style.back} >Voltar</button></Link>
+
       </div>
-
-
-      <div className={style.footer}>
-      </div>
-
 
     </>
 

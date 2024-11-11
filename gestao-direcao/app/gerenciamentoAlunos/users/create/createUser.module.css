@@ -126,3 +126,26 @@
      width: 100%;
 
    }
+
+   .back {
+
+    display: flex;
+  
+    justify-content: center;
+  
+    align-items: center;
+  
+    width: 50%;
+  
+    cursor: pointer;
+  
+    background-color: #878787;
+   
+    border-radius: 5%;
+  
+    padding: 10px;
+  
+    border-radius: 10px;
+  
+    margin-left: 25%;
+  }

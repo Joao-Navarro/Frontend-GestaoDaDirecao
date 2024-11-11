@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 import styles from './createUser.module.css';
+import Link from 'next/link';
 
 export default function CreateUserPage() {
     const [NomeAluno, setNomeAluno] = useState('');
@@ -108,6 +109,8 @@ export default function CreateUserPage() {
 
 
                 <button type="submit" className={styles.button}>Criar</button>
+
+                <Link href= '/gerenciamentoAlunos'><button className={styles.back} >Voltar</button></Link>
             </form>
 
         </div>
