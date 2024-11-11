@@ -203,13 +203,13 @@ const Home = () => {
         </label>
 
         <div className={style.ano}>
-          <label>Ano</label>
-          <input className={style.input} value={ano} type='number' onChange={handleAnoChange} name="ano" />
+          
+          <input className={style.input} value={ano} type='number' onChange={handleAnoChange} name="ano" placeholder='ano' />
         </div>
 
         
 
-<button className={style.button} onClick={getFilter} >Filtrar</button>
+<button className={style.button} onClick={getFilter} disabled={ !ensinoTurma || !etapa || !ano} >Filtrar</button>
 
 
         
