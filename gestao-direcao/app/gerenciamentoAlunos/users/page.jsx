@@ -41,13 +41,6 @@ const Home = () => {
         const resData = await response.json();
         console.log(resData);
 
-        if (Array.isArray(resData) && resData.length === 0) {
-          alert('Banco de dados vazio');
-        } else {
-          alert('Tabela carregada');
-        }
-
-
         const table = document.createElement('table');
         table.className = style.table;
 
@@ -100,7 +93,9 @@ const Home = () => {
         document.getElementById("descricao").appendChild(table);
       } catch (error) {
         console.log('error', error);
-        alert('Valor inexistente ou Banco de dados vazio', error);
+        document.getElementById('error').error;
+        document.getElementById('error').innerHTML = `Table display error: tabela não existente`;
+
       }
       
     } else {
@@ -189,6 +184,8 @@ const Home = () => {
       <Link href= '/gerenciamentoAlunos'><button className={style.back} >Voltar</button></Link>
 
       </div>
+
+      <div id = 'error'></div>
 
     </>
 
