@@ -27,7 +27,7 @@ const Home = () => {
       const url = `http://localhost:3001/avalia/${etapa}/${Turma}/${ano}/${tipoprova}`;  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
       console.log(`Constructed URL: ${url}`);
       console.log('Current state:', etapa, Turma, ano, tipoprova);
-      
+
 
 
       try {
@@ -45,13 +45,13 @@ const Home = () => {
 
         if (Array.isArray(resData) && resData.length === 0) {
           setMsgErro('Erro ao carregar tabela')
-        setTimeout(() => setMsgErro(''), 3000)
+          setTimeout(() => setMsgErro(''), 3000)
           document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
-      } else {
-        setMsgSucesso('Tabela carregada com sucesso!');
-        setTimeout(() => setMsgSucesso(''), 3000)
-        document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
-      }
+        } else {
+          setMsgSucesso('Tabela carregada com sucesso!');
+          setTimeout(() => setMsgSucesso(''), 3000)
+          document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+        }
         // Verifique se a classe foi adicionada
         // add a border to the table// Create a header row
         const headerRow = table.insertRow(0);
@@ -87,14 +87,8 @@ const Home = () => {
               cell.innerHTML = item[header];
             }
           });
-          
-          // const actionCell = row.insertCell();
-          // const editLink = document.createElement('a');
-          // editLink.className = style.editLink
-          // editLink.href = `avalia/${item.rm}/${item.ano}/edit`; // Supondo que o campo users_ID existe
-          // editLink.innerText = 'Editar';
-          // actionCell.appendChild(editLink);
-           const container = document.getElementById('seuContainer')
+
+          const container = document.getElementById('seuContainer')
           const editLink = document.createElement('a');
           editLink.className = style.editLink
           editLink.href = `avalia/${item.rm}/${item.ano}/edit`; // Supondo que o campo users_ID existe
@@ -102,19 +96,16 @@ const Home = () => {
           container.appendChild(editLink);
         });
 
-        resData.forEach((item) => {
 
-         
-        })
-         
+
 
 
         // Add the table to the #descricao divdocument.getElementById("descricao").innerHTML = '';
         document.getElementById("descricao").appendChild(table);
-      }catch (error) {
-      
-          console.log('error', error)
-        
+      } catch (error) {
+
+        console.log('error', error)
+
       }
     } else {
       console.log('Please select all options');
@@ -147,102 +138,104 @@ const Home = () => {
 
 
   return (
-<>
-    { msgSucesso && (
-      <div className={style.msgSucesso}>
-        {msgSucesso}
+    <>
+      {msgSucesso && (
+        <div className={style.msgSucesso}>
+          {msgSucesso}
         </div>)}
-        { msgErro && (
-      <div className={style.msgErro}>
-        {msgErro}
+      {msgErro && (
+        <div className={style.msgErro}>
+          {msgErro}
         </div>)}
 
-    <div className={style.body}>
-      <Header />
-      <div className={style.filtro}>
-        <label>
-          <select className={style.button} name="ensino" value={Turma} onChange={handleTurmaChange}>
-            <option value="">EF1</option>
-            <option value="3%25E.F">3º Ano</option>
-            <option value="4%25E.F">4º Ano</option>
-            <option value="5%25E.F">5º Ano</option >
-          </select>
-        </label>
+      <div className={style.body}>
+        <Header />
+        <div className={style.filtro}>
+          <label>
+            <select className={style.button} name="ensino" value={Turma} onChange={handleTurmaChange}>
+              <option value="">EF1</option>
+              <option value="3%25E.F">3º Ano</option>
+              <option value="4%25E.F">4º Ano</option>
+              <option value="5%25E.F">5º Ano</option >
+            </select>
+          </label>
 
 
 
 
-        <label>
-          <select className={style.button} name="ensino" value={Turma} onChange={handleTurmaChange}>
-            <option value="">EF2</option>
-            <option value="6%25A%25">6º Ano A</option>
-            <option value="6%25B%25">6º Ano B</option>
-            <option value="7%25A%25">7º Ano A</option>
-            <option value="7%25B%25">7º Ano B</option>
-            <option value="8%25A%25">8º Ano A</option><option value="8%25B%25">8º Ano B</option>
-            <option value="9%25A%25">9º Ano A</option>
-            <option value="9%25B%25">9º Ano B</option>
-          </select>
-        </label>
+          <label>
+            <select className={style.button} name="ensino" value={Turma} onChange={handleTurmaChange}>
+              <option value="">EF2</option>
+              <option value="6%25A%25">6º Ano A</option>
+              <option value="6%25B%25">6º Ano B</option>
+              <option value="7%25A%25">7º Ano A</option>
+              <option value="7%25B%25">7º Ano B</option>
+              <option value="8%25A%25">8º Ano A</option><option value="8%25B%25">8º Ano B</option>
+              <option value="9%25A%25">9º Ano A</option>
+              <option value="9%25B%25">9º Ano B</option>
+            </select>
+          </label>
 
 
-        <label>
-          <select className={style.button} name="ensino" value={Turma} onChange={handleTurmaChange}>
-            <option value="">EM</option>
-            <option value="1%25A%25">1º Ano A</option>
-            <option value="1%25B%25">1º Ano B</option>
-            <option value="2%25E.M">2º Ano</option>
-            <option value="3%25E.M">3º Ano</option>
-          </select>
-        </label>
-
-
-
-
-        <label>
-          <select className={style.button} name="etapa" onChange={handleEtapaChange} value={etapa}>
-            <option value="">Etapa</option>
-            <option value="1S">1</option>
-            <option value="2S">2</option>
-            <option value="3S">3</option>
-          </select>
-        </label>
-
-        <label>
-          <select className={style.button} name="etapa" onChange={handleTipoprovaChange} value={tipoprova}>
-            <option value="">Tipo de Prova</option>
-            <option value="SARESP">SARESP</option>
-            <option value="DESBRAVA">DESBRAVENEM</option>
-          </select>
-        </label>
-
-
-        <input placeholder='Ano' value={ano} type='number' onChange={handleAnoChange} name="ano" />
+          <label>
+            <select className={style.button} name="ensino" value={Turma} onChange={handleTurmaChange}>
+              <option value="">EM</option>
+              <option value="1%25A%25">1º Ano A</option>
+              <option value="1%25B%25">1º Ano B</option>
+              <option value="2%25E.M">2º Ano</option>
+              <option value="3%25E.M">3º Ano</option>
+            </select>
+          </label>
 
 
 
 
+          <label>
+            <select className={style.button} name="etapa" onChange={handleEtapaChange} value={etapa}>
+              <option value="">Etapa</option>
+              <option value="1S">1</option>
+              <option value="2S">2</option>
+              <option value="3S">3</option>
+            </select>
+          </label>
+
+          <label>
+            <select className={style.button} name="etapa" onChange={handleTipoprovaChange} value={tipoprova}>
+              <option value="">Tipo de Prova</option>
+              <option value="SARESP">SARESP</option>
+              <option value="DESBRAVA">DESBRAVENEM</option>
+            </select>
+          </label>
 
 
-        <button className={style.button} onClick={getFilter} disabled={!Turma || !etapa || !ano || !tipoprova}>Filtrar</button>
+          <input placeholder='Ano' value={ano} type='number' onChange={handleAnoChange} name="ano" />
 
 
 
+
+
+
+          <button className={style.button} onClick={getFilter} disabled={!Turma || !etapa || !ano || !tipoprova}>Filtrar</button>
+
+
+
+
+        </div>
+
+
+        <h1 className={style.text}>Avaliação Externa</h1>
+
+        <div className={style.tableAll}>
+
+          <div className={style.table} id='descricao' ref={descricaoRef} ></div>
+
+          <div id='seuContainer' className={style.seuContainer} />
+
+        </div>
+
+        <Link href='/avaliacaoExterna'><button className={style.back} >Voltar</button></Link>
 
       </div>
-
-
-      <h1 className={style.text}>Avaliação Externa</h1>
-
-      <div className={style.tableAll}>
-
-      <div className={style.table} id='descricao' ref={descricaoRef} ></div>
-
-      <div id='seuContainer' className={style.seuContainer}/></div>
-
-      <Link href='/avaliacaoExterna'><button className={style.back} >Voltar</button></Link>
-
-    </div>
     </>
   );
 };
