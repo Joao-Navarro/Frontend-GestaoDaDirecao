@@ -18,7 +18,7 @@ export default function HomePage() {
       <div className={styles.links}>
         {/* Link para Listar Usuários */}
         <div className={styles.linkItem}>
-        <Link href="/avaliacaoExterna/users">
+        <Link href="/avaliacaoExterna/avalia">
             <SiGoogleclassroom  size={250} className={styles.icon} />
             <p>Listar Uma Turma</p>
         </Link>
@@ -28,7 +28,7 @@ export default function HomePage() {
 
         {/* Link para Criar Novo Usuário */}
         <div className={styles.linkItem}>
-        <Link href="/avaliacaoExterna/users/create">
+        <Link href="/avaliacaoExterna/avalia/create">
            <MdNoteAdd size={250} className={styles.icon} />
             <p>Lançar uma Nota</p>
         </Link>
