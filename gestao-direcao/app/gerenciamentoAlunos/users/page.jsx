@@ -37,6 +37,15 @@ const Home = () => {
         const resData = await response.json();
         console.log(resData);
 
+        if (Array.isArray(resData) && resData.length === 0) {
+          setMsgErro('Erro ao carregar tabela')
+        setTimeout(() => setMsgErro(''), 3000)
+          document.getElementById("descricao").innerHTML = '';
+      } else {
+        setMsgSucesso('Tabela carregada com sucesso!');
+        setTimeout(() => setMsgSucesso(''), 3000)
+        document.getElementById("descricao").innerHTML = '';
+      }
 
         const table = document.createElement('table');
         table.className = style.table;
