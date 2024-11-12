@@ -52,7 +52,7 @@ export default function EditUserPage({ params }) {
       // Redirecionar para outra página após a atualização
       router.push('/avaliacaoExterna/avalia'); // Substitua pelo caminho desejado
     } catch (error) {
-      setMsgErro('Erro ao carregar tabela')
+      setMsgErro('Erro ao atualizar aluno')
       setTimeout(() => setMsgErro(''), 3000)
     }
   };
