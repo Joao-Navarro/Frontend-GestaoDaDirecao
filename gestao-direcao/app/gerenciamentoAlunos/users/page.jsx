@@ -14,6 +14,8 @@ const Home = () => {
   const [ano, setAno] = useState('');
   const [sala, setSala] = useState('')
   const descricaoRef = useRef(null);
+  const [msgSucesso, setMsgSucesso] = useState('');
+  const [msgErro, setMsgErro] = useState('');
 
 
   useEffect(() => {
@@ -24,7 +26,7 @@ const Home = () => {
 
 
 
-// document.getElementById("descricao").innerHTML = ''; 
+  // document.getElementById("descricao").innerHTML = ''; 
 
 
 
@@ -41,9 +43,19 @@ const Home = () => {
         const resData = await response.json();
         console.log(resData);
 
+        if (Array.isArray(resData) && resData.length === 0) {
+          setMsgErro('Erro ao carregar tabela')
+        setTimeout(() => setMsgErro(''), 3000)
+          document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+      } else {
+        setMsgSucesso('Tabela carregada com sucesso!');
+        setTimeout(() => setMsgSucesso(''), 3000)
+        document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+      }
+
+
         const table = document.createElement('table');
         table.className = style.table;
-
 
         const headerRow = table.insertRow(0);
         const headers = Object.keys(resData[0]);
@@ -93,11 +105,8 @@ const Home = () => {
         document.getElementById("descricao").appendChild(table);
       } catch (error) {
         console.log('error', error);
-        document.getElementById('error').error;
-        document.getElementById('error').innerHTML = `Table display error: tabela não existente`;
-
       }
-      
+
     } else {
       console.log('Please select all options');
     }
@@ -122,6 +131,16 @@ const Home = () => {
 
   return (
     <>
+
+      {msgSucesso && (
+        <div className={style.msgSucesso}>
+          {msgSucesso}
+        </div>)}
+      {msgErro && (
+        <div className={style.msgErro}>
+          {msgErro}
+        </div>)}
+
       <Header />
 
       <h1 className={style.text}>Gerenciamento de alunos</h1>
@@ -166,7 +185,7 @@ const Home = () => {
           </select>
         </label>
 
-          <input value={ano} type='number' onChange={handleAnoChange} name="ano"  placeholder='Ano'/>
+        <input value={ano} type='number' onChange={handleAnoChange} name="ano" placeholder='Ano' />
 
 
 
@@ -181,11 +200,11 @@ const Home = () => {
 
       <div className={style.card}>
 
-      <Link href= '/gerenciamentoAlunos'><button className={style.back} >Voltar</button></Link>
+        <Link href='/gerenciamentoAlunos'><button className={style.back} >Voltar</button></Link>
 
       </div>
 
-      <div id = 'error'></div>
+
 
     </>
 
