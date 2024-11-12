@@ -98,7 +98,7 @@ export default function EditUserPage({ params }) {
         <label for='nota'>Nota</label>
         <input
           id='nota'
-          type="text"
+          type="number"
           placeholder="notaExt"
           value={user.notaExt}
           onChange={(e) => setUser({ ...user, notaExt: e.target.value })}
