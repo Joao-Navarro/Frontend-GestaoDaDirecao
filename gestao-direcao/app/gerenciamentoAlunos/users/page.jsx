@@ -45,13 +45,13 @@ const Home = () => {
 
         if (Array.isArray(resData) && resData.length === 0) {
           setMsgErro('Erro ao carregar tabela')
-        setTimeout(() => setMsgErro(''), 3000)
+          setTimeout(() => setMsgErro(''), 3000)
           document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
-      } else {
-        setMsgSucesso('Tabela carregada com sucesso!');
-        setTimeout(() => setMsgSucesso(''), 3000)
-        document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
-      }
+        } else {
+          setMsgSucesso('Tabela carregada com sucesso!');
+          setTimeout(() => setMsgSucesso(''), 3000)
+          document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+        }
 
 
         const table = document.createElement('table');
@@ -98,11 +98,14 @@ const Home = () => {
             }
           });
 
-          const actionCell = row.insertCell();
+          const container = document.getElementById('seuContainer')
           const editLink = document.createElement('a');
+          editLink.className = style.editLink
           editLink.href = `/gerenciamentoAlunos/users/alunos/${item.RM}/edit`;
           editLink.innerText = 'Editar';
-          actionCell.appendChild(editLink);
+          container.appendChild(editLink);
+
+
 
         });
 
@@ -201,9 +204,16 @@ const Home = () => {
       </div>
 
 
+      <div className={style.tableAll}>
+
+        <div style={{ overflow: 'auto' }} className={style.table} id='descricao' ref={descricaoRef} />
+
+        <div id='seuContainer' className={style.seuContainer} />
+
+      </div>
 
 
-      <div style={{ overflow: 'auto' }} className={style.table} id='descricao' ref={descricaoRef} />
+
 
       <div className={style.card}>
 

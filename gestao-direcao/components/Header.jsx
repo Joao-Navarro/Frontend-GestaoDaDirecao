@@ -16,13 +16,9 @@ function Header() {
 
                 <div className="casa" >
 
-                    <Link href="/menu"><Image src="/ICONECASA.png" alt="JSX Icon" width={80} height={80} /></Link>
+                  <span className='icone'>  <Link href="/menu"><Image src="/ICONECASA.png" alt="JSX Icon" width={40} height={40} /></Link> </span>
                     
-                    </div>
-
-                    <div className="suporte">
-
-                    <Link href="/menu"><Image src="/telefone.png.png" alt="JSX Icon" width={80} height={80} /></Link>
+                  <span className='icone'> <Link href="/menu"><Image src="/telefone.png.png" alt="JSX Icon" width={40} height={37}  /></Link>  </span>
 
                 </div>
 
@@ -30,7 +26,7 @@ function Header() {
 
                 <div className="logo">
 
-                    <Image src="/imagelogo.png" alt="JSX Icon" width='190' height='50' />
+                    <Image src="/imagelogo.png" alt="JSX Icon" width='150' height='40' />
 
                 </div>
 

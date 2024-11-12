@@ -100,10 +100,10 @@ export default function EditUserPage({ params }) {
                         <option value="8%25B%25">8º Ano B</option>
                         <option value="9%25A%25">9º Ano A</option>
                         <option value="9%25B%25">9º Ano B</option>
-                        <option value="1%25A%25">1º Ano A</option>
-                        <option value="1%25B%25">1º Ano B</option>
-                        <option value="2%25E.M">2º Ano</option>
-                        <option value="3%25E.M">3º Ano</option>
+                        <option value="1%25A%25">1º Ano EM A</option>
+                        <option value="1%25B%25">1º Ano EM B</option>
+                        <option value="2%25E.M">2º Ano EM</option>
+                        <option value="3%25E.M">3º Ano EM</option>
 
                     </select>
 
