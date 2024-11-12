@@ -146,11 +146,10 @@ const Home = () => {
 
   return (
     <>
-      <Header />
+      <Header/>
       <div className={style.filtro}>
-        <label>
         <select className={style.button} value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
-                <option value="">EF1</option>
+                <option value="">EF I</option>
                 <option value="notasEF1/1%25E.F">1º Ano</option>
                 <option value="notasEF1/2%25E.F">2º Ano</option>
                 <option value="notasEF1/3%25E.F">3º Ano</option>
@@ -160,7 +159,7 @@ const Home = () => {
 
 
           <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
-            <option value="">EF2</option>
+            <option value="">EF II</option>
             <option value="notasEF2/6%25A%25">6º Ano A</option>
             <option value="notasEF2/6%25B%25">6º Ano B</option>
             <option value="notasEF2/7%25A%25">7º Ano A</option>
@@ -181,7 +180,6 @@ const Home = () => {
           </select>
 
 
-        </label>
 
 
         <label>
@@ -198,7 +196,7 @@ const Home = () => {
           <input className={style.input} value={ano} type='number' onChange={handleAnoChange} name="ano" />
         </div>
 
-        <button onClick={getFilter} disabled={!ensinoTurma || !etapa || !ano}>
+        <button className={style.button} onClick={getFilter} disabled={!ensinoTurma || !etapa || !ano}>
           Filtrar
         </button>
 
@@ -214,7 +212,6 @@ const Home = () => {
      
      
       </div>
-      <Footer />
     </>
   );
 };

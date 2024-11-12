@@ -15,8 +15,14 @@
   
   .button {
     padding: 10px;
-    background-color: #0070f3;
-    color: white;
     border: none;
     cursor: pointer;
+    background-color: #878787;
+    border-radius: 5%;
+    border-radius: 10px;
+  }
+
+  .text {
+    text-align: center;
+
   }

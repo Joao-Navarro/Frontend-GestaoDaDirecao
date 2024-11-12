@@ -18,7 +18,7 @@ export default function HomePage() {
 
         <div className={styles.linkItem}>
           <Link href="gerenciamentoAlunos/users">
-            <MdGroupAdd size={250} className={styles.icon} />
+            <MdGroups size={250} className={styles.icon} />
             <p>Listar Alunos</p>
           </Link>
         </div>
@@ -26,12 +26,11 @@ export default function HomePage() {
 
         <div className={styles.linkItem}>
           <Link href="gerenciamentoAlunos/users/create">
-            <MdGroups size={250} className={styles.icon} />
+            <MdGroupAdd size={250} className={styles.icon} />
             <p>Adicionar Alunos</p>
           </Link>
         </div>       
         
-        <h1 className={styles.text}>Gerenciamento de alunos</h1>
 
       </div>
     </div>
