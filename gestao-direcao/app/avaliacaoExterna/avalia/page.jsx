@@ -43,8 +43,15 @@ const Home = () => {
         const table = document.createElement('table');
         table.className = style.table;
 
-        setMsgSucesso('Tabela carregada');
+        if (Array.isArray(resData) && resData.length === 0) {
+          setMsgErro('Erro ao carregar tabela')
+        setTimeout(() => setMsgErro(''), 3000)
+          document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+      } else {
+        setMsgSucesso('Tabela carregada com sucesso!');
         setTimeout(() => setMsgSucesso(''), 3000)
+        document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+      }
         // Verifique se a classe foi adicionada
         // add a border to the table// Create a header row
         const headerRow = table.insertRow(0);
@@ -80,20 +87,34 @@ const Home = () => {
               cell.innerHTML = item[header];
             }
           });
-
-          const actionCell = row.insertCell();
+          
+          // const actionCell = row.insertCell();
+          // const editLink = document.createElement('a');
+          // editLink.className = style.editLink
+          // editLink.href = `avalia/${item.rm}/${item.ano}/edit`; // Supondo que o campo users_ID existe
+          // editLink.innerText = 'Editar';
+          // actionCell.appendChild(editLink);
+           const container = document.getElementById('seuContainer')
           const editLink = document.createElement('a');
+          editLink.className = style.editLink
           editLink.href = `avalia/${item.rm}/${item.ano}/edit`; // Supondo que o campo users_ID existe
           editLink.innerText = 'Editar';
-          actionCell.appendChild(editLink);
+          container.appendChild(editLink);
         });
+
+        resData.forEach((item) => {
+
+         
+        })
+         
 
 
         // Add the table to the #descricao divdocument.getElementById("descricao").innerHTML = '';
         document.getElementById("descricao").appendChild(table);
       }catch (error) {
-        setMsgErro('Erro ao carregar tabela')
-        setTimeout(() => setMsgErro(''), 3000)
+      
+          console.log('error', error)
+        
       }
     } else {
       console.log('Please select all options');
@@ -213,7 +234,11 @@ const Home = () => {
 
       <h1 className={style.text}>Avaliação Externa</h1>
 
-      <div className={style.table} id='descricao' ref={descricaoRef} />
+      <div className={style.tableAll}>
+
+      <div className={style.table} id='descricao' ref={descricaoRef} ></div>
+
+      <div id='seuContainer' className={style.seuContainer}/></div>
 
       <Link href='/avaliacaoExterna'><button className={style.back} >Voltar</button></Link>
 

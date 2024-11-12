@@ -12,6 +12,8 @@ export default function CreateUserPage() {
   const [tipoprova, setTipoprova] = useState('');
   const [notaExt, setNotaExt] = useState('');
   const [Turma, setTurma] = useState('');
+  const [msgSucesso, setMsgSucesso] = useState('');
+  const [msgErro, setMsgErro] = useState('');
 
 
 
@@ -29,25 +31,32 @@ export default function CreateUserPage() {
 
       // Verifica se a resposta não foi bem-sucedida
       if (!res.ok) {
-        const errorMessage = await res.text(); // Obtém a mensagem de erro do servidor
-        document.getElementById('error').innerHTML = `User  creation failed: O Usuário já existe`; // Exibe a mensagem de erro no alert
-        return; // Sai da função se a criação do usuário falhar
-      }
+        setMsgErro('Erro ao criar usuário. Usuário já existente')
+      setTimeout(() => setMsgErro(''), 3000)
 
-      // Se a resposta for bem-sucedida
       setAno('');
       setEtapa('');
       setRm('');
       setTipoprova('');
       setTurma('');
       setNotaExt('');
+    } else {
+      setMsgSucesso('Tabela carregada com sucesso!');
+      setTimeout(() => setMsgSucesso(''), 3000)
 
-      alert('Usuário criado com sucesso!');
-    } catch (err) {
-      // Captura erros que não estão relacionados à resposta da API
-      document.getElementById('error').innerHTML = ('User  creation failed: ' + err.message); // Exibe erro de rede ou outro erro
+      setAno('');
+      setEtapa('');
+      setRm('');
+      setTipoprova('');
+      setTurma('');
+      setNotaExt('');
     }
 
+      // Se a resposta for bem-sucedida
+ 
+    } catch (error) {
+      console.log('error', error)
+    }
     // Adicione manipuladores de eventos para cada select, se necessário
 
 
@@ -79,6 +88,16 @@ export default function CreateUserPage() {
   return (
     <div className={styles.container}>
       <Header />
+
+      { msgSucesso && (
+      <div className={styles.msgSucesso}>
+        {msgSucesso}
+        </div>)}
+        { msgErro && (
+      <div className={styles.msgErro}>
+        {msgErro}
+        </div>)}
+
       <h1 className={styles.h1}>Lançar Nova Nota</h1>
       <form onSubmit={createUser} className={styles.form}>
 
