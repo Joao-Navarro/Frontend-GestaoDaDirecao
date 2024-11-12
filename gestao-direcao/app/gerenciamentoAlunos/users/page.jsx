@@ -3,8 +3,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import style from "./page.module.css";
 import Header from '@/components/Header';
-import { render } from 'react-dom';
 import Link from 'next/link';
+import { render } from 'react-dom';
 
 
 
@@ -14,6 +14,8 @@ const Home = () => {
   const [ano, setAno] = useState('');
   const [sala, setSala] = useState('')
   const descricaoRef = useRef(null);
+  const [msgSucesso, setMsgSucesso] = useState('');
+  const [msgErro, setMsgErro] = useState('');
 
 
   useEffect(() => {
@@ -21,6 +23,10 @@ const Home = () => {
       descricaoRef.current.innerHTML = '';
     }
   }, []);
+
+
+
+  // document.getElementById("descricao").innerHTML = ''; 
 
 
 
@@ -37,10 +43,19 @@ const Home = () => {
         const resData = await response.json();
         console.log(resData);
 
+        if (Array.isArray(resData) && resData.length === 0) {
+          setMsgErro('Erro ao carregar tabela')
+        setTimeout(() => setMsgErro(''), 3000)
+          document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+      } else {
+        setMsgSucesso('Tabela carregada com sucesso!');
+        setTimeout(() => setMsgSucesso(''), 3000)
+        document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+      }
+
 
         const table = document.createElement('table');
         table.className = style.table;
-
 
         const headerRow = table.insertRow(0);
         const headers = Object.keys(resData[0]);
@@ -82,6 +97,13 @@ const Home = () => {
               cell.innerHTML = item[header];
             }
           });
+
+          const actionCell = row.insertCell();
+          const editLink = document.createElement('a');
+          editLink.href = `/gerenciamentoAlunos/users/alunos/${item.RM}/edit`;
+          editLink.innerText = 'Editar';
+          actionCell.appendChild(editLink);
+
         });
 
 
@@ -91,9 +113,11 @@ const Home = () => {
       } catch (error) {
         console.log('error', error);
       }
+
     } else {
       console.log('Please select all options');
     }
+
   }
 
   // add event handlers for each select
@@ -114,6 +138,16 @@ const Home = () => {
 
   return (
     <>
+
+      {msgSucesso && (
+        <div className={style.msgSucesso}>
+          {msgSucesso}
+        </div>)}
+      {msgErro && (
+        <div className={style.msgErro}>
+          {msgErro}
+        </div>)}
+
       <Header />
 
       <h1 className={style.text}>Gerenciamento de alunos</h1>
@@ -158,10 +192,7 @@ const Home = () => {
           </select>
         </label>
 
-        <div className={style.ano}>
-          <label>Ano</label>
-          <input className={style.input} value={ano} type='number' onChange={handleAnoChange} name="ano" />
-        </div>
+        <input value={ano} type='number' onChange={handleAnoChange} name="ano" placeholder='Ano' />
 
 
 
@@ -176,13 +207,11 @@ const Home = () => {
 
       <div className={style.card}>
 
+        <Link href='/gerenciamentoAlunos'><button className={style.back} >Voltar</button></Link>
+
+
       </div>
 
-      <Link href= '/gerenciamentoAlunos'><button className={style.back} >Voltar</button></Link>
-
-
-      <div className={style.footer}>
-      </div>
 
 
     </>

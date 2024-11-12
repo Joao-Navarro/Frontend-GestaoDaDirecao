@@ -1,3 +1,10 @@
+.body {
+
+  height: 900px
+
+}
+
+
 .text{
     justify-content: center;
     align-items: center;
@@ -29,6 +36,20 @@
     margin-bottom: 3%;
   }
   
+      
+  .filtro input {
+  
+    border-radius: 5px;
+  
+    border-color: solid black 2px;  
+
+    text-align: center;
+  
+    background-color: #acacac;
+  
+    padding: 10px;
+  
+  }
   
   .button {
   
@@ -49,9 +70,7 @@
   
     border-radius: 10px;
   
-  
-  
-  
+
   }
   
   
@@ -59,26 +78,39 @@
   
   
     background-color: #a3a1a1;
-  
     cursor: pointer;
   
   
   }
+
+  .button option:hover {
+  
+    background-color: #000;
+  
+  }
+  
   
   .ano {
-
+  
+  
     display: flex;
+  
   
     background-color: #878787;
   
+  
     padding: 10px;
+  
   
     border-radius: 10px;
   
+  
     justify-content: space-around;
+  
   
     width: 15%;
   }
+  
   
   .input {
   
@@ -86,7 +118,7 @@
     border-radius: 5px;
   
   
-    border-color: solid black 2px;
+    border-color: solid black 5px;
   
   
     text-align: center;
@@ -96,9 +128,6 @@
   
   
   }
-  
-  
-  
   
   
   
@@ -115,21 +144,45 @@
   
   
   }
+
+  .back {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    width: 50%;
+
+    cursor: pointer;
+
+    background-color: #878787;
+   
+    border-radius: 5%;
+  
+    padding: 10px;
+  
+    border-radius: 10px;
+
+    margin-left: 25%;
+
+    margin-top: 5%;
+  }
+  
   
   .table {
   
-  
-    width: 100%;
+    width: 90%;
     border-collapse: collapse;
     margin: 0 auto;
     font-size: 16px;
     text-align: center;
-    margin-top: 3%;
   }
   
   
   .table th, .table td {
-    padding: 10px;
+    padding: 15px;
     border: 1px solid #000000;
   }
   
@@ -144,15 +197,72 @@
     border-bottom: 1px solid #000000;
   }
   
-  .footer {
-    position: relative;
-    bottom: 0;
-    width: 100%;
+  .msgSucesso {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 1000;
+    transition: opacity 0.5s ease;
   }
   
-  
-  
-  
+  .msgErro {
+    position: fixed;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #8a1007;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+    transition: opacity 0.5s ease;
+  }
+
+  .editLink {
+
+    text-decoration: none;
+
+    color: black;
+
+    background-color: #878787;
+
+    padding: 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    margin-top: 10%;
+
+    border-radius: 10px;
+
+    border: #000 solid 1px;
+  }
+
+  .seuContainer {
+
+    margin-top: 4%;
+
+  }
+
+  .tableAll {
+
+    display: flex;
+
+    flex-direction: row;
+
+    justify-content: center;
+
+    align-items: center;
+
+    margin: 5%;
+
+  }
   
   
   @media only screen and (max-width: 800px) {
@@ -164,10 +274,7 @@
       width: 80%;
   
   
-      display: flex;
-  
-  
-      justify-content: space-around;
+      display: flex;justify-content: space-around;
   
   
       margin-left: 5%;
@@ -178,21 +285,20 @@
      
       justify-content: space-around;
      
-      margin: 6.7%;
+      margin: 6%;
     }
     .ano {
-      width: 100px;
+      width: 50%;
     }
     .input {
       width: 100%;
     }
     .botao {
-      flex-direction: row;
       width: 100%;
       margin-bottom: 9%;
     }
     .table {
-      font-size: 7px;
+      font-size: 1.2rem;
       width: auto;
       height: auto;
     }
