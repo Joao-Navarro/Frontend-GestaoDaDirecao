@@ -7,6 +7,7 @@ import Header from '@/components/Header';
 
 export default function EditUserPage({ params }) {
   const router = useRouter(); // Inicializa o useRouter
+  const [msgErro, setMsgErro] = useState('');
   const [user, setUser] = useState({
     etapa: '',
     ano: '',
@@ -51,13 +52,19 @@ export default function EditUserPage({ params }) {
       // Redirecionar para outra página após a atualização
       router.push('/avaliacaoExterna/avalia'); // Substitua pelo caminho desejado
     } catch (error) {
-      console.error('Erro:', error);
-      // Aqui você pode adicionar lógica para lidar com o erro, como exibir uma mensagem ao usuário
+      setMsgErro('Erro ao carregar tabela')
+      setTimeout(() => setMsgErro(''), 3000)
     }
   };
 
   return (
     <>
+
+{ msgErro && (
+        <div className={style.msgErro}>
+          {msgErro}
+          </div>)}
+
 <Header/>
 
     <div className={styles.container}>

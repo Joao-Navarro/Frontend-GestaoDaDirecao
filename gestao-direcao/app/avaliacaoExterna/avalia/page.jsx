@@ -9,6 +9,8 @@ const Home = () => {
   const [ano, setAno] = useState('');
   const [tipoprova, setTipoprova] = useState('');
   const descricaoRef = useRef(null);
+  const [msgSucesso, setMsgSucesso] = useState('');
+  const [msgErro, setMsgErro] = useState('');
 
 
   useEffect(() => {
@@ -51,6 +53,9 @@ const Home = () => {
 
         const table = document.createElement('table');
         table.className = style.table;
+
+        setMsgSucesso('Tabela carregada');
+        setTimeout(() => setMsgSucesso(''), 3000)
         // Verifique se a classe foi adicionada
         // add a border to the table// Create a header row
         const headerRow = table.insertRow(0);
@@ -97,8 +102,9 @@ const Home = () => {
 
         // Add the table to the #descricao divdocument.getElementById("descricao").innerHTML = '';
         document.getElementById("descricao").appendChild(table);
-      } catch (error) {
-        console.log('Valor inexistente', error);
+      }catch (error) {
+        setMsgErro('Erro ao carregar tabela')
+        setTimeout(() => setMsgErro(''), 3000)
       }
     } else {
       console.log('Please select all options');
@@ -131,6 +137,16 @@ const Home = () => {
 
 
   return (
+<>
+    { msgSucesso && (
+      <div className={style.msgSucesso}>
+        {msgSucesso}
+        </div>)}
+        { msgErro && (
+      <div className={style.msgErro}>
+        {msgErro}
+        </div>)}
+
     <div className={style.body}>
       <Header />
       <div className={style.filtro}>
@@ -213,6 +229,7 @@ const Home = () => {
       <Link href='/avaliacaoExterna'><button className={style.back} >Voltar</button></Link>
 
     </div>
+    </>
   );
 };
 
