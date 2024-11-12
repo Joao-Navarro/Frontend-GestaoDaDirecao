@@ -61,7 +61,7 @@ export default function EditUserPage({ params }) {
     <>
 
 { msgErro && (
-        <div className={style.msgErro}>
+        <div className={styles.msgErro}>
           {msgErro}
           </div>)}
 
