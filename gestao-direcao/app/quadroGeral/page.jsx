@@ -303,12 +303,13 @@ const Home = () => {
             onChange={handleAnoChange}
             name="ano"
             placeholder='Ano'/>
+  </div>
 
-        
+
           {Ano && (Ano < 2024 || Ano > 2024) && (
             <p className={style.anoerrado}>Ano não encontrado</p>
           )}
-       </div> 
+       
   
         <button className={style.button} onClick={getFilter} disabled={!Turma || !etapa || !Ano}>
           Filtrar
