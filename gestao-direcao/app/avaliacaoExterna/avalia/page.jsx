@@ -65,6 +65,10 @@ const Home = () => {
           else if (header === 'notaExt') {
             th.innerHTML = 'Nota';
           }
+          else if (header === 'ano') {
+            th.innerHTML = 'Ano';
+          }
+
 
           headerRow.appendChild(th);
 
