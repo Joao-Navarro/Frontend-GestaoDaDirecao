@@ -4,9 +4,12 @@ import style from "./page.module.css";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { render } from 'react-dom';
+import Link from 'next/link';
 
 
 const Home = () => {
+  const [msgSucesso, setMsgSucesso] = useState('');
+  const [msgErro, setMsgErro] = useState('');
   const [ensinoTurma, setEnsinoTurma] = useState(''); // add state for each select
   const [etapa, setEtapa] = useState('');
   const [ano, setAno] = useState('');
@@ -20,10 +23,20 @@ const Home = () => {
 
 
   const getFilter = async () => {
+  
+
+    if (!ensinoTurma || !etapa || !ano) {
+      alert('Por favor, selecione todas as opções!');
+      return; // Interrompe a execução da função se algum campo estiver vazio
+    }
+
+    
     if (ensinoTurma && etapa && ano) {
       const url = `http://localhost:3001/avaliasesi/${etapa}/${ensinoTurma}/${ano}`;  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
       console.log(`Constructed URL: ${url}`);
       console.log('Current state:', etapa, ensinoTurma, ano);
+
+      
 
       try {
         const response = await fetch(url);
@@ -31,11 +44,22 @@ const Home = () => {
         const resData = await response.json();
         console.log(resData);
 
+        if (Array.isArray(resData) && resData.length === 0) {
+          setMsgErro('Erro ao carregar tabela')
+        setTimeout(() => setMsgErro(''), 3000)
+          document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+      } else {
+        setMsgSucesso('Tabela carregada com sucesso!');
+        setTimeout(() => setMsgSucesso(''), 3000)
+        document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+      }
+
         // Create a table element
         // Create a table element
 
         const table = document.createElement('table');
         table.className = style.table; 
+
         // Verifique se a classe foi adicionada
         // add a border to the table
 
@@ -76,12 +100,21 @@ const Home = () => {
         // Add the table to the #descricao div
         document.getElementById("descricao").innerHTML = '';
         document.getElementById("descricao").appendChild(table);
+
+        
+
+       
       } catch (error) {
-        console.log('error', error);
+        console.log('error', error)
       }
+
     } else {
-      console.log('Please select all options');
+      alert('Por favor, selecione todas as opções!');
     }
+
+
+
+
   }
 
   // add event handlers for each select
@@ -100,59 +133,71 @@ const Home = () => {
     setAno(e.target.value);
   }
 
-  const [filter, setFilter] = useState({
-    ensino: '',
-    etapa: '',
-    ano: '',
-  });
+  // const [filter, setFilter] = useState({
+  //   ensino: '',
+  //   etapa: '',
+  //   ano: '',
+  // });
 
  
 
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilter((prevFilter) => ({
-      ...prevFilter,
-      [name]: value,
-    }));
+  // const handleFilterChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFilter((prevFilter) => ({
+  //     ...prevFilter,
+  //     [name]: value,
+  //   }));
 
-    // Atualiza as etapas disponíveis com base no ensino selecionado
-    if (name === 'ensino') {
-      setFilter((prevFilter) => ({
-        ...prevFilter,
-        etapa: '', // Reseta a etapa ao mudar o ensino
-      }));
-      setAvailableEtapas(getEtapas(value));
-    }
-  };
+  //   // Atualiza as etapas disponíveis com base no ensino selecionado
+  //   if (name === 'ensino') {
+  //     setFilter((prevFilter) => ({
+  //       ...prevFilter,
+  //       etapa: '', // Reseta a etapa ao mudar o ensino
+  //     }));
+  //     setAvailableEtapas(getEtapas(value));
+  //   }
+  // };
 
 
 
-  const handleFilter = () => {
-    const newFilteredStudents = studentsData.filter((student) =>
-      (filter.ensino ? student.ensino === filter.ensino : true) &&
-      (filter.etapa ? student.etapa === filter.etapa : true) &&
-      (filter.ano ? student.ano === filter.ano : true)
-    );
-    setFilteredStudents(newFilteredStudents);
-  };
+  // const handleFilter = () => {
+  //   const newFilteredStudents = studentsData.filter((student) =>
+  //     (filter.ensino ? student.ensino === filter.ensino : true) &&
+  //     (filter.etapa ? student.etapa === filter.etapa : true) &&
+  //     (filter.ano ? student.ano === filter.ano : true)
+  //   );
+  //   setFilteredStudents(newFilteredStudents);
+  // };
 
   return (
     <>
+    { msgSucesso && (
+        <div className={style.msgSucesso}>
+          {msgSucesso}
+          </div>)}
+          { msgErro && (
+        <div className={style.msgErro}>
+          {msgErro}
+          </div>)}
       <Header />
+
+      <h1 className={style.text}>Avalia Sesi</h1>
+
       <div className={style.filtro}>
         <label>
           <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
-            <option value="">EF1</option>
+            <option value="">EF I</option>
             <option value="3%25E.F">3º Ano</option>
             <option value="4%25E.F">4º Ano</option>
             <option value="5%25E.F">5º Ano</option >
+
           </select>
         </label>
 
 
         <label>
           <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
-            <option value="">EF2</option>
+            <option value="">EF II</option>
             <option value="6%25A%25">6º Ano A</option>
             <option value="6%25B%25">6º Ano B</option>
             <option value="7%25A%25">7º Ano A</option>
@@ -185,26 +230,26 @@ const Home = () => {
         </label>
 
         <div className={style.ano}>
-          <label>Ano</label>
-          <input className={style.input} value={ano} type='number' onChange={handleAnoChange} name="ano" />
+          
+          <input className={style.input} value={ano} type='number' onChange={handleAnoChange} name="ano" placeholder='ano' />
         </div>
 
-
-
-        <button className={style.button} onClick={getFilter} disabled={!ensinoTurma || !etapa || !ano}>Filtrar</button>
-
-
-      </div>
-
-      <h1 className={style.text}>Avalia Sesi</h1>
-
-     
-        <div className={style.table} id='descricao' ref={descricaoRef} />
         
-              <div className={style.footer}>
 
-      <Footer />
+<button className={style.button} onClick={getFilter} disabled={ !ensinoTurma || !etapa || !ano} >Filtrar</button>
+
+
+        
+      <Link  href="https://app.powerbi.com/home?experience=power-bi&culture=pt-br&country=br&ScenarioId=Signup" className={style.button}>Power BI</Link>     
+
+      
+
+
       </div>
+    
+        <div className={style.table}style={{ overflow: 'auto' }} id='descricao' ref={descricaoRef} />
+        
+          
 
     </>
   );

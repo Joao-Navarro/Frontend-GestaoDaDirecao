@@ -99,6 +99,7 @@ export default function CreateUserPage() {
 
                 <button type="submit" className={styles.button}>Criar</button>
             </form>
+
         </div>
     );
 }

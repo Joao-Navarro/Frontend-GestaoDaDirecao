@@ -30,7 +30,7 @@
 
 }
 
-.usuario {
+.casa {
 
   display: flex;
 
@@ -45,12 +45,26 @@
   margin-left: 2%;
 }
 
+.suporte {
+
+  display: flex;
+
+  margin-top: 1%;
+
+  width: 30px;
+
+  height: 30px;
+
+  margin-bottom: 8%;
+margin-left: -70%;
+}
+
 .logo {
 
   display: flex;
 
   justify-content: end;
-  
+
   margin-bottom: 2%;
 
   margin-right: 2%;
@@ -74,11 +88,9 @@
 
   justify-content: center;
 
-  margin-top: 18%;
+  margin-top: 2%;
 
 }
-
-
 
 
 

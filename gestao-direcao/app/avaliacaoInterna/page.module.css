@@ -94,18 +94,15 @@
   text-align: left;
 }
 
-.th, .td {
+.table th, .table td {
   padding: 10px;
   border: 1px solid #000000;
+
 }
 
 .th {
   background-color: #f4f4f4;
   border-bottom: 2px solid #000000;
-}
-
-.td {
-  border-bottom: 1px solid #000000;
 }
 
 .tr:nth-child(even) {
@@ -153,3 +150,4 @@
   }
 
 }
+

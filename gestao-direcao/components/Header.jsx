@@ -14,17 +14,29 @@ function Header() {
 
             <div className="header">
 
-                <div className="usuario" >
+                <div className="casa" >
 
                     <Link href="/menu"><Image src="/ICONECASA.png" alt="JSX Icon" width={80} height={80} /></Link>
+                    
+                    </div>
+
+                    <div className="suporte">
+
+                    <Link href="/menu"><Image src="/telefone.png.png" alt="JSX Icon" width={80} height={80} /></Link>
 
                 </div>
+
+
 
                 <div className="logo">
 
                     <Image src="/imagelogo.png" alt="JSX Icon" width='190' height='50' />
-                
+
                 </div>
+
+
+
+
 
 
 
