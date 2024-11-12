@@ -97,6 +97,13 @@ const Home = () => {
               cell.innerHTML = item[header];
             }
           });
+
+          const actionCell = row.insertCell();
+          const editLink = document.createElement('a');
+          editLink.href = `/gerenciamentoAlunos/users/alunos/${item.RM}/edit`;
+          editLink.innerText = 'Editar';
+          actionCell.appendChild(editLink);
+
         });
 
 
