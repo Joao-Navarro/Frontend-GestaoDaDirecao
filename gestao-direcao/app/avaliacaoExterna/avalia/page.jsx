@@ -36,17 +36,6 @@ const Home = () => {
         const resData = await response.json();
         console.log(resData);
 
-        if (Array.isArray(resData) && resData.length === 0) {
-
-          alert('Banco de Dados Vazio')
-
-        }
-
-        else {
-          alert('Tabela Carregada')
-        }
-
-
         // Create a table element
         // Create a table element
 
