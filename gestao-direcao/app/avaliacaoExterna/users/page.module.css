@@ -70,28 +70,20 @@
   
   }
   
-  
   .ano {
-  
-  
+
     display: flex;
-  
   
     background-color: #878787;
   
-  
     padding: 10px;
-  
   
     border-radius: 10px;
   
-  
     justify-content: space-around;
-  
   
     width: 15%;
   }
-  
   
   .input {
   

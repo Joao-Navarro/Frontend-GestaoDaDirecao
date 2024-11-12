@@ -294,15 +294,16 @@ const Home = () => {
         </label>
 
         
-   <div className={style.ano}>
+ 
+        <div className={style.ano}>
           <input
             className={style.input}
             value={Ano}
             type='number'
             onChange={handleAnoChange}
             name="ano"
-            placeholder='Ano'
-          />
+            placeholder='Ano'/>
+
         
           {Ano && (Ano < 2024 || Ano > 2024) && (
             <p className={style.anoerrado}>Ano não encontrado</p>
@@ -312,8 +313,8 @@ const Home = () => {
         <button className={style.button} onClick={getFilter} disabled={!Turma || !etapa || !Ano}>
           Filtrar
         </button>
-      </div>
 
+  </div>
       
 
       <div id='tabelas'>

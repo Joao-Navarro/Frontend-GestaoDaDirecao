@@ -115,7 +115,15 @@ export default function CreateUserPage() {
           </label>
 
 
-          <input placeholder='Ano' value={ano} type='number' onChange={handleAnoChange} name="ano" />
+          <div className={styles.ano}>
+          <input
+            className={styles.input}
+            value={ano}
+            type='number'
+            onChange={handleAnoChange}
+            name="ano"
+            placeholder='Ano'/>
+  </div>
 
          
 

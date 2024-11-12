@@ -25,15 +25,15 @@ function Home() {
 
           <Link href="/avaliacaoInterna" ><Image className={styles.imginterna} src="/INTERNA.png" alt="avaliação interna" width={300} height={300} /></Link>
 
-          <h3>Avaliação Interna - CE 242</h3>
+          <h3> AVALIAÇÃO INTERNA - CE 242</h3>
 
         </div>
 
         <div className={styles.card}>
 
-          <Link href="/avaliacaoExterna" ><Image className={styles.imginterna} src="/EXTERNA.png" alt="avaliação externa" width={300} height={300} /></Link>
+          <Link href="/avaliacaoExterna" ><Image className={styles.imginterna} src="/AV.EXTERNA.png" alt="avaliação externa" width={300} height={300} /></Link>
 
-          <h3>DESBRAVENEM E SARESP</h3>
+          <h3>DESBRAVA ENEM E SARESP</h3>
 
         </div>
 
@@ -41,7 +41,7 @@ function Home() {
 
           <Link href="/cursoTecnico" ><Image className={styles.imginterna} src="/SENAI.png" alt="curso tecnico" width={300} height={300} /></Link>
 
-          <h3>Curso Técnico</h3>
+          <h3>CURSO TÉCNICO</h3>
 
         </div>
 
@@ -50,7 +50,7 @@ function Home() {
 
           <Link href="/avaliaSesi" ><Image className={styles.imginterna} src="/AVALIA.png" alt="avalia sesi" width={300} height={300} /></Link>
 
-          <h3>Avalia Sesi</h3>
+          <h3>AVALIA SESI</h3>
 
         </div>
 
@@ -58,7 +58,7 @@ function Home() {
           
           <Link href="/quadroGeral" ><Image className={styles.imginterna} src="/GERAL.png" alt="Quadro Geral" width={300} height={300} /></Link>
           
-          <h3>Quadro Geral</h3>
+          <h3>QUADRO GERAL</h3>
           
           </div>
 
@@ -66,7 +66,7 @@ function Home() {
           
           <Link href="/gerenciamentoAlunos" ><Image className={styles.imginterna} src="/GERENCIAMENTO.png" alt="Gerenciamento de alunos" width={300} height={300} /></Link>
           
-          <h3>Gerenciar Alunos</h3>
+          <h3>GERENCIAMENTO DE ALUNOS</h3>
           
           </div>
 

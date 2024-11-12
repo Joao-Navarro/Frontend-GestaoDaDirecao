@@ -43,7 +43,7 @@
 
 .card h3 {
 
-    font-size: 2rem;
+    font-size: 1rem;
 
     color: #000000;
   
@@ -81,6 +81,13 @@
 
 }
 
+.cards h3 {
+
+  font-size: 1rem;
+
+  color: #000000;
+
+}
 
 
 
@@ -216,7 +223,7 @@
     
     .card h3 {
       
-        font-size: 1rem;
+        font-size: 80%;
     
         color: #000000;
 
@@ -247,11 +254,14 @@
     }
 
     .cards h3 {
-      font-size: 1rem;
+
+      font-size: 80%;
     
       color: #000000;
 
       margin-left: 5%;
+
+      margin-top: 2%;
     }
 
     .cards:hover {
@@ -263,11 +273,12 @@
 
 
     .imginterna{
-        width: 90%;
-        height: 100px;
+        width: 80%;
+        height: 120px;
         object-fit: cover;
         margin-bottom: 2%;
         margin-left: 7%;
+        margin-top: 2%;
     }
     
   
@@ -282,9 +293,9 @@
     
         flex-direction: column;
     
-        width: 100%;
+        width: 90%;
     
-        margin-bottom: 2%;
+        margin-bottom: 3%;
     }
     
 
