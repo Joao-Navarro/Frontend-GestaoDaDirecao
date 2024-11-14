@@ -217,7 +217,7 @@ const Home = () => {
 
       <div className={style.card}>
 
-        <Link href='/gerenciamentoAlunos'><button className={style.back} >Voltar</button></Link>
+        <Link  className={style.back} href='/gerenciamentoAlunos'> Voltar</Link>
 
 
       </div>

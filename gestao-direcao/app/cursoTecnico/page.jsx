@@ -115,52 +115,14 @@ const Home = () => {
   }
 
 
-  const [filter, setFilter] = useState({
-    ensino: '',
-    etapa: '',
-    ano: '',
-  });
-
-
- 
-
-
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilter((prevFilter) => ({
-      ...prevFilter,
-      [name]: value,
-    }));
-
-
-    // Atualiza as etapas disponíveis com base no ensino selecionado
-    if (name === 'ensino') {
-      setFilter((prevFilter) => ({
-        ...prevFilter,
-        etapa: '', // Reseta a etapa ao mudar o ensino
-      }));
-      setAvailableEtapas(getEtapas(value));
-    }
-  };
-
-
-
-
-
-
-  const handleFilter = () => {
-    const newFilteredStudents = studentsData.filter((student) =>
-      (filter.ensino ? student.ensino === filter.ensino : true) &&
-      (filter.etapa ? student.etapa === filter.etapa : true) &&
-      (filter.ano ? student.ano === filter.ano : true)
-    );
-    setFilteredStudents(newFilteredStudents);
-  };
 
 
   return (
     <>
-      <Header />
+      <Header />  
+      
+        <h1 className={style.text}>Curso Técnico</h1>
+
       <div className={style.filtro}>
         <label>
           <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
@@ -229,8 +191,7 @@ const Home = () => {
       </div>
 
 
-      <h1 className={style.text}>Curso Técnico</h1>
-
+  
 
      
         <div style={{ overflow: 'auto' }}  className={style.table} id='descricao' ref={descricaoRef} />

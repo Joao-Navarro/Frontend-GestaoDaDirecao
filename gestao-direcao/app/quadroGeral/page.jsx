@@ -133,59 +133,9 @@ const Home = () => {
     setAno(e.target.value);
   }
 
-  const [filter, setFilter] = useState({
-    ensino: '',
-    etapa: '',
-    ano: '',
-  });
+ 
 
-  const [availableEtapas, setAvailableEtapas] = useState([]);
-
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilter((prevFilter) => ({
-      ...prevFilter,
-      [name]: value,
-    }));
-
-    // Atualiza as etapas disponíveis com base no ensino selecionado
-    if (name === 'ensino') {
-      setFilter((prevFilter) => ({
-        ...prevFilter,
-        etapa: '', // Reseta a etapa ao mudar o ensino
-      }));
-      setAvailableEtapas(getEtapas(value));
-    }
-  };
-
-  const getEtapas = (ensino) => {
-    switch (ensino) {
-      case '3°':
-      case '4°':
-      case '5°':
-        return ['3', '4', '5'];
-      case '6°':
-      case '7°A':
-      case '7°B':
-        return ['6', '7A', '7B', '8A', '8B', '9A', '9B'];
-      case '1°A':
-      case '1°B':
-      case '2°':
-      case '3°':
-        return ['1A', '1B', '2', '3'];
-      default:
-        return [];
-    }
-  };
-
-  const handleFilter = () => {
-    const newFilteredStudents = studentsData.filter((student) =>
-      (filter.ensino ? student.ensino === filter.ensino : true) &&
-      (filter.etapa ? student.etapa === filter.etapa : true) &&
-      (filter.ano ? student.ano === filter.ano : true)
-    );
-    setFilteredStudents(newFilteredStudents);
-  };
+ 
 
   const gerarPDF = () => {
 
@@ -286,7 +236,7 @@ const Home = () => {
   
         <label>
           <select className={style.button} name="etapa" onChange={handleEtapaChange} value={etapa}>
-            <option value="">Selecione</option>
+            <option value="">Etapa</option>
             <option value="1S">1</option>
             <option value="2S">2</option>
             <option value="3S">3</option>

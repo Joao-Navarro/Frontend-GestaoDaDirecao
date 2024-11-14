@@ -105,7 +105,7 @@ export default function CreateUserPage() {
         <div className={styles.filtro}>
           <label>
             <select className={styles.button} name="ensino" value={Turma} onChange={handleTurmaChange}>
-              <option value="">EF1</option>
+              <option value="">EF I</option>
               <option value="3%25E.F">3º Ano</option>
               <option value="4%25E.F">4º Ano</option>
               <option value="5%25E.F">5º Ano</option >
@@ -117,7 +117,7 @@ export default function CreateUserPage() {
 
           <label>
             <select className={styles.button} name="ensino" value={Turma} onChange={handleTurmaChange}>
-              <option value="">EF2</option>
+              <option value="">EF II</option>
               <option value="6%25A%25">6º Ano A</option>
               <option value="6%25B%25">6º Ano B</option>
               <option value="7%25A%25">7º Ano A</option>
@@ -190,7 +190,7 @@ export default function CreateUserPage() {
 
       </form>
 
-      <Link href='/avaliacaoExterna' ><button className={styles.back}>Voltar</button></Link>
+      <Link className={styles.back} href='/avaliacaoExterna' >Voltar</Link>
 
       <div id = 'error'></div>
 
