@@ -1,0 +1,21 @@
+.body{
+
+}
+  
+.container {
+    width: 20%;
+    background: rgb(219, 33, 33);
+    padding: 20px; 
+    border-radius: 8px;
+   
+    text-align: center;
+    align-items: center;
+  }
+  
+.nome{
+    text-align: center;
+    
+}
+
+
+  

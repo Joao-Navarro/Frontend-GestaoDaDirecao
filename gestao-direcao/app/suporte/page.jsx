@@ -1,11 +1,16 @@
 // pages/index.js
 import React from 'react';
 import ContactForm from '../../components/ContactForm';
+import Header from '@/components/Header';
 
 const Home = () => {
+    
     return (
+
         <div>
-            <h1>Entre em Contato</h1>
+            <Header/>
+            
+            <h1>Central de atendimento</h1>
             <ContactForm />
         </div>
     );

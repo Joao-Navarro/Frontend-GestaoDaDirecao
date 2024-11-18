@@ -3,6 +3,7 @@
 
 import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
+import styles from "../app/suporte/page.module.css"
 
 const ContactForm = () => {
     const form = useRef();
@@ -32,22 +33,42 @@ const ContactForm = () => {
     
 
     return (
-        <form ref={form} onSubmit={sendEmail}>
-            <div>
+
+        <div className={styles.container}>
+    
+    <div className={styles.body}>
+
+            <form ref={form} onSubmit={sendEmail}>
+
+            <div className={styles.nome}>
                 <label htmlFor="user_name">Seu nome</label>
                 <input type="text" name="user_name" required />
             </div>
-            <div>
+
+
+            <div className={styles.email}>
                 <label htmlFor="user_email">Seu email</label>
                 <input type="email" name="user_email" required />
             </div>
-            <div>
+
+
+            <div className={styles.mensagem}>
                 <label htmlFor="message">Mensagem</label>
                 <textarea name="message" required />
             </div>
+
+            <div className={styles.enviar}>
             <button type="submit">Enviar</button>
             {status && <p>{status}</p>}
+            
+            </div>
+
+
         </form>
+
+        </div>
+
+        </div>
     );
 };
 
