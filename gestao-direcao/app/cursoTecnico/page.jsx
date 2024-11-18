@@ -15,6 +15,9 @@ const Home = () => {
   const descricaoRef = useRef(null);
 
 
+  const [msgSucesso, setMsgSucesso] = useState('');
+  const [msgErro, setMsgErro] = useState('');
+
   useEffect(() => {
     if (descricaoRef.current) {
       descricaoRef.current.innerHTML = '';
@@ -44,6 +47,16 @@ const Home = () => {
 
         const table = document.createElement('table');
         table.className = style.table;
+
+        if (Array.isArray(resData) && resData.length === 0) {
+          setMsgErro('Erro ao carregar tabela')
+        setTimeout(() => setMsgErro(''), 3000)
+          document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+      } else {
+        setMsgSucesso('Tabela carregada com sucesso!');
+        setTimeout(() => setMsgSucesso(''), 3000)
+        document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+      }
         // Verifique se a classe foi adicionada
         // add a border to the table
 
@@ -88,7 +101,7 @@ const Home = () => {
         document.getElementById("descricao").innerHTML = '';
         document.getElementById("descricao").appendChild(table);
       } catch (error) {
-        console.log('error', error);
+        console.log('error', error)
       }
     } else {
       console.log('Please select all options');
@@ -119,6 +132,14 @@ const Home = () => {
 
   return (
     <>
+    { msgSucesso && (
+        <div className={style.msgSucesso}>
+          {msgSucesso}
+          </div>)}
+          { msgErro && (
+        <div className={style.msgErro}>
+          {msgErro}
+          </div>)}
       <Header />  
       
         <h1 className={style.text}>Curso Técnico</h1>

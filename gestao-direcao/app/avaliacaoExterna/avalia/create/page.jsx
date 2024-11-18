@@ -41,7 +41,7 @@ export default function CreateUserPage() {
       setTurma('');
       setNotaExt('');
     } else {
-      setMsgSucesso('Tabela carregada com sucesso!');
+      setMsgSucesso('Usuário carregado com sucesso!');
       setTimeout(() => setMsgSucesso(''), 3000)
 
       setAno('');
