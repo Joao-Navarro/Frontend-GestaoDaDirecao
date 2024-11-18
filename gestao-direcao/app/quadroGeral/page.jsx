@@ -4,11 +4,8 @@ import style from "./page.module.css";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-
-
 const Home = () => {
-
-  const [Turma, setEnsinoTurma] = useState(''); // add state for each select
+  const [Turma, setEnsinoTurma] = useState('');
   const [etapa, setEtapa] = useState('');
   const [Ano, setAno] = useState('');
 
@@ -16,28 +13,29 @@ const Home = () => {
   const [tabela2Data, setTabela2Data] = useState([]);
   const [tabela3Data, setTabela3Data] = useState([]);
 
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedValue, setEditedValue] = useState('');
+  const [editingRowIndex, setEditingRowIndex] = useState(null);
+  const [editingRm, setEditingRm] = useState(null); // Para armazenar o RM da linha sendo editada
+
+
   const getFilter = async () => {
     if (Turma && etapa && Ano) {
       try {
-        // URLs para as três tabelas
         const urls = [
           `http://localhost:3001/tabelageralef1/${etapa}/${Turma}/${Ano}`,
           `http://localhost:3001/tabelageralef2/${etapa}/${Turma}/${Ano}`,
           `http://localhost:3001/tabelageralem/${etapa}/${Turma}/${Ano}`
         ];
-
-        // Fazendo as chamadas de forma assíncrona
+  
         const responses = await Promise.all(urls.map(url => fetch(url)));
         const data = await Promise.all(responses.map(res => res.json()));
-
+  
         setTabela1Data(data[0]);
         setTabela2Data(data[1]);
         setTabela3Data(data[2]);
-        // Create a table element
-        // Create a table element
-        const table = document.createElement('table');
-        table.className = style.table;// add a border to the table
-
+  
+        console.log('Dados carregados:', data[0]); // Verifique os dados carregados
       } catch (error) {
         console.log('error', error);
       }
@@ -46,20 +44,82 @@ const Home = () => {
     }
   };
 
+  const updateComDeficiencia = async (rowIndex, rm) => {
+    console.log('tabela1Data antes da atualização:', tabela1Data); // Verifique o estado atual
+    console.log('tabela2Data:', tabela2Data); // Verifique o estado atual
+    console.log('tabela3Data:', tabela3Data); // Verifique o estado atual
+    
+    try {
+      const response = await fetch(`http://localhost:3001/avaliasesi/${rm}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ComDeficiencia: editedValue }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Erro ao atualizar os dados');
+      }
+      console.log('Atualização bem-sucedida');
+  
+      // Combine os dados das três tabelas
+      const combinedData = [...tabela1Data, ...tabela2Data, ...tabela3Data];
+  
+      // Verifique se combinedData não está vazio
+      if (combinedData.length === 0) {
+        console.error('combinedData is empty, cannot update');
+        return; // Saia da função se combinedData estiver vazio
+      }
+  
+      // Encontre o índice do item que você deseja atualizar
+      const itemIndex = combinedData.findIndex(item => item.RM === rm);
+      if (itemIndex === -1) {
+        console.error('Item não encontrado para RM:', rm);
+        return; // Saia da função se o item não for encontrado
+      }
+  
+      // Atualize o valor de ComDeficiencia
+      combinedData[itemIndex].ComDeficiencia = editedValue;
+  
+      // Atualize o estado das tabelas
+      // Aqui você pode decidir como atualizar cada tabela de acordo com sua lógica
+      // Por exemplo, se você quiser atualizar tabela1Data, tabela2Data e tabela3Data com os dados combinados:
+  
+      // Reiniciar a edição
+      setIsEditing(false);
+      setEditedValue(''); // Limpar o valor do input
+      setEditingRowIndex(null);
+      setEditingRm(null); // Limpar RM após a edição
+    } catch (error) {
+      console.error('Erro ao atualizar:', error);
+    }
+  };
+
+  const startEditing = (rowIndex, value, rm) => {
+    setIsEditing(true);
+    setEditedValue(value);
+    setEditingRowIndex(rowIndex);
+    setEditingRm(rm); // Verifique se 'rm' está correto aqui
+  };
+
+  const saveEditedValue = () => {
+    console.log('RM:', editingRm); // Adicione esta linha para depuração
+    if (editingRm !== null && editingRowIndex !== null) {
+      updateComDeficiencia(editingRowIndex, editingRm);
+    }
+  };
+
   const renderTable = (data) => {
     if (!data.length) return null;
 
-    // Filtra as chaves que contêm a palavra "nota" (independente de maiúsculas/minúsculas)
     const notaHeaders = Object.keys(data[0]).filter(key => key.toLowerCase().includes('nota'));
     const avaliaHeaders = Object.keys(data[0]).filter(key => key.toLowerCase().includes('s'));
     const noToFixedHeaders = ['RM', 'Ano']; // Adicione aqui os cabeçalhos que não devem usar toFixed
 
-
-
     return (
       <div style={{ overflow: 'auto' }}>
         <table id='tabelas' className={style.table}>
-
           <thead>
             <tr>
               {Object.keys(data[0]).map((header, index) => (
@@ -74,7 +134,9 @@ const Home = () => {
               <tr key={rowIndex}>
                 {Object.keys(data[0]).map((header, cellIndex) => {
                   const value = item[header];
-                  // Define a cor de fundo apenas para as colunas que contêm "nota"
+                  const isInclusaoColumn = header === 'ComDeficiencia';
+                  // Aplicar toFixed se o valor for um número e o cabeçalho não estiver na lista de cabeçalhos que não devem usar toFixed
+                  const displayValue = (typeof value === 'number' && !noToFixedHeaders.includes(header)) ? value.toFixed(2) : value;
                   const isNotaColumn = notaHeaders.includes(header);
                   const isAvaliaColumn = avaliaHeaders.includes(header);
 
@@ -105,11 +167,32 @@ const Home = () => {
                     }
                   }
 
+
                   return (
                     <td key={cellIndex} style={cellStyle}>
-                    {value === null ? "Não informado" : 
-                      (typeof value === 'number' && !noToFixedHeaders.includes(header) ? value.toFixed(2) : value)}
-                  </td>
+                      {isInclusaoColumn ? (
+                        <>
+                          {isEditing && editingRowIndex === rowIndex ? (
+                            <>
+                              <textarea
+                                type="text"
+                                value={editedValue}
+                                onChange={(e) => setEditedValue(e.target.value)}
+                              />
+                              <button onClick={saveEditedValue}>Salvar</button>
+                            </>
+                          ) : (
+                            <>
+                              <div onClick={() => startEditing(rowIndex, value, item.RM)}>{value || "Não informado"}</div>
+                              <button onClick={() => startEditing(rowIndex, value, item.RM)}>Editar</button>
+                            </>
+                          )}
+                        </>
+                      ) : (
+                        displayValue === null ? "Não informado" : displayValue
+
+                      )}
+                    </td>
                   );
                 })}
               </tr>
@@ -120,98 +203,56 @@ const Home = () => {
     );
   };
 
-
-
-
-  // add event handlers for each select
   const handleEnsinoTurmaChange = (e) => {
-    console.log('etapa changed:', e.target.value);
     setEnsinoTurma(e.target.value);
   }
 
   const handleEtapaChange = (e) => {
-    console.log('Turma changed:', e.target.value);
     setEtapa(e.target.value);
   }
 
   const handleAnoChange = (e) => {
-    console.log('ano changed:', e.target.value);
     setAno(e.target.value);
   }
 
-
-
-
-
   const gerarPDF = () => {
-
     const tabela = document.getElementById('tabelas');
-
     const novaJanela = window.open('', '', 'width=800,height=600');
 
     novaJanela.document.write('<html><head><title>Quadro Geral PDF</title>');
     novaJanela.document.write(`<style>
-
         @page {
-
           size: landscape; 
-
         }
-
         table {
-
           width: 100%;
-
           table-layout: fixed;
-
           border-collapse: collapse;
-
           font-size: x-small;
-
         }
-
         th, td {
-
            border: 1px solid black;
-
           padding: 8px;
-
           text-align: center;
-
-          word-wrap: break-word; /* Permite que o texto quebre em várias linhas */
-
-          overflow-wrap: break-word; /* Para compatibilidade com navegadores */
-
-          white-space: pre-wrap; /* Permite que o texto quebre em várias linhas */
-
+          word-wrap: break-word; 
+          overflow-wrap: break-word; 
+          white-space: pre-wrap; 
         }
-
         th {
-        
-        background-color:#f4f4f4;
-        
+          background-color:#f4f4f4;
         }
-
       </style>`);
-
     novaJanela.document.write('</head><body>');
-
     novaJanela.document.write(tabela.outerHTML);
-
     novaJanela.document.write('</body></html>');
-
     novaJanela.document.close();
-
     novaJanela.print();
-
   };
 
   return (
     <>
       <Header />
-
       <h1 className={style.text}>Quadro geral</h1>
-
       <div className={style.filtro}>
         <select className={style.button} name="ensino" value={Turma} onChange={handleEnsinoTurmaChange}>
           <option value="">EF I</option>
@@ -249,8 +290,6 @@ const Home = () => {
           </select>
         </label>
 
-
-
         <div className={style.ano}>
           <input
             className={style.input}
@@ -261,18 +300,14 @@ const Home = () => {
             placeholder='Ano' />
         </div>
 
-
         {Ano && (Ano < 2024 || Ano > 2024) && (
           <p className={style.anoerrado}>Ano não encontrado</p>
         )}
 
-
         <button className={style.button} onClick={getFilter} disabled={!Turma || !etapa || !Ano}>
           Filtrar
         </button>
-
       </div>
-
 
       <div id='tabelas'>
         {renderTable(tabela1Data)}
@@ -281,9 +316,6 @@ const Home = () => {
       </div>
 
       <button className={style.pdf} onClick={gerarPDF}>Gerar PDF</button>
-
-
-
     </>
   );
 };
