@@ -10,7 +10,6 @@ const Home = () => {
         <div>
             <Header/>
             
-            <h1>Central de atendimento</h1>
             <ContactForm />
         </div>
     );
