@@ -18,7 +18,7 @@ function Header() {
 
                   <span className='icone'>  <Link href="/menu"><Image src="/ICONECASA.png" alt="JSX Icon" width={40} height={40} /></Link> </span>
                     
-                  <span className='icone'> <Link href="/menu"><Image src="/telefone.png.png" alt="JSX Icon" width={40} height={37}  /></Link>  </span>
+                  <span className='icone'> <Link href="/suporte"><Image src="/telefone.png.png" alt="JSX Icon" width={40} height={37}  /></Link>  </span>
 
                 </div>
 
