@@ -52,15 +52,20 @@ const Home = () => {
     // Filtra as chaves que contêm a palavra "nota" (independente de maiúsculas/minúsculas)
     const notaHeaders = Object.keys(data[0]).filter(key => key.toLowerCase().includes('nota'));
     const avaliaHeaders = Object.keys(data[0]).filter(key => key.toLowerCase().includes('s'));
+    const noToFixedHeaders = ['RM', 'Ano']; // Adicione aqui os cabeçalhos que não devem usar toFixed
+
 
 
     return (
       <div style={{ overflow: 'auto' }}>
         <table id='tabelas' className={style.table}>
+
           <thead>
             <tr>
               {Object.keys(data[0]).map((header, index) => (
-                <th key={index}>{header}</th>
+                <th key={index}>
+                  {header === "ComDeficiencia" ? "Inclusão" : header}
+                </th>
               ))}
             </tr>
           </thead>
@@ -102,14 +107,15 @@ const Home = () => {
 
                   return (
                     <td key={cellIndex} style={cellStyle}>
-                      {value === null ? "Não informado" : value}
-                    </td>
+                    {value === null ? "Não informado" : 
+                      (typeof value === 'number' && !noToFixedHeaders.includes(header) ? value.toFixed(2) : value)}
+                  </td>
                   );
                 })}
               </tr>
             ))}
-</tbody>
-</table>
+          </tbody>
+        </table>
       </div>
     );
   };
@@ -133,9 +139,9 @@ const Home = () => {
     setAno(e.target.value);
   }
 
- 
 
- 
+
+
 
   const gerarPDF = () => {
 
@@ -207,33 +213,33 @@ const Home = () => {
       <h1 className={style.text}>Quadro geral</h1>
 
       <div className={style.filtro}>
-          <select className={style.button} name="ensino" value={Turma} onChange={handleEnsinoTurmaChange}>
-            <option value="">EF I</option>
-            <option value="3%25E.F">3º Ano</option>
-            <option value="4%25E.F">4º Ano</option>
-            <option value="5%25E.F">5º Ano</option>
-          </select>
-  
-          <select className={style.button} name="ensino" value={Turma} onChange={handleEnsinoTurmaChange}>
-            <option value="">EF II</option>
-            <option value="6%25A%25">6º Ano A</option>
-            <option value="6%25B%25">6º Ano B</option>
-            <option value="7%25A%25">7º Ano A</option>
-            <option value="7%25B%25">7º Ano B</option>
-            <option value="8%25A%25">8º Ano A</option>
-            <option value="8%25B%25">8º Ano B</option>
-            <option value="9%25A%25">9º Ano A</option>
-            <option value="9%25B%25">9º Ano B</option>
-          </select>
-  
-          <select className={style.button} name="ensino" value={Turma} onChange={handleEnsinoTurmaChange}>
-            <option value="">EM</option>
-            <option value="1%25A%25">1º Ano A</option>
-            <option value="1%25B%25">1º Ano B</option>
-            <option value="2%25E.M">2º Ano</option>
-            <option value="3%25E.M">3º Ano</option>
-          </select>
-  
+        <select className={style.button} name="ensino" value={Turma} onChange={handleEnsinoTurmaChange}>
+          <option value="">EF I</option>
+          <option value="3%25E.F">3º Ano</option>
+          <option value="4%25E.F">4º Ano</option>
+          <option value="5%25E.F">5º Ano</option>
+        </select>
+
+        <select className={style.button} name="ensino" value={Turma} onChange={handleEnsinoTurmaChange}>
+          <option value="">EF II</option>
+          <option value="6%25A%25">6º Ano A</option>
+          <option value="6%25B%25">6º Ano B</option>
+          <option value="7%25A%25">7º Ano A</option>
+          <option value="7%25B%25">7º Ano B</option>
+          <option value="8%25A%25">8º Ano A</option>
+          <option value="8%25B%25">8º Ano B</option>
+          <option value="9%25A%25">9º Ano A</option>
+          <option value="9%25B%25">9º Ano B</option>
+        </select>
+
+        <select className={style.button} name="ensino" value={Turma} onChange={handleEnsinoTurmaChange}>
+          <option value="">EM</option>
+          <option value="1%25A%25">1º Ano A</option>
+          <option value="1%25B%25">1º Ano B</option>
+          <option value="2%25E.M">2º Ano</option>
+          <option value="3%25E.M">3º Ano</option>
+        </select>
+
         <label>
           <select className={style.button} name="etapa" onChange={handleEtapaChange} value={etapa}>
             <option value="">Etapa</option>
@@ -243,8 +249,8 @@ const Home = () => {
           </select>
         </label>
 
-        
- 
+
+
         <div className={style.ano}>
           <input
             className={style.input}
@@ -252,21 +258,21 @@ const Home = () => {
             type='number'
             onChange={handleAnoChange}
             name="ano"
-            placeholder='Ano'/>
-  </div>
+            placeholder='Ano' />
+        </div>
 
 
-          {Ano && (Ano < 2024 || Ano > 2024) && (
-            <p className={style.anoerrado}>Ano não encontrado</p>
-          )}
-       
-  
+        {Ano && (Ano < 2024 || Ano > 2024) && (
+          <p className={style.anoerrado}>Ano não encontrado</p>
+        )}
+
+
         <button className={style.button} onClick={getFilter} disabled={!Turma || !etapa || !Ano}>
           Filtrar
         </button>
 
-  </div>
-      
+      </div>
+
 
       <div id='tabelas'>
         {renderTable(tabela1Data)}
@@ -277,7 +283,7 @@ const Home = () => {
       <button className={style.pdf} onClick={gerarPDF}>Gerar PDF</button>
 
 
-     
+
     </>
   );
 };

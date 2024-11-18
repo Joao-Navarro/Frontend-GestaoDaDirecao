@@ -8,22 +8,49 @@ import Link from 'next/link';
 
 export default function CreateUserPage() {
     const [NomeAluno, setNomeAluno] = useState('');
-    const [RM, setRm] = useState('');
+    const [RM, setRM] = useState('');
     const [Turma, setTurma] = useState('');
     const [Ano, setAno] = useState('');
+    const [msgSucesso, setMsgSucesso] = useState('');
+    const [msgErro, setMsgErro] = useState('');
 
 
     const createUser = async (e) => {
         e.preventDefault();
-
-        await fetch('http://localhost:3001/alunos/', {
+    
+        try {
+          const res = await fetch('http://localhost:3001/alunos/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ NomeAluno, RM, Turma, Ano: Ano ? parseInt(Ano) : null }),
-
-        });
-
-    }
+            body: JSON.stringify({ RM, Turma, Ano, NomeAluno })
+    
+    
+          });
+    
+          // Verifica se a resposta não foi bem-sucedida
+          if (!res.ok) {
+            setMsgErro('Erro ao criar usuário. Usuário já existente')
+          setTimeout(() => setMsgErro(''), 3000)
+    
+          setAno('');
+          setRM('');
+          setTurma('');
+          setNomeAluno(''); 
+        } else {
+          setMsgSucesso('Tabela carregada com sucesso!');
+          setTimeout(() => setMsgSucesso(''), 3000)
+    
+          setAno('');
+          setRM('');
+          setTurma('');
+          setNomeAluno('');
+        }
+         
+        } catch (error) {
+          console.log('error', error)
+        }
+    
+      };
 
 
     const handleEnsinoTurmaChange = (e) => {
@@ -37,6 +64,15 @@ export default function CreateUserPage() {
 
         <div className={styles.container}>
             <Header />
+
+            {msgSucesso && (
+        <div className={styles.msgSucesso}>
+          {msgSucesso}
+        </div>)}
+      {msgErro && (
+        <div className={styles.msgErro}>
+          {msgErro}
+        </div>)}
 
             <h1 className={styles.h1}>Criar Novo Aluno</h1>
             <form onSubmit={createUser} className={styles.form}>
@@ -54,7 +90,7 @@ export default function CreateUserPage() {
                         type="number"
                         placeholder="RM"
                         value={RM}
-                        onChange={(e) => setRm(e.target.value)}
+                        onChange={(e) => setRM(e.target.value)}
                         className={styles.input}
                     />
                     <input
