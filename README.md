@@ -11,3 +11,5 @@ Alteração avaliacaoInterna - Ângelo Bevilacqua
 
 Aleteração Gerenciamento-de-alunos-Gustavo Donizete
 
+Aleteração Avalia SESI - João
+
