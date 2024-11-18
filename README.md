@@ -4,3 +4,5 @@ Nesse repositório estarão as telas do frontend do nosso sistema de Gestão da 
 Criem uma branch para cada tela!
 
 Criem uma branch chamada "pré-main", para testarmos nossas merges.
+
+Alteração na branch cursoTecnico-Davi
