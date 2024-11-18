@@ -11,6 +11,8 @@ const Home = () => {
   const [ensinoTurma, setEnsinoTurma] = useState(''); // add state for each select
   const [etapa, setEtapa] = useState('');
   const [ano, setAno] = useState('');
+  const [msgSucesso, setMsgSucesso] = useState('');
+  const [msgErro, setMsgErro] = useState('');
 
   const getFilter = async () => {
     if (ensinoTurma && etapa && ano) {
@@ -65,13 +67,24 @@ const Home = () => {
         // Add the table to the #descricao div
         document.getElementById("descricao").innerHTML = '';
         document.getElementById("descricao").appendChild(table);
-      } catch (error) {
-        console.log('error', error);
+
+        setMsgSucesso('Tabela carregada');
+        setTimeout(() => setMsgSucesso(''), 3000)
+
+      } 
+      
+      catch (error) {
+        setMsgErro('Erro ao carregar tabela')
+        setTimeout(() => setMsgErro(''), 3000)
       }
+
+      
     } else {
       console.log('Please select all options');
+
     }
   }
+  
 
   // add event handlers for each select
   const handleEnsinoTurmaChange = (e) => {
@@ -92,6 +105,14 @@ const Home = () => {
  
   return (
     <>
+    { msgSucesso && (
+        <div className={style.msgSucesso}>
+          {msgSucesso}
+          </div>)}
+          { msgErro && (
+        <div className={style.msgErro}>
+          {msgErro}
+          </div>)}
       <Header/>
       
       <h1 className={style.text}>Avaliação Interna</h1>
