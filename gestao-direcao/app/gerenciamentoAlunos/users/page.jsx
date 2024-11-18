@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import style from "./page.module.css";
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import Link from 'next/link';
 import { render } from 'react-dom';
 
 
@@ -14,6 +14,8 @@ const Home = () => {
   const [ano, setAno] = useState('');
   const [sala, setSala] = useState('')
   const descricaoRef = useRef(null);
+  const [msgSucesso, setMsgSucesso] = useState('');
+  const [msgErro, setMsgErro] = useState('');
 
 
   useEffect(() => {
@@ -21,6 +23,10 @@ const Home = () => {
       descricaoRef.current.innerHTML = '';
     }
   }, []);
+
+
+
+  // document.getElementById("descricao").innerHTML = ''; 
 
 
 
@@ -37,10 +43,19 @@ const Home = () => {
         const resData = await response.json();
         console.log(resData);
 
+        if (Array.isArray(resData) && resData.length === 0) {
+          setMsgErro('Erro ao carregar tabela')
+          setTimeout(() => setMsgErro(''), 3000)
+          document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+        } else {
+          setMsgSucesso('Tabela carregada com sucesso!');
+          setTimeout(() => setMsgSucesso(''), 3000)
+          document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+        }
+
 
         const table = document.createElement('table');
         table.className = style.table;
-
 
         const headerRow = table.insertRow(0);
         const headers = Object.keys(resData[0]);
@@ -82,6 +97,16 @@ const Home = () => {
               cell.innerHTML = item[header];
             }
           });
+
+          const container = document.getElementById('seuContainer')
+          const editLink = document.createElement('a');
+          editLink.className = style.editLink
+          editLink.href = `/gerenciamentoAlunos/users/alunos/${item.RM}/edit`;
+          editLink.innerText = 'Editar';
+          container.appendChild(editLink);
+
+
+
         });
 
 
@@ -91,9 +116,11 @@ const Home = () => {
       } catch (error) {
         console.log('error', error);
       }
+
     } else {
       console.log('Please select all options');
     }
+
   }
 
   // add event handlers for each select
@@ -114,14 +141,24 @@ const Home = () => {
 
   return (
     <>
+
+      {msgSucesso && (
+        <div className={style.msgSucesso}>
+          {msgSucesso}
+        </div>)}
+      {msgErro && (
+        <div className={style.msgErro}>
+          {msgErro}
+        </div>)}
+
       <Header />
 
       <h1 className={style.text}>Gerenciamento de alunos</h1>
-      
+
       <div className={style.filtro}>
         <label>
           <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
-            <option value="">EF1</option>
+            <option value="">EF I</option>
             <option value="1%25E.F">1 Ano</option>
             <option value="2%25E.F">2º Ano</option>
             <option value="3%25E.F">3º Ano</option>
@@ -135,7 +172,7 @@ const Home = () => {
 
         <label>
           <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
-            <option value="">EF2</option>
+            <option value="">EF II</option>
             <option value="6%25A%25">6º Ano A</option>
             <option value="6%25B%25">6º Ano B</option>
             <option value="7%25A%25">7º Ano A</option>
@@ -158,10 +195,7 @@ const Home = () => {
           </select>
         </label>
 
-        <div className={style.ano}>
-          <label>Ano</label>
-          <input className={style.input} value={ano} type='number' onChange={handleAnoChange} name="ano" />
-        </div>
+        <input value={ano} type='number' onChange={handleAnoChange} name="ano" placeholder='Ano' />
 
 
 
@@ -169,20 +203,25 @@ const Home = () => {
 
       </div>
 
-      
+
+      <div className={style.tableAll}>
+
+        <div style={{ overflow: 'auto' }} className={style.table} id='descricao' ref={descricaoRef} />
+
+        <div id='seuContainer' className={style.seuContainer} />
+
+      </div>
 
 
-      <div className={style.table} id='descricao' ref={descricaoRef} />
+
 
       <div className={style.card}>
 
-</div>
+        <Link  className={style.back} href='/gerenciamentoAlunos'> Voltar</Link>
 
 
-      <div className={style.footer}>
-
-        <Footer />
       </div>
+
 
 
     </>

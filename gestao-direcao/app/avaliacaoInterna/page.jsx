@@ -89,68 +89,16 @@ const Home = () => {
     setAno(e.target.value);
   }
 
-  const [filter, setFilter] = useState({
-    ensino: '',
-    etapa: '',
-    ano: '',
-  });
-
-  const [filteredStudents, setFilteredStudents] = useState(studentsData);
-  const [availableEtapas, setAvailableEtapas] = useState([]);
-
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilter((prevFilter) => ({
-      ...prevFilter,
-      [name]: value,
-    }));
-
-    // Atualiza as etapas disponíveis com base no ensino selecionado
-    if (name === 'ensino') {
-      setFilter((prevFilter) => ({
-        ...prevFilter,
-        etapa: '', // Reseta a etapa ao mudar o ensino
-      }));
-      setAvailableEtapas(getEtapas(value));
-    }
-  };
-
-  const getEtapas = (ensino) => {
-    switch (ensino) {
-      case '3°':
-      case '4°':
-      case '5°':
-        return ['3', '4', '5'];
-      case '6°':
-      case '7°A':
-      case '7°B':
-        return ['6', '7A', '7B', '8A', '8B', '9A', '9B'];
-      case '1°A':
-      case '1°B':
-      case '2°':
-      case '3°':
-        return ['1A', '1B', '2', '3'];
-      default:
-        return [];
-    }
-  };
-
-  const handleFilter = () => {
-    const newFilteredStudents = studentsData.filter((student) =>
-      (filter.ensino ? student.ensino === filter.ensino : true) &&
-      (filter.etapa ? student.etapa === filter.etapa : true) &&
-      (filter.ano ? student.ano === filter.ano : true)
-    );
-    setFilteredStudents(newFilteredStudents);
-  };
-
+ 
   return (
     <>
-      <Header />
+      <Header/>
+      
+      <h1 className={style.text}>Avaliação Interna</h1>
+      
       <div className={style.filtro}>
-        <label>
         <select className={style.button} value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
-                <option value="">EF1</option>
+                <option value="">EF I</option>
                 <option value="notasEF1/1%25E.F">1º Ano</option>
                 <option value="notasEF1/2%25E.F">2º Ano</option>
                 <option value="notasEF1/3%25E.F">3º Ano</option>
@@ -160,7 +108,7 @@ const Home = () => {
 
 
           <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
-            <option value="">EF2</option>
+            <option value="">EF II</option>
             <option value="notasEF2/6%25A%25">6º Ano A</option>
             <option value="notasEF2/6%25B%25">6º Ano B</option>
             <option value="notasEF2/7%25A%25">7º Ano A</option>
@@ -181,7 +129,6 @@ const Home = () => {
           </select>
 
 
-        </label>
 
 
         <label>
@@ -193,19 +140,27 @@ const Home = () => {
           </select>
         </label>
 
-        <div className={style.ano}>
-          <label>Ano</label>
-          <input className={style.input} value={ano} type='number' onChange={handleAnoChange} name="ano" />
-        </div>
 
-        <button onClick={getFilter} disabled={!ensinoTurma || !etapa || !ano}>
+        <div className={style.ano}>
+          <input
+            className={style.input}
+            value={ano}
+            type='number'
+            onChange={handleAnoChange}
+            name="ano"
+            placeholder='Ano'/>
+  </div>
+
+        
+
+        <button className={style.button} onClick={getFilter} disabled={!ensinoTurma || !etapa || !ano}>
           Filtrar
         </button>
 
 
        </div>
 
-      <h1 className={style.text}>Avaliação Interna</h1>
+      
 
       
 
@@ -214,7 +169,6 @@ const Home = () => {
      
      
       </div>
-      <Footer />
     </>
   );
 };

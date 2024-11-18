@@ -8,7 +8,6 @@ import styles from "./page.module.css";
 
 import Header from "@/components/Header";
 
-import Footer from '@/components/Footer';
 
 function Home() {
 
@@ -26,15 +25,15 @@ function Home() {
 
           <Link href="/avaliacaoInterna" ><Image className={styles.imginterna} src="/INTERNA.png" alt="avaliação interna" width={300} height={300} /></Link>
 
-          <h3>AVALIAÇÃO INTERNA</h3>
+          <h3> AVALIAÇÃO INTERNA - CE 242</h3>
 
         </div>
 
         <div className={styles.card}>
 
-          <Link href="/avaliacaoExterna" ><Image className={styles.imginterna} src="/EXTERNA.png" alt="avaliação externa" width={300} height={300} /></Link>
+          <Link href="/avaliacaoExterna" ><Image className={styles.imginterna} src="/AV.EXTERNA.png" alt="avaliação externa" width={300} height={300} /></Link>
 
-          <h3>AVALIAÇÃO EXTERNA</h3>
+          <h3>DESBRAVA ENEM E SARESP</h3>
 
         </div>
 
@@ -42,7 +41,7 @@ function Home() {
 
           <Link href="/cursoTecnico" ><Image className={styles.imginterna} src="/SENAI.png" alt="curso tecnico" width={300} height={300} /></Link>
 
-          <h3>CURSO TECNICO</h3>
+          <h3>CURSO TÉCNICO</h3>
 
         </div>
 
@@ -54,22 +53,26 @@ function Home() {
           <h3>AVALIA SESI</h3>
 
         </div>
+
+        <div className={styles.cards}>
+          
+          <Link href="/quadroGeral" ><Image className={styles.imginterna} src="/GERAL.png" alt="Quadro Geral" width={300} height={300} /></Link>
+          
+          <h3>QUADRO GERAL</h3>
+          
+          </div>
+
+          <div className={styles.cards}>
+          
+          <Link href="/gerenciamentoAlunos" ><Image className={styles.imginterna} src="/GERENCIAMENTO.png" alt="Gerenciamento de alunos" width={300} height={300} /></Link>
+          
+          <h3>GERENCIAMENTO DE ALUNOS</h3>
+          
+          </div>
+
+
         
       </div>
-
-
-      <div className={styles.Button}>
-
-<div className={styles.LinkItem}>
-
-      <Link href="/quadroGeral" ><button className={styles.ButtonGeral} type="submit">Quadro Geral</button></Link>
-
-      </div>
-
-      <Link href="/gerenciamentoAlunos" ><button className={styles.ButtonAlunos} type="submit">Gerenciar Alunos</button></Link>
-
-      </div>
-  
 
 
     </>

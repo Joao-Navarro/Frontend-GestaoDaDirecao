@@ -115,56 +115,18 @@ const Home = () => {
   }
 
 
-  const [filter, setFilter] = useState({
-    ensino: '',
-    etapa: '',
-    ano: '',
-  });
-
-
- 
-
-
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilter((prevFilter) => ({
-      ...prevFilter,
-      [name]: value,
-    }));
-
-
-    // Atualiza as etapas disponíveis com base no ensino selecionado
-    if (name === 'ensino') {
-      setFilter((prevFilter) => ({
-        ...prevFilter,
-        etapa: '', // Reseta a etapa ao mudar o ensino
-      }));
-      setAvailableEtapas(getEtapas(value));
-    }
-  };
-
-
-
-
-
-
-  const handleFilter = () => {
-    const newFilteredStudents = studentsData.filter((student) =>
-      (filter.ensino ? student.ensino === filter.ensino : true) &&
-      (filter.etapa ? student.etapa === filter.etapa : true) &&
-      (filter.ano ? student.ano === filter.ano : true)
-    );
-    setFilteredStudents(newFilteredStudents);
-  };
 
 
   return (
     <>
-      <Header />
+      <Header />  
+      
+        <h1 className={style.text}>Curso Técnico</h1>
+
       <div className={style.filtro}>
         <label>
           <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
-            <option value="">EF1</option>
+            <option value="">EF I</option>
             <option value="3%25E.F">3º Ano</option>
             <option value="4%25E.F">4º Ano</option>
             <option value="5%25E.F">5º Ano</option >
@@ -176,7 +138,7 @@ const Home = () => {
 
         <label>
           <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
-            <option value="">EF2</option>
+            <option value="">EF II</option>
             <option value="6%25A%25">6º Ano A</option>
             <option value="6%25B%25">6º Ano B</option>
             <option value="7%25A%25">7º Ano A</option>
@@ -213,33 +175,30 @@ const Home = () => {
 
 
         <div className={style.ano}>
-          <label>Ano</label>
-          <input className={style.input} value={ano} type='number' onChange={handleAnoChange} name="ano" />
-        </div>
-
-
-
-
+          <input
+            className={style.input}
+            value={ano}
+            type='number'
+            onChange={handleAnoChange}
+            name="ano"
+            placeholder='Ano'/>
+  </div>
 
 
         <button className={style.button} onClick={getFilter} disabled={!ensinoTurma || !etapa || !ano}>Filtrar</button>
 
 
-
-
       </div>
 
 
-      <h1 className={style.text}>Curso Técnico</h1>
-
+  
 
      
-        <div className={style.table} id='descricao' ref={descricaoRef} />
+        <div style={{ overflow: 'auto' }}  className={style.table} id='descricao' ref={descricaoRef} />
        
               <div className={style.footer}>
 
 
-      <Footer />
       </div>
 
 

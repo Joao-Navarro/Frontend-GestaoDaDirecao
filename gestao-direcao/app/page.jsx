@@ -1,8 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react';
-import Head from 'next/head';
-import Image from 'next/image';
 import style from "@/app/page.module.css"
+import Image from 'next/image';
 const SignIn = () => {
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
@@ -35,6 +34,7 @@ const SignIn = () => {
   return (
     <div className={style.body}>
     
+      <Image className={style.image} src='/FUNDOLOGIN.jpeg'  fill={true}/>
 
       <div className={style.container}>
         <div className={style.card}>

@@ -3,9 +3,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import style from "./page.module.css";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import { render } from 'react-dom';
+
+
+
 
 const Home = () => {
-  const [Turma, setTurma] = useState(''); // add state for each select
+  const [ensinoTurma, setEnsinoTurma] = useState(''); // add state for each select
   const [etapa, setEtapa] = useState('');
   const [ano, setAno] = useState('');
   const [tipoprova, setTipoprova] = useState('');
@@ -22,10 +26,15 @@ const Home = () => {
 
 
   const getFilter = async () => {
-    if (Turma && etapa && ano && tipoprova ) {
-      const url = `http://localhost:3001/avalia/${etapa}/${Turma}/${ano}/${tipoprova}`;  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
+    if (ensinoTurma && etapa && ano) {
+      const url = `http://localhost:3001/avalia/${etapa}/${ensinoTurma}/${ano}/${tipoprova}`;  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
       console.log(`Constructed URL: ${url}`);
-      console.log('Current state:', etapa, Turma, ano, tipoprova);
+      console.log('Current state:', etapa, ensinoTurma, ano);
+
+      const deleteUser = async (id) => {
+        await fetch(`http://localhost:3001/users/${id}`, { method: 'DELETE' });
+        fetchUsers();  // Atualiza a lista após exclusão
+      };
 
 
       try {
@@ -42,22 +51,24 @@ const Home = () => {
         const table = document.createElement('table');
         table.className = style.table;
         // Verifique se a classe foi adicionada
-        // add a border to the table// Create a header row
+        // add a border to the table
+        // Create a header row
         const headerRow = table.insertRow(0);
         const headers = Object.keys(resData[0]);
         headers.forEach((header, index) => {
           const th = document.createElement('th');
           if (header === 'rm') {
             th.innerHTML = 'RM';
-          } else if (header === 'NomeAluno') {
-            th.innerHTML = 'Nome do Aluno';
+          } else if (header === 'etapa') {
+            th.innerHTML = 'Etapa';
+          } else if (header === 'ano') {
+            th.innerHTML = 'Ano';
+          } else if (header === 'Ebep' || header === 'ComDeficiencia') {
+            th.innerHTML = header.replace('Ebep', 'E.B.E.P').replace('ComDeficiencia', 'Com Deficiência');
+          } else {
+            th.innerHTML = header.replace('1S-', '1ª Etapa ').replace('2S-', '2ª Etapa ').replace('3S-', '3ª Etapa ').replace('CH', 'Ciências Humanas').replace('CN', 'Ciências Naturais').replace('LI', 'Língua Inglesa').replace('LP', 'Língua Portuguesa').replace('MAT', 'Matemática');
           }
-          else if (header === 'notaExt') {
-            th.innerHTML = 'Nota';
-          } 
-
           headerRow.appendChild(th);
-        
         });
 
 
@@ -68,14 +79,17 @@ const Home = () => {
             const cell = row.insertCell();
             if (item[header] === null) {
               cell.innerHTML = "Não informado";
-            }else {
+            } else if (header === 'Ebep' || header === 'ComDeficiencia') {
+              cell.innerHTML = item[header] === 'TRUE' ? 'Sim' : 'Não';
+            } else {
               cell.innerHTML = item[header];
             }
           });
         });
 
 
-        // Add the table to the #descricao divdocument.getElementById("descricao").innerHTML = '';
+        // Add the table to the #descricao div
+        document.getElementById("descricao").innerHTML = '';
         document.getElementById("descricao").appendChild(table);
       } catch (error) {
         console.log('error', error);
@@ -87,9 +101,9 @@ const Home = () => {
 
 
   // add event handlers for each select
-  const handleTurmaChange = (e) => {
+  const handleEnsinoTurmaChange = (e) => {
     console.log('etapa changed:', e.target.value);
-    setTurma(e.target.value);
+    setEnsinoTurma(e.target.value);
   }
 
 
@@ -103,9 +117,8 @@ const Home = () => {
     console.log('ano changed:', e.target.value);
     setAno(e.target.value);
   }
-
   const handleTipoprovaChange = (e) => {
-    console.log('tipo prova changed:', e.target.value);
+    console.log('tipoproca changed:', e.target.value);
     setTipoprova(e.target.value);
   }
 
@@ -115,7 +128,7 @@ const Home = () => {
       <Header />
       <div className={style.filtro}>
         <label>
-          <select className={style.button} name="ensino" value={Turma} onChange={handleTurmaChange}>
+          <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
             <option value="">EF1</option>
             <option value="3%25E.F">3º Ano</option>
             <option value="4%25E.F">4º Ano</option>
@@ -127,13 +140,14 @@ const Home = () => {
 
 
         <label>
-          <select className={style.button} name="ensino" value={Turma} onChange={handleTurmaChange}>
+          <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
             <option value="">EF2</option>
             <option value="6%25A%25">6º Ano A</option>
             <option value="6%25B%25">6º Ano B</option>
             <option value="7%25A%25">7º Ano A</option>
             <option value="7%25B%25">7º Ano B</option>
-            <option value="8%25A%25">8º Ano A</option><option value="8%25B%25">8º Ano B</option>
+            <option value="8%25A%25">8º Ano A</option>
+            <option value="8%25B%25">8º Ano B</option>
             <option value="9%25A%25">9º Ano A</option>
             <option value="9%25B%25">9º Ano B</option>
           </select>
@@ -141,7 +155,7 @@ const Home = () => {
 
 
         <label>
-          <select className={style.button} name="ensino" value={Turma} onChange={handleTurmaChange}>
+          <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
             <option value="">EM</option>
             <option value="1%25A%25">1º Ano A</option>
             <option value="1%25B%25">1º Ano B</option>
@@ -164,24 +178,32 @@ const Home = () => {
 
         <label>
           <select className={style.button} name="etapa" onChange={handleTipoprovaChange} value={tipoprova}>
-            <option value="">Tipo de Prova</option>
+            <option value="">Tipo De Prova</option>
             <option value="SARESP">SARESP</option>
-            <option value="DESBRAVA">DESBRAVENEM</option>
+            <option value="DESBRAVENEM">DESBRAVENEM</option>
+            <option value="OBMEP">OBMEP</option>
+            <option value="CANGURU">CANGURU</option>
           </select>
         </label>
 
 
+       
         <div className={style.ano}>
-          <label>Ano</label>
-          <input className={style.input} value={ano} type='number' onChange={handleAnoChange} name="ano" />
-        </div>
+          <input
+            className={style.input}
+            value={ano}
+            type='number'
+            onChange={handleAnoChange}
+            name="ano"
+            placeholder='Ano'/>
+  </div>
 
 
 
 
 
 
-        <button className={style.button} onClick={getFilter} disabled={!Turma || !etapa || !ano || !tipoprova}>Filtrar</button>
+        <button className={style.button} onClick={getFilter} disabled={!ensinoTurma || !etapa || !ano}>Filtrar</button>
 
 
 
@@ -191,11 +213,10 @@ const Home = () => {
 
       <h1 className={style.text}>Avalia Externa</h1>
 
-      <div className={style.table} id='descricao' ref={descricaoRef} />
+      <div style={{ overflow: 'auto' }} className={style.table} id='descricao' ref={descricaoRef} />
 
       <div className={style.footer}>
 
-        <Footer />
       </div>
 
 
@@ -205,3 +226,4 @@ const Home = () => {
 
 
 export default Home;
+

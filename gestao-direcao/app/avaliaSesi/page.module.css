@@ -21,6 +21,14 @@
 
   margin-bottom: 3%;
 }
+ .filtro input{
+  border-radius: 5px;
+  border-color: solid black 2px;
+  text-align: center;
+  background-color: #878787;
+  padding: 10px;
+  width: 100%;
+ }
 
 .button {
 
@@ -50,30 +58,38 @@
 
 }
 
+
 .ano {
 
-  display: flex;
 
-  background-color: #878787;
+  display: flex;
 
   padding: 10px;
 
   border-radius: 10px;
 
+
   justify-content: space-around;
+
 
   width: 15%;
 }
 
+
 .input {
+
 
   border-radius: 5px;
 
+
   border-color: solid black 2px;
+
 
   text-align: center;
 
+
   background-color: #acacac;
+
 
 }
 
@@ -112,6 +128,32 @@
 
 .table td {
   border-bottom: 1px solid #000000;
+}
+
+.msgSucesso {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  z-index: 1000;
+  transition: opacity 0.5s ease;
+}
+
+.msgErro {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #8a1007;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  z-index: 1000;
+  transition: opacity 0.5s ease;
 }
 
 
