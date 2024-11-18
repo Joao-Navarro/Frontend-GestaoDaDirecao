@@ -38,7 +38,7 @@ const Home = () => {
         const table = document.createElement('table');
         table.border = '1'; // add a border to the table
 
-        document.getElementById('error').innerHTML = `Tabela existente  `;// Exibe a mensagem de erro no alert
+        document.getElementById('error').innerHTML = ``;// Exibe a mensagem de erro no alert
         // Create a header row
         const headerRow = table.insertRow(0);
         const headers = Object.keys(resData[0]);
@@ -236,6 +236,8 @@ const Home = () => {
 
       <div className="info">
       <div style={{ overflow: 'auto' }} className={style.table} id="descricao"></div>
+     
+      <div id = 'error'></div>
      
       </div>
       <Footer/>
