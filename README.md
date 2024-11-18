@@ -5,6 +5,7 @@ Criem uma branch para cada tela!
 
 Criem uma branch chamada "pré-main", para testarmos nossas merges.
 
+Alteração na branch cursoTecnico-Davi
 
 Alteração avaliacaoInterna - Ângelo Bevilacqua
 
