@@ -8,6 +8,8 @@ const Home = () => {
   const [Turma, setEnsinoTurma] = useState('');
   const [etapa, setEtapa] = useState('');
   const [Ano, setAno] = useState('');
+  const [msgSucesso, setMsgSucesso] = useState('');
+  const [msgErro, setMsgErro] = useState('');
 
   const [tabela1Data, setTabela1Data] = useState([]);
   const [tabela2Data, setTabela2Data] = useState([]);
@@ -27,6 +29,8 @@ const Home = () => {
           `http://localhost:3001/tabelageralef2/${etapa}/${Turma}/${Ano}`,
           `http://localhost:3001/tabelageralem/${etapa}/${Turma}/${Ano}`
         ];
+
+        
   
         const responses = await Promise.all(urls.map(url => fetch(url)));
         const data = await Promise.all(responses.map(res => res.json()));
@@ -34,6 +38,19 @@ const Home = () => {
         setTabela1Data(data[0]);
         setTabela2Data(data[1]);
         setTabela3Data(data[2]);
+
+        const combinedData = [...tabela1Data, ...tabela2Data, ...tabela3Data];
+
+
+        if (Array.isArray(combinedData) && combinedData.length === 0) {
+          setMsgErro('Erro ao carregar tabela')
+        setTimeout(() => setMsgErro(''), 3000)
+          document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+      } else {
+        setMsgSucesso('Tabela carregada com sucesso!');
+        setTimeout(() => setMsgSucesso(''), 3000)
+        document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+      }
   
         console.log('Dados carregados:', data[0]); // Verifique os dados carregados
       } catch (error) {
@@ -118,6 +135,8 @@ const Home = () => {
     const noToFixedHeaders = ['RM', 'Ano']; // Adicione aqui os cabeçalhos que não devem usar toFixed
 
     return (
+
+      
       <div style={{ overflow: 'auto' }}>
         <table id='tabelas' className={style.table}>
           <thead>
@@ -251,6 +270,14 @@ const Home = () => {
 
   return (
     <>
+     { msgSucesso && (
+        <div className={style.msgSucesso}>
+          {msgSucesso}
+          </div>)}
+          { msgErro && (
+        <div className={style.msgErro}>
+          {msgErro}
+          </div>)}
       <Header />
       <h1 className={style.text}>Quadro geral</h1>
       <div className={style.filtro}>
