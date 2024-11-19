@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import '@/app/globals.css';
 import Link from 'next/link';
+import { FaHouse } from "react-icons/fa6";
+import { IoMdChatboxes } from "react-icons/io";
 
 
 function Header() {
@@ -16,9 +18,10 @@ function Header() {
 
                 <div className="casa" >
 
-                  <span className='icone'>  <Link href="/menu"><Image src="/ICONECASA.png" alt="JSX Icon" width={40} height={40} /></Link> </span>
+
+                   <Link href="/menu"> <FaHouse size={45} className="icone"/> </Link> 
                     
-                  <span className='icone'> <Link href="/suporte"><Image src="/telefone.png.png" alt="JSX Icon" width={40} height={37}  /></Link>  </span>
+                   <Link href="/suporte"> <IoMdChatboxes size={50} className="icone" /> </Link>  
 
                 </div>
 
