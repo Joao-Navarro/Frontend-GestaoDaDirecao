@@ -98,12 +98,12 @@ const Home = () => {
             }
           });
 
-          const container = document.getElementById('seuContainer')
+          const actionCell = row.insertCell();
           const editLink = document.createElement('a');
-          editLink.className = style.editLink
           editLink.href = `/gerenciamentoAlunos/users/alunos/${item.RM}/edit`;
           editLink.innerText = 'Editar';
-          container.appendChild(editLink);
+          editLink.className = style.editButton; // Adiciona a classe de estilo
+          actionCell.appendChild(editLink);
 
 
 

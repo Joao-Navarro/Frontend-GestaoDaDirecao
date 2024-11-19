@@ -231,31 +231,17 @@
     transition: opacity 0.5s ease;
   }
 
-  .editLink {
-
-    text-decoration: none;
-
-    color: black;
-
-    background-color: #878787;
-
-    padding: 10px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    margin-top: 10%;
-
-    border-radius: 10px;
-
-    border: #000 solid 1px;
+  .editButton {
+    color: black; /* Cor do texto */
+    text-decoration: none; /* Remove o sublinhado */
+    padding: 5px 10px; /* Espaçamento interno */
+    background-color: #878787; /* Cor de fundo */
+    border-radius: 5px; /* Bordas arredondadas */
+    transition: background-color 0.3s; /* Transição suave para a cor de fundo */
   }
-
-  .seuContainer {
-
-    margin-top: 4%;
-
+  
+  .editButton:hover {
+    background-color: #a3a1a1; /* Cor de fundo ao passar o mouse */
   }
 
   .tableAll {

@@ -83,17 +83,20 @@ const Home = () => {
             const cell = row.insertCell();
             if (item[header] === null) {
               cell.innerHTML = "Não informado";
+            } else if (header === 'Ebep' || header === 'ComDeficiencia') {
+              cell.innerHTML = item[header] === 'TRUE' ? 'Sim' : 'Não';
             } else {
               cell.innerHTML = item[header];
             }
           });
 
-          const container = document.getElementById('seuContainer')
+          const actionCell = row.insertCell();
           const editLink = document.createElement('a');
-          editLink.className = style.editLink
-          editLink.href = `avalia/${item.rm}/${item.ano}/edit`; // Supondo que o campo users_ID existe
+          editLink.href = `avalia/${item.rm}/${item.ano}/edit`;
           editLink.innerText = 'Editar';
-          container.appendChild(editLink);
+          editLink.className = style.editButton; // Adiciona a classe de estilo
+          actionCell.appendChild(editLink);
+
         });
 
 
