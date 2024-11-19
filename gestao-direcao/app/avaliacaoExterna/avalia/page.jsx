@@ -154,7 +154,7 @@ const Home = () => {
       <div className={style.body}>
         <Header />
         
-        <h1 className={style.text}>Avaliação Externa</h1>
+        <h1 className={style.text}>Listar Avaliações</h1>
         
         <div className={style.filtro}>
           <label>

@@ -153,7 +153,7 @@ const Home = () => {
 
       <Header />
 
-      <h1 className={style.text}>Gerenciamento de alunos</h1>
+      <h1 className={style.text}>Listar Alunos</h1>
 
       <div className={style.filtro}>
         <label>
