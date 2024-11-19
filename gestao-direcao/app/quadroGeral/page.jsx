@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from "./page.module.css";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -10,6 +10,7 @@ const Home = () => {
   const [Ano, setAno] = useState('');
   const [msgSucesso, setMsgSucesso] = useState('');
   const [msgErro, setMsgErro] = useState('');
+  const [filtragemTentada, setFiltragemTentada] = useState(false);
 
   const [tabela1Data, setTabela1Data] = useState([]);
   const [tabela2Data, setTabela2Data] = useState([]);
@@ -20,9 +21,23 @@ const Home = () => {
   const [editingRowIndex, setEditingRowIndex] = useState(null);
   const [editingRm, setEditingRm] = useState(null); // Para armazenar o RM da linha sendo editada
 
+  useEffect(() => {
+    const combinedData = [...tabela1Data, ...tabela2Data, ...tabela3Data];
+  
+    if (filtragemTentada) { // Verifique se a filtragem foi tentada
+      if (combinedData.length === 0) {
+        setMsgErro('Erro ao carregar tabela');
+        setTimeout(() => setMsgErro(''), 3000);
+      } else {
+        setMsgSucesso('Tabela carregada com sucesso!');
+        setTimeout(() => setMsgSucesso(''), 3000);
+      }
+    }
+  }, [tabela1Data, tabela2Data, tabela3Data, filtragemTentada]);
 
   const getFilter = async () => {
     if (Turma && etapa && Ano) {
+      setFiltragemTentada(true);
       try {
         const urls = [
           `http://localhost:3001/tabelageralef1/${etapa}/${Turma}/${Ano}`,
@@ -38,26 +53,13 @@ const Home = () => {
         setTabela1Data(data[0]);
         setTabela2Data(data[1]);
         setTabela3Data(data[2]);
-
-        const combinedData = [...tabela1Data, ...tabela2Data, ...tabela3Data];
-
-
-        if (Array.isArray(combinedData) && combinedData.length === 0) {
-          setMsgErro('Erro ao carregar tabela')
-        setTimeout(() => setMsgErro(''), 3000)
-          document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
-      } else {
-        setMsgSucesso('Tabela carregada com sucesso!');
-        setTimeout(() => setMsgSucesso(''), 3000)
-        document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
-      }
   
         console.log('Dados carregados:', data[0]); // Verifique os dados carregados
       } catch (error) {
         console.log('error', error);
       }
     } else {
-      console.log('Please select all options');
+      console.log('Por favor, selecione todas as opções');
     }
   };
 
@@ -198,12 +200,12 @@ const Home = () => {
                                 value={editedValue}
                                 onChange={(e) => setEditedValue(e.target.value)}
                               />
-                              <button onClick={saveEditedValue}>Salvar</button>
+                              <button className={`${style.desa} desa`} onClick={saveEditedValue}>Salvar</button>
                             </>
                           ) : (
                             <>
                               <div onClick={() => startEditing(rowIndex, value, item.RM)}>{value || "Não informado"}</div>
-                              <button onClick={() => startEditing(rowIndex, value, item.RM)}>Editar</button>
+                              <button className={`${style.desa} desa`}  onClick={() => startEditing(rowIndex, value, item.RM)}>Editar</button>
                             </>
                           )}
                         </>
@@ -259,6 +261,10 @@ const Home = () => {
         }
         th {
           background-color:#f4f4f4;
+        }
+
+        .desa {
+        display: none !important;
         }
       </style>`);
     novaJanela.document.write('</head><body>');
