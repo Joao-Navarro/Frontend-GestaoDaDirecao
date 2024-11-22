@@ -52,12 +52,12 @@ const ContactForm = () => {
 
 
                     <div className={styles.labelFloat}>
-                        <input  className={styles.input}  placeholder='email' type="email" name="user_email" required />
+                        <input  className={styles.input}  placeholder='Email' type="email" name="user_email" required />
                     </div>
 
 
                     <div className={styles.labelFloat}>
-                        <textarea  className={styles.input} placeholder='message' name="message" required />
+                        <textarea  className={styles.input} placeholder='Mensagem' name="message" required />
                     </div>
 
                     <div className={styles.justifyCenter}>
