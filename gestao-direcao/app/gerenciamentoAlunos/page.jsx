@@ -12,7 +12,7 @@ export default function HomePage() {
 
       <Header />
 
-      <h1 className={styles.h1}>Bem-vindo a Sessão de gerenciamento de alunos</h1>
+      <h1 className={styles.h1}>Bem-vindo a Sessão de Gerenciamento de Alunos</h1>
 
       <div className={styles.links}>
 

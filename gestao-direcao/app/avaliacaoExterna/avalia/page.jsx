@@ -33,6 +33,7 @@ const Home = () => {
           setTimeout(() => setMsgSucesso(''), 3000);
           setData(resData); // Armazena os dados recebidos
         }
+
       } catch (error) {
         console.log('error', error);
       }
@@ -80,7 +81,7 @@ const Home = () => {
       <div className={style.body}>
         <Header />
         
-        <h1 className={style.text}>Avaliação Externa</h1>
+        <h1 className={style.text}>Listar Avaliações</h1>
         
         <div className={style.filtro}>
           <label>

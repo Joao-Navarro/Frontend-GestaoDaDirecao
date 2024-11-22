@@ -252,12 +252,11 @@
     border: #000 solid 1px;
 
     text-align: center;
+
   }
-
-  .seuContainer {
-
-    margin-top: 4%;
-
+  
+  .editButton:hover {
+    background-color: #a3a1a1; /* Cor de fundo ao passar o mouse */
   }
 
   .tableAll {
