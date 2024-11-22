@@ -231,13 +231,28 @@
     transition: opacity 0.5s ease;
   }
 
-  .editButton {
-    color: black; /* Cor do texto */
-    text-decoration: none; /* Remove o sublinhado */
-    padding: 5px 10px; /* Espaçamento interno */
-    background-color: #878787; /* Cor de fundo */
-    border-radius: 5px; /* Bordas arredondadas */
-    transition: background-color 0.3s; /* Transição suave para a cor de fundo */
+  .editLink {
+
+    text-decoration: none;
+
+    color: black;
+
+    background-color: #878787;
+
+    padding: 10px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    margin: 5%;
+
+    border-radius: 10px;
+
+    border: #000 solid 1px;
+
+    text-align: center;
+
   }
   
   .editButton:hover {
@@ -254,7 +269,7 @@
 
     align-items: center;
 
-    margin: 5%;
+    overflow: auto;
 
   }
   
@@ -265,7 +280,7 @@
      
       flex-wrap: wrap;
      
-      width: 80%;
+      width: 90%;
   
   
       display: flex;justify-content: space-around;
@@ -292,9 +307,22 @@
       margin-bottom: 9%;
     }
     .table {
-      font-size: 1.2rem;
+      font-size: 1rem;
       width: auto;
       height: auto;
+      margin: 2%;
+    }
+
+    .editLink {
+
+      text-align: center;
+
+      padding: 5px;
+      
+      padding-right: 10px;
+
+      margin-top: 50%;
+
     }
   
   

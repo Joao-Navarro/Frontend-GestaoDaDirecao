@@ -99,7 +99,7 @@ export default function EditUserPage({ params }) {
         <input
           id='nota'
           type="number"
-          placeholder="notaExt"
+          placeholder="Nota"
           value={user.notaExt}
           onChange={(e) => setUser({ ...user, notaExt: e.target.value })}
           className={styles.input}
