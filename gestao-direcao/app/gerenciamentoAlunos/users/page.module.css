@@ -101,7 +101,7 @@
 }
 
 
-.filtro input{
+.filtro input {
   border-radius: 5px;
   border-color: solid black 2px;
   text-align: center;
@@ -187,7 +187,7 @@
   cursor: pointer;
 
   background-color: #878787;
- 
+
   border-radius: 5%;
 
   padding: 10px;
@@ -199,6 +199,8 @@
   color: #000;
 
   text-decoration: none;
+
+  margin-top: 10px;
 }
 
 .msgSucesso {
@@ -235,25 +237,24 @@
 
   background-color: #878787;
 
-  padding: 7.5px;
+  padding: 10px;
 
   display: flex;
 
   flex-direction: column;
 
-  margin-top: 10%;
-
-  margin-left: 5%;
+  margin: 5%;
 
   border-radius: 10px;
 
   border: #000 solid 1px;
+
+  text-align: center;
+
 }
 
-.seuContainer {
-
-  margin-top: 9%;
-
+.editButton:hover {
+  background-color: #a3a1a1; /* Cor de fundo ao passar o mouse */
 }
 
 .tableAll {
@@ -266,10 +267,9 @@
 
   align-items: center;
 
-  margin: 5%;
+  overflow: auto;
 
 }
-
 
 
 
