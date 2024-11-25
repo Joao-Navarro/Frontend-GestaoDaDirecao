@@ -68,7 +68,7 @@ export default function EditUserPage({ params }) {
 <Header/>
 
     <div className={styles.container}>
-      <h1 className={styles.text}>Editar Usuário</h1>
+      <h1 className={styles.text}>Editar Nota</h1>
       <form onSubmit={updateUser} className={styles.form}>
 
         <label for='etapa'>Etapa</label>
