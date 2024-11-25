@@ -16,6 +16,7 @@ const Home = () => {
   const descricaoRef = useRef(null);
   const [msgSucesso, setMsgSucesso] = useState('');
   const [msgErro, setMsgErro] = useState('');
+  const [data, setData] = useState([]);
 
 
   useEffect(() => {
@@ -23,13 +24,6 @@ const Home = () => {
       descricaoRef.current.innerHTML = '';
     }
   }, []);
-
-
-
-  // document.getElementById("descricao").innerHTML = ''; 
-
-
-
 
   const getFilter = async () => {
     if (ensinoTurma && ano) {
@@ -46,70 +40,12 @@ const Home = () => {
         if (Array.isArray(resData) && resData.length === 0) {
           setMsgErro('Erro ao carregar tabela')
           setTimeout(() => setMsgErro(''), 3000)
-          document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+          setData([])
         } else {
           setMsgSucesso('Tabela carregada com sucesso!');
           setTimeout(() => setMsgSucesso(''), 3000)
-          document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+          setData(resData)
         }
-
-
-        const table = document.createElement('table');
-        table.className = style.table;
-
-        const headerRow = table.insertRow(0);
-        const headers = Object.keys(resData[0]);
-        headers.forEach((header, index) => {
-          const th = document.createElement('th');
-
-          if (header === 'RM') {
-            th.innerHTML = 'RM';
-          }
-          else if (header === 'NomeAluno') {
-            th.innerHTML = 'Nome do aluno';
-          }
-          else if (header === 'Turma') {
-            th.innerHTML = 'Turma';
-          }
-          else if (header === 'ano') {
-            th.innerHTML = 'ano';
-          }
-
-          else if (header === 'Ano') {
-            th.innerHTML = 'Ano';
-          }
-          else if (header === 'Ebep' || header === 'ComDeficiencia') {
-            th.innerHTML = header.replace('Ebep', 'E.B.E.P').replace('ComDeficiencia', 'Com Deficiência');
-          }
-          headerRow.appendChild(th);
-        });
-
-
-        resData.forEach((item) => {
-          const row = table.insertRow();
-          headers.forEach((header) => {
-            const cell = row.insertCell();
-            if (item[header] === null) {
-              cell.innerHTML = "Não informado";
-            } else if (header === 'Ebep' || header === 'ComDeficiencia') {
-              cell.innerHTML = item[header] === 'TRUE' ? 'Sim' : 'Não';
-            } else {
-              cell.innerHTML = item[header];
-            }
-          });
-
-          const container = document.getElementById('seuContainer')
-          const editLink = document.createElement('a');
-          editLink.className = style.editLink
-          editLink.href = `/gerenciamentoAlunos/users/alunos/${item.RM}/edit`;
-          editLink.innerText = 'Editar';
-          container.appendChild(editLink);
-
-
-
-        });
-
-
 
         document.getElementById("descricao").innerHTML = '';
         document.getElementById("descricao").appendChild(table);
@@ -203,21 +139,41 @@ const Home = () => {
 
       </div>
 
-
-      <div className={style.tableAll}>
-
-        <div style={{ overflow: 'auto' }} className={style.table} id='descricao' ref={descricaoRef} />
-
-        <div id='seuContainer' className={style.seuContainer} />
-
+      <div className={style.tableAll} >
+        <div className={style.table} id='descricao'>
+          {data.length > 0 && (
+            <table className={style.table}>
+              <thead>
+                <tr>
+                  <th>RM</th>
+                  <th>Nome do Aluno</th>
+                  <th>Nota</th>
+                  <th>Ano</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((item) => (
+                  <tr key={item.RM}>
+                    <td>{item.RM !== null ? item.RM : "Não informado"}</td>
+                    <td>{item.NomeAluno !== null ? item.NomeAluno : "Não informado"}</td>
+                    <td>{item.Turma !== null ? item.Turma : "Não informado"}</td>
+                    <td>{item.Ano !== null ? item.Ano : "Não informado"}</td>
+                    <Link href={`/gerenciamentoAlunos/users/alunos/${item.RM}/edit`} className={style.editLink}>
+                      Editar
+                    </Link>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
       </div>
-
 
 
 
       <div className={style.card}>
 
-        <Link  className={style.back} href='/gerenciamentoAlunos'> Voltar</Link>
+        <Link className={style.back} href='/gerenciamentoAlunos'> Voltar</Link>
 
 
       </div>

@@ -186,6 +186,8 @@
   color: #000;
 
   text-decoration: none;
+
+  margin-top: 10px;
 }
 
 .msgSucesso {
@@ -222,27 +224,24 @@
 
   background-color: #878787;
 
-  padding: 5px;
+  padding: 10px;
 
   display: flex;
 
   flex-direction: column;
 
-  margin-top: 20%;
-
-  margin-left: 5%;
+  margin: 5%;
 
   border-radius: 10px;
 
   border: #000 solid 1px;
+
+  text-align: center;
+
 }
 
-.seuContainer {
-  justify-content: space-around;
-  display: flex;
-  flex-direction: column;
-  margin-top: 5%;
-
+.editButton:hover {
+  background-color: #a3a1a1; /* Cor de fundo ao passar o mouse */
 }
 
 .tableAll {
@@ -255,10 +254,9 @@
 
   align-items: center;
 
-  margin: 5%;
+  overflow: auto;
 
 }
-
 
 
 
