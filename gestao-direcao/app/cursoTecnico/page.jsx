@@ -15,6 +15,9 @@ const Home = () => {
   const descricaoRef = useRef(null);
 
 
+  const [msgSucesso, setMsgSucesso] = useState('');
+  const [msgErro, setMsgErro] = useState('');
+
   useEffect(() => {
     if (descricaoRef.current) {
       descricaoRef.current.innerHTML = '';
@@ -44,6 +47,16 @@ const Home = () => {
 
         const table = document.createElement('table');
         table.className = style.table;
+
+        if (Array.isArray(resData) && resData.length === 0) {
+          setMsgErro('Erro ao carregar tabela')
+        setTimeout(() => setMsgErro(''), 3000)
+          document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+      } else {
+        setMsgSucesso('Tabela carregada com sucesso!');
+        setTimeout(() => setMsgSucesso(''), 3000)
+        document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+      }
         // Verifique se a classe foi adicionada
         // add a border to the table
 
@@ -88,7 +101,7 @@ const Home = () => {
         document.getElementById("descricao").innerHTML = '';
         document.getElementById("descricao").appendChild(table);
       } catch (error) {
-        console.log('error', error);
+        console.log('error', error)
       }
     } else {
       console.log('Please select all options');
@@ -119,43 +132,26 @@ const Home = () => {
 
   return (
     <>
+    { msgSucesso && (
+        <div className={style.msgSucesso}>
+          {msgSucesso}
+          </div>)}
+          { msgErro && (
+        <div className={style.msgErro}>
+          {msgErro}
+          </div>)}
       <Header />  
       
         <h1 className={style.text}>Curso Técnico</h1>
 
       <div className={style.filtro}>
-        <label>
-          <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
-            <option value="">EF I</option>
-            <option value="3%25E.F">3º Ano</option>
-            <option value="4%25E.F">4º Ano</option>
-            <option value="5%25E.F">5º Ano</option >
-          </select>
-        </label>
-
-
-
-
-        <label>
-          <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
-            <option value="">EF II</option>
-            <option value="6%25A%25">6º Ano A</option>
-            <option value="6%25B%25">6º Ano B</option>
-            <option value="7%25A%25">7º Ano A</option>
-            <option value="7%25B%25">7º Ano B</option>
-            <option value="8%25A%25">8º Ano A</option>
-            <option value="8%25B%25">8º Ano B</option>
-            <option value="9%25A%25">9º Ano A</option>
-            <option value="9%25B%25">9º Ano B</option>
-          </select>
-        </label>
+        
 
 
         <label>
           <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
             <option value="">EM</option>
-            <option value="1%25A%25">1º Ano A</option>
-            <option value="1%25B%25">1º Ano B</option>
+          
             <option value="2%25E.M">2º Ano</option>
             <option value="3%25E.M">3º Ano</option>
           </select>
@@ -169,7 +165,7 @@ const Home = () => {
             <option value="">Etapa</option>
             <option value="1S">1</option>
             <option value="2S">2</option>
-            <option value="3S">3</option>
+      
           </select>
         </label>
 

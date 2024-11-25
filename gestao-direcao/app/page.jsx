@@ -8,6 +8,9 @@ const SignIn = () => {
   const [msgError, setMsgError] = useState('');
   const [senhaVisivel, setSenhaVisivel] = useState(false);
 
+
+
+  
   const entrar = () => {
     // Definindo credenciais fixas
     const usuarioFixo = 'Gestão';

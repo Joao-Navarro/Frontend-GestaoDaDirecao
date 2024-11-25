@@ -245,17 +245,18 @@
 
     flex-direction: column;
 
-    margin-top: 10%;
+    margin: 5%;
 
     border-radius: 10px;
 
     border: #000 solid 1px;
+
+    text-align: center;
+
   }
-
-  .seuContainer {
-
-    margin-top: 4%;
-
+  
+  .editButton:hover {
+    background-color: #a3a1a1; /* Cor de fundo ao passar o mouse */
   }
 
   .tableAll {
@@ -268,7 +269,7 @@
 
     align-items: center;
 
-    margin: 5%;
+    overflow: auto;
 
   }
   
@@ -279,7 +280,7 @@
      
       flex-wrap: wrap;
      
-      width: 80%;
+      width: 90%;
   
   
       display: flex;justify-content: space-around;
@@ -306,9 +307,22 @@
       margin-bottom: 9%;
     }
     .table {
-      font-size: 1.2rem;
+      font-size: 1rem;
       width: auto;
       height: auto;
+      margin: 2%;
+    }
+
+    .editLink {
+
+      text-align: center;
+
+      padding: 5px;
+      
+      padding-right: 10px;
+
+      margin-top: 50%;
+
     }
   
   

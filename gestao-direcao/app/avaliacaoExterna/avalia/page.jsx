@@ -1,111 +1,41 @@
 "use client";
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import style from "./page.module.css";
 import Header from '@/components/Header';
 import Link from 'next/link';
+
 const Home = () => {
-  const [Turma, setTurma] = useState(''); // add state for each select
+  const [Turma, setTurma] = useState('');
   const [etapa, setEtapa] = useState('');
   const [ano, setAno] = useState('');
   const [tipoprova, setTipoprova] = useState('');
-  const descricaoRef = useRef(null);
   const [msgSucesso, setMsgSucesso] = useState('');
   const [msgErro, setMsgErro] = useState('');
-
-
-  useEffect(() => {
-    if (descricaoRef.current) {
-      descricaoRef.current.innerHTML = '';
-    }
-  }, []);
-
-
-
+  const [data, setData] = useState([]);
 
   const getFilter = async () => {
     if (Turma && etapa && ano && tipoprova) {
-      const url = `http://localhost:3001/avalia/${etapa}/${Turma}/${ano}/${tipoprova}`;  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
+      const url = `http://localhost:3001/avalia/${etapa}/${Turma}/${ano}/${tipoprova}`;
       console.log(`Constructed URL: ${url}`);
       console.log('Current state:', etapa, Turma, ano, tipoprova);
 
-
-
       try {
         const response = await fetch(url);
-        console.log(response);
         const resData = await response.json();
         console.log(resData);
 
-        // Create a table element
-        // Create a table element
-
-
-        const table = document.createElement('table');
-        table.className = style.table;
-
         if (Array.isArray(resData) && resData.length === 0) {
-          setMsgErro('Erro ao carregar tabela')
-          setTimeout(() => setMsgErro(''), 3000)
-          document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+          setMsgErro('Erro ao carregar tabela');
+          setTimeout(() => setMsgErro(''), 3000);
+          setData([]); // Limpa os dados se não houver resultados
         } else {
           setMsgSucesso('Tabela carregada com sucesso!');
-          setTimeout(() => setMsgSucesso(''), 3000)
-          document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+          setTimeout(() => setMsgSucesso(''), 3000);
+          setData(resData); // Armazena os dados recebidos
         }
-        // Verifique se a classe foi adicionada
-        // add a border to the table// Create a header row
-        const headerRow = table.insertRow(0);
-        const headers = Object.keys(resData[0]);
-        headers.forEach((header, index) => {
-          const th = document.createElement('th');
-          if (header === 'rm') {
-            th.innerHTML = 'RM';
-          } else if (header === 'NomeAluno') {
-            th.innerHTML = 'Nome do Aluno';
-          }
-          else if (header === 'notaExt') {
-            th.innerHTML = 'Nota';
-          }
-          else if (header === 'ano') {
-            th.innerHTML = 'Ano';
-          }
 
-
-          headerRow.appendChild(th);
-
-        });
-
-
-        // Create rows for each data item
-        resData.forEach((item) => {
-          const row = table.insertRow();
-          headers.forEach((header) => {
-            const cell = row.insertCell();
-            if (item[header] === null) {
-              cell.innerHTML = "Não informado";
-            } else {
-              cell.innerHTML = item[header];
-            }
-          });
-
-          const container = document.getElementById('seuContainer')
-          const editLink = document.createElement('a');
-          editLink.className = style.editLink
-          editLink.href = `avalia/${item.rm}/${item.ano}/edit`; // Supondo que o campo users_ID existe
-          editLink.innerText = 'Editar';
-          container.appendChild(editLink);
-        });
-
-
-
-
-
-        // Add the table to the #descricao divdocument.getElementById("descricao").innerHTML = '';
-        document.getElementById("descricao").appendChild(table);
       } catch (error) {
-
-        console.log('error', error)
-
+        console.log('error', error);
       }
     } else {
       console.log('Please select all options');
@@ -151,7 +81,7 @@ const Home = () => {
       <div className={style.body}>
         <Header />
         
-        <h1 className={style.text}>Avaliação Externa</h1>
+        <h1 className={style.text}>Listar Avaliações</h1>
         
         <div className={style.filtro}>
           <label>
@@ -228,16 +158,37 @@ const Home = () => {
 
         
 
-        <div className={style.tableAll}>
-
-          <div className={style.table} id='descricao' ref={descricaoRef} ></div>
-
-          <div id='seuContainer' className={style.seuContainer} />
-
+        <div className={style.tableAll} >
+          <div className={style.table} id='descricao'>
+            {data.length > 0 && (
+              <table className={style.table}>
+                <thead>
+                  <tr>
+                    <th>RM</th>
+                    <th>Nome do Aluno</th>
+                    <th>Nota</th>
+                    <th>Ano</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.map((item) => (
+                    <tr key={item.rm}>
+                      <td>{item.rm !== null ? item.rm : "Não informado"}</td>
+                      <td>{item.NomeAluno !== null ? item.NomeAluno : "Não informado"}</td>
+                      <td>{item.notaExt !== null ? item.notaExt : "Não informado"}</td>
+                      <td>{item.ano !== null ? item.ano : "Não informado"}</td>
+                        <Link href={`avalia/${item.rm}/${item.ano}/edit`} className={style.editLink}>
+                          Editar
+                        </Link>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
         </div>
 
         <Link className={style.back} href='/avaliacaoExterna'>Voltar</Link>
-
       </div>
     </>
   );
