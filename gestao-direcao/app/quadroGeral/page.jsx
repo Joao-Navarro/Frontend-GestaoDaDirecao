@@ -8,6 +8,7 @@ const Home = () => {
   const [Turma, setEnsinoTurma] = useState('');
   const [etapa, setEtapa] = useState('');
   const [Ano, setAno] = useState('');
+  const [Nota, setNota] = useState('');
   const [msgSucesso, setMsgSucesso] = useState('');
   const [msgErro, setMsgErro] = useState('');
   const [filtragemTentada, setFiltragemTentada] = useState(false);
@@ -40,9 +41,9 @@ const Home = () => {
       setFiltragemTentada(true);
       try {
         const urls = [
-          `http://localhost:3001/tabelageralef1/${etapa}/${Turma}/${Ano}`,
-          `http://localhost:3001/tabelageralef2/${etapa}/${Turma}/${Ano}`,
-          `http://localhost:3001/tabelageralem/${etapa}/${Turma}/${Ano}`
+          `http://localhost:3001/tabelageralef1/${etapa}/${Turma}/${Ano}/${Nota}`,
+          `http://localhost:3001/tabelageralef2/${etapa}/${Turma}/${Ano}/${Nota}`,
+          `http://localhost:3001/tabelageralem/${etapa}/${Turma}/${Ano}/${Nota}`
         ];
 
         
@@ -236,6 +237,10 @@ const Home = () => {
     setAno(e.target.value);
   }
 
+  const handleNotaChange = (e) => {
+    setNota(e.target.value);
+  }
+
   const gerarPDF = () => {
     const tabela = document.getElementById('tabelas');
     const novaJanela = window.open('', '', 'width=800,height=600');
@@ -333,9 +338,17 @@ const Home = () => {
             placeholder='Ano' />
         </div>
 
-        {Ano && (Ano < 2024 || Ano > 2024) && (
-          <p className={style.anoerrado}>Ano não encontrado</p>
-        )}
+        <div className={style.ano}>
+          <input
+            className={style.input}
+            value={Nota}
+            type='number'
+            onChange={handleNotaChange}
+            name="nota"
+            placeholder='Nota' />
+        </div>
+
+      
 
         <button className={style.button} onClick={getFilter} disabled={!Turma || !etapa || !Ano}>
           Filtrar
