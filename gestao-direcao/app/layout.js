@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Gestão da direção',
+  title: 'Gestão da Direção',
   description: 'Gestão da direção - Site do SESI 242',
 }
 
