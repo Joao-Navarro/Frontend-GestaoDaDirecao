@@ -169,7 +169,6 @@ const Home = () => {
         </label>
 
 
-        <div className={style.ano}>
           <input
             className={style.input}
             value={ano}
@@ -177,7 +176,6 @@ const Home = () => {
             onChange={handleAnoChange}
             name="ano"
             placeholder='Ano'/>
-  </div>
 
 
         <button className={style.button} onClick={getFilter} disabled={!ensinoTurma || !etapa || !ano}>Filtrar</button>
