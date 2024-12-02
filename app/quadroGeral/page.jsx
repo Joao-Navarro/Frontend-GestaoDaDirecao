@@ -294,7 +294,7 @@ const Home = () => {
       <div className={style.filtro}>
         <select className={style.button} name="ensino" value={Turma} onChange={handleEnsinoTurmaChange}>
           <option value="">EF I</option>
-          <option value="1EF">1 Ano</option>
+          <option value="1EF">1º Ano</option>
           <option value="2EF">2º Ano</option>
           <option value="3EF">3º Ano</option>
           <option value="4EF">4º Ano</option>
