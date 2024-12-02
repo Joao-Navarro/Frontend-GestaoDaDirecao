@@ -10,7 +10,7 @@ import Link from 'next/link';
 const Home = () => {
   const [msgSucesso, setMsgSucesso] = useState('');
   const [msgErro, setMsgErro] = useState('');
-  const [ensinoTurma, setEnsinoTurma] = useState(''); // add state for each select
+  const [ensinoTurma, setEnsinoTurma] = useState(''); 
   const [etapa, setEtapa] = useState('');
   const [ano, setAno] = useState('');
   const descricaoRef = useRef(null);
@@ -27,7 +27,7 @@ const Home = () => {
 
     if (!ensinoTurma || !etapa || !ano) {
       alert('Por favor, selecione todas as opções!');
-      return; // Interrompe a execução da função se algum campo estiver vazio
+      return; 
     }
 
     
@@ -47,23 +47,19 @@ const Home = () => {
         if (Array.isArray(resData) && resData.length === 0) {
           setMsgErro('Erro ao carregar tabela')
         setTimeout(() => setMsgErro(''), 3000)
-          document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+          document.getElementById("descricao").innerHTML = ''; 
       } else {
         setMsgSucesso('Tabela carregada com sucesso!');
         setTimeout(() => setMsgSucesso(''), 3000)
-        document.getElementById("descricao").innerHTML = ''; // Limpa a tabela anterior
+        document.getElementById("descricao").innerHTML = ''; 
       }
 
-        // Create a table element
-        // Create a table element
+        
 
         const table = document.createElement('table');
         table.className = style.table; 
 
-        // Verifique se a classe foi adicionada
-        // add a border to the table
-
-        // Create a header row
+       
         const headerRow = table.insertRow(0);
         const headers = Object.keys(resData[0]);
         headers.forEach((header, index) => {
@@ -82,7 +78,7 @@ const Home = () => {
           headerRow.appendChild(th);
         });
 
-        // Create rows for each data item
+       
         resData.forEach((item) => {
           const row = table.insertRow();
           headers.forEach((header) => {
@@ -97,7 +93,7 @@ const Home = () => {
           });
         });
 
-        // Add the table to the #descricao div
+    
         document.getElementById("descricao").innerHTML = '';
         document.getElementById("descricao").appendChild(table);
 
@@ -117,7 +113,6 @@ const Home = () => {
 
   }
 
-  // add event handlers for each select
   const handleEnsinoTurmaChange = (e) => {
     console.log('etapa changed:', e.target.value);
     setEnsinoTurma(e.target.value);
@@ -133,41 +128,6 @@ const Home = () => {
     setAno(e.target.value);
   }
 
-  // const [filter, setFilter] = useState({
-  //   ensino: '',
-  //   etapa: '',
-  //   ano: '',
-  // });
-
- 
-
-  // const handleFilterChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFilter((prevFilter) => ({
-  //     ...prevFilter,
-  //     [name]: value,
-  //   }));
-
-  //   // Atualiza as etapas disponíveis com base no ensino selecionado
-  //   if (name === 'ensino') {
-  //     setFilter((prevFilter) => ({
-  //       ...prevFilter,
-  //       etapa: '', // Reseta a etapa ao mudar o ensino
-  //     }));
-  //     setAvailableEtapas(getEtapas(value));
-  //   }
-  // };
-
-
-
-  // const handleFilter = () => {
-  //   const newFilteredStudents = studentsData.filter((student) =>
-  //     (filter.ensino ? student.ensino === filter.ensino : true) &&
-  //     (filter.etapa ? student.etapa === filter.etapa : true) &&
-  //     (filter.ano ? student.ano === filter.ano : true)
-  //   );
-  //   setFilteredStudents(newFilteredStudents);
-  // };
 
   return (
     <>

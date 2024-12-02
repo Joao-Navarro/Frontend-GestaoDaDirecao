@@ -4,9 +4,6 @@ import style from "./page.module.css";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
-const studentsData = [
-];
-
 const Home = () => {
   const [ensinoTurma, setEnsinoTurma] = useState(''); // add state for each select
   const [etapa, setEtapa] = useState('');
