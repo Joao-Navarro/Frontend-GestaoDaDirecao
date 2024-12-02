@@ -106,9 +106,9 @@ export default function CreateUserPage() {
           <label>
             <select className={styles.button} name="ensino" value={Turma} onChange={handleTurmaChange}>
               <option value="">EF I</option>
-              <option value="3%25E.F">3º Ano</option>
-              <option value="4%25E.F">4º Ano</option>
-              <option value="5%25E.F">5º Ano</option >
+              <option value="3EF">3º Ano</option>
+              <option value="4EF">4º Ano</option>
+              <option value="5EF">5º Ano</option >
             </select>
           </label>
 
@@ -118,14 +118,14 @@ export default function CreateUserPage() {
           <label>
             <select className={styles.button} name="ensino" value={Turma} onChange={handleTurmaChange}>
               <option value="">EF II</option>
-              <option value="6%25A%25">6º Ano A</option>
-              <option value="6%25B%25">6º Ano B</option>
-              <option value="7%25A%25">7º Ano A</option>
-              <option value="7%25B%25">7º Ano B</option>
-              <option value="8%25A%25">8º Ano A</option>
-              <option value="8%25B%25">8º Ano B</option>
-              <option value="9%25A%25">9º Ano A</option>
-              <option value="9%25B%25">9º Ano B</option>
+              <option value="6A">6º Ano A</option>
+              <option value="6B">6º Ano B</option>
+              <option value="7A">7º Ano A</option>
+              <option value="7B">7º Ano B</option>
+              <option value="8A">8º Ano A</option>
+              <option value="8B">8º Ano B</option>
+              <option value="9A">9º Ano A</option>
+              <option value="9B">9º Ano B</option>
             </select>
           </label>
 
@@ -133,10 +133,12 @@ export default function CreateUserPage() {
           <label>
             <select className={styles.button} name="ensino" value={Turma} onChange={handleTurmaChange}>
               <option value="">EM</option>
-              <option value="1%25A%25">1º Ano A</option>
-              <option value="1%25B%25">1º Ano B</option>
-              <option value="2%25E.M">2º Ano</option>
-              <option value="3%25E.M">3º Ano</option>
+              <option value="1AEM">1º Ano A</option>
+              <option value="1BEM">1º Ano B</option>
+              <option value="2AEM">2º Ano A</option>
+              <option value="2BEM">2º Ano B</option>
+              <option value="3AEM">3º Ano A</option>
+              <option value="3BEM">3º Ano B</option>
             </select>
           </label>
 
@@ -156,7 +158,7 @@ export default function CreateUserPage() {
             <select className={styles.button} name="etapa" onChange={handleTipoprovaChange} value={tipoprova}>
               <option value="">Tipo de Prova</option>
               <option value="SARESP">SARESP</option>
-              <option value="DESBRAVA">DESBRAVENEM</option>
+              <option value="DESBRAVENEM">DESBRAVENEM</option>
             </select>
           </label>
 

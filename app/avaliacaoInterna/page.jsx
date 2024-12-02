@@ -16,9 +16,9 @@ const Home = () => {
       const url = `http://localhost:3001/${ensinoTurma}/${etapa}/${ano};`  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
       console.log(`Constructed URL: ${url}`);
       console.log('Current state:', ensinoTurma, etapa, ano);
-      
 
-      
+
+
 
       try {
         debugger
@@ -39,9 +39,9 @@ const Home = () => {
         headers.forEach((header, index) => {
           const th = document.createElement('th');
           if (header === 'NomeAluno') {
-              th.innerHTML = 'Nome do Aluno';
+            th.innerHTML = 'Nome do Aluno';
           } else {
-              th.innerHTML = header.replace('1Etapa', '1ª Etapa ').replace('AR', 'Artes').replace('CCE', 'CCE').replace('CH', 'Ciências Humanas').replace('CN', 'Ciências Naturais').replace('EF', 'Educação Física').replace('LI', 'Língua Inglesa').replace('LP', 'Língua Portuguesa').replace('MAT', 'Matemática').replace('PF', 'Pensamento Filosófico').replace('PR', 'Programação').replace('PSC', 'PSC').replace('ROB', 'Robótica');
+            th.innerHTML = header.replace('1Etapa', '1ª Etapa ').replace('AR', 'Artes').replace('CCE', 'CCE').replace('CH', 'Ciências Humanas').replace('CN', 'Ciências Naturais').replace('EF', 'Educação Física').replace('LI', 'Língua Inglesa').replace('LP', 'Língua Portuguesa').replace('MAT', 'Matemática').replace('PF', 'Pensamento Filosófico').replace('PR', 'Programação').replace('PSC', 'PSC').replace('ROB', 'Robótica');
           }
           headerRow.appendChild(th);
         });
@@ -68,20 +68,20 @@ const Home = () => {
         setMsgSucesso('Tabela carregada');
         setTimeout(() => setMsgSucesso(''), 3000)
 
-      } 
-      
+      }
+
       catch (error) {
         setMsgErro('Erro ao carregar tabela')
         setTimeout(() => setMsgErro(''), 3000)
       }
 
-      
+
     } else {
       console.log('Please select all options');
 
     }
   }
-  
+
 
   // add event handlers for each select
   const handleEnsinoTurmaChange = (e) => {
@@ -99,52 +99,54 @@ const Home = () => {
     setAno(e.target.value);
   }
 
- 
+
   return (
     <>
-    { msgSucesso && (
+      {msgSucesso && (
         <div className={style.msgSucesso}>
           {msgSucesso}
-          </div>)}
-          { msgErro && (
+        </div>)}
+      {msgErro && (
         <div className={style.msgErro}>
           {msgErro}
-          </div>)}
-      <Header/>
-      
+        </div>)}
+      <Header />
+
       <h1 className={style.text}>Avaliação Interna</h1>
-      
+
       <div className={style.filtro}>
         <select className={style.button} value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
-                <option value="">EF I</option>
-                <option value="notasEF1/1%25E.F">1º Ano</option>
-                <option value="notasEF1/2%25E.F">2º Ano</option>
-                <option value="notasEF1/3%25E.F">3º Ano</option>
-                <option value="notasEF1/4%25E.F">4º Ano</option>
-                <option value="notasEF1/5%25E.F">5º Ano</option>
-            </select>
+          <option value="">EF I</option>
+          <option value="notasEF1/1EF">1º Ano</option>
+          <option value="notasEF1/2EF">2º Ano</option>
+          <option value="notasEFI/3EF">3º Ano</option>
+          <option value="notasEFI/4EF">4º Ano</option>
+          <option value="notasEFI/5EF">5º Ano</option >
+        </select>
 
 
-          <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
-            <option value="">EF II</option>
-            <option value="notasEF2/6%25A%25">6º Ano A</option>
-            <option value="notasEF2/6%25B%25">6º Ano B</option>
-            <option value="notasEF2/7%25A%25">7º Ano A</option>
-            <option value="notasEF2/7%25B%25">7º Ano B</option>
-            <option value="notasEF2/8%25A%25">8º Ano A</option>
-            <option value="notasEF2/8%25B%25">8º Ano B</option>
-            <option value="notasEF2/9%25A%25">9º Ano A</option>
-            <option value="notasEF2/9%25B%25">9º Ano B</option>
-          </select>
+        <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
+          <option value="">EF II</option>
+          <option value="notasEF2/6A">6º Ano A</option>
+          <option value="notasEF2/6B">6º Ano B</option>
+          <option value="notasEF2/7A">7º Ano A</option>
+          <option value="notasEF2/7B">7º Ano B</option>
+          <option value="notasEF2/8A">8º Ano A</option>
+          <option value="notasEF2/8B">8º Ano B</option>
+          <option value="notasEF2/9A">9º Ano A</option>
+          <option value="notasEF2/9B">9º Ano B</option>
+        </select>
 
-          <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
-            <option value="">EM</option>
-            <option value="notasEM/1%25A%25">1º Ano A</option>
-            <option value="notasEM/1%25B%25">1º Ano B</option>
-            <option value="notasEM/2%25E.M">2º Ano</option>
-            <option value="notasEM/3%25E.M">3º Ano</option>
+        <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
+          <option value="">EM</option>
+          <option value="notasEM/1AEM">1º Ano A</option>
+          <option value="notasEM/1BEM">1º Ano B</option>
+          <option value="notasEM/2AEM">2º Ano A</option>
+          <option value="notasEM/2BEM">2º Ano B</option>
+          <option value="notasEM/3AEM">3º Ano A</option>
+          <option value="notasEM/3BEM">3º Ano B</option>
 
-          </select>
+        </select>
 
 
 
@@ -166,26 +168,26 @@ const Home = () => {
             type='number'
             onChange={handleAnoChange}
             name="ano"
-            placeholder='Ano'/>
-  </div>
+            placeholder='Ano' />
+        </div>
 
-        
+
 
         <button className={style.button} onClick={getFilter} disabled={!ensinoTurma || !etapa || !ano}>
           Filtrar
         </button>
 
 
-       </div>
+      </div>
 
-      
 
-      
+
+
 
       <div className="info">
-      <div style={{ overflow: 'auto' }} className={style.table} id="descricao"></div>
-     
-     
+        <div style={{ overflow: 'auto' }} className={style.table} id="descricao"></div>
+
+
       </div>
     </>
   );

@@ -9,7 +9,7 @@ import Link from 'next/link';
 const Home = () => {
   const [msgSucesso, setMsgSucesso] = useState('');
   const [msgErro, setMsgErro] = useState('');
-  const [ensinoTurma, setEnsinoTurma] = useState(''); 
+  const [ensinoTurma, setEnsinoTurma] = useState('');
   const [etapa, setEtapa] = useState('');
   const [ano, setAno] = useState('');
   const descricaoRef = useRef(null);
@@ -22,20 +22,20 @@ const Home = () => {
 
 
   const getFilter = async () => {
-  
+
 
     if (!ensinoTurma || !etapa || !ano) {
       alert('Por favor, selecione todas as opções!');
-      return; 
+      return;
     }
 
-    
+
     if (ensinoTurma && etapa && ano) {
       const url = `http://localhost:3001/avaliasesi/${etapa}/${ensinoTurma}/${ano}`;  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
       console.log(`Constructed URL: ${url}`);
       console.log('Current state:', etapa, ensinoTurma, ano);
 
-      
+
 
       try {
         const response = await fetch(url);
@@ -45,20 +45,20 @@ const Home = () => {
 
         if (Array.isArray(resData) && resData.length === 0) {
           setMsgErro('Erro ao carregar tabela')
-        setTimeout(() => setMsgErro(''), 3000)
-          document.getElementById("descricao").innerHTML = ''; 
-      } else {
-        setMsgSucesso('Tabela carregada com sucesso!');
-        setTimeout(() => setMsgSucesso(''), 3000)
-        document.getElementById("descricao").innerHTML = ''; 
-      }
+          setTimeout(() => setMsgErro(''), 3000)
+          document.getElementById("descricao").innerHTML = '';
+        } else {
+          setMsgSucesso('Tabela carregada com sucesso!');
+          setTimeout(() => setMsgSucesso(''), 3000)
+          document.getElementById("descricao").innerHTML = '';
+        }
 
-        
+
 
         const table = document.createElement('table');
-        table.className = style.table; 
+        table.className = style.table;
 
-       
+
         const headerRow = table.insertRow(0);
         const headers = Object.keys(resData[0]);
         headers.forEach((header, index) => {
@@ -77,7 +77,7 @@ const Home = () => {
           headerRow.appendChild(th);
         });
 
-       
+
         resData.forEach((item) => {
           const row = table.insertRow();
           headers.forEach((header) => {
@@ -92,13 +92,13 @@ const Home = () => {
           });
         });
 
-    
+
         document.getElementById("descricao").innerHTML = '';
         document.getElementById("descricao").appendChild(table);
 
-        
 
-       
+
+
       } catch (error) {
         console.log('error', error)
       }
@@ -130,14 +130,14 @@ const Home = () => {
 
   return (
     <>
-    { msgSucesso && (
+      {msgSucesso && (
         <div className={style.msgSucesso}>
           {msgSucesso}
-          </div>)}
-          { msgErro && (
+        </div>)}
+      {msgErro && (
         <div className={style.msgErro}>
           {msgErro}
-          </div>)}
+        </div>)}
       <Header />
 
       <h1 className={style.text}>Avalia Sesi</h1>
@@ -146,9 +146,9 @@ const Home = () => {
         <label>
           <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
             <option value="">EF I</option>
-            <option value="3%25E.F">3º Ano</option>
-            <option value="4%25E.F">4º Ano</option>
-            <option value="5%25E.F">5º Ano</option >
+            <option value="3EF">3º Ano</option>
+            <option value="4EF">4º Ano</option>
+            <option value="5EF">5º Ano</option >
 
           </select>
         </label>
@@ -157,24 +157,26 @@ const Home = () => {
         <label>
           <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
             <option value="">EF II</option>
-            <option value="6%25A%25">6º Ano A</option>
-            <option value="6%25B%25">6º Ano B</option>
-            <option value="7%25A%25">7º Ano A</option>
-            <option value="7%25B%25">7º Ano B</option>
-            <option value="8%25A%25">8º Ano A</option>
-            <option value="8%25B%25">8º Ano B</option>
-            <option value="9%25A%25">9º Ano A</option>
-            <option value="9%25B%25">9º Ano B</option>
+            <option value="6A">6º Ano A</option>
+            <option value="6B">6º Ano B</option>
+            <option value="7A">7º Ano A</option>
+            <option value="7B">7º Ano B</option>
+            <option value="8A">8º Ano A</option>
+            <option value="8B">8º Ano B</option>
+            <option value="9A">9º Ano A</option>
+            <option value="9B">9º Ano B</option>
           </select>
         </label>
 
         <label>
           <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
             <option value="">EM</option>
-            <option value="1%25A%25">1º Ano A</option>
-            <option value="1%25B%25">1º Ano B</option>
-            <option value="2%25E.M">2º Ano</option>
-            <option value="3%25E.M">3º Ano</option>
+            <option value="1AEM">1º Ano A</option>
+            <option value="1BEM">1º Ano B</option>
+            <option value="2AEM">2º Ano A</option>
+            <option value="2BEM">2º Ano B</option>
+            <option value="3AEM">3º Ano A</option>
+            <option value="3BEM">3º Ano B</option>
           </select>
         </label>
 
@@ -195,25 +197,25 @@ const Home = () => {
             type='number'
             onChange={handleAnoChange}
             name="ano"
-            placeholder='Ano'/>
-  </div>
-
-        
-
-<button className={style.button} onClick={getFilter} disabled={ !ensinoTurma || !etapa || !ano} >Filtrar</button>
+            placeholder='Ano' />
+        </div>
 
 
-        
-      <Link  href="https://app.powerbi.com/home?experience=power-bi&culture=pt-br&country=br&ScenarioId=Signup" target="_blank" className={style.button}>Power BI</Link>     
 
-      
+        <button className={style.button} onClick={getFilter} disabled={!ensinoTurma || !etapa || !ano} >Filtrar</button>
+
+
+
+        <Link href="https://app.powerbi.com/home?experience=power-bi&culture=pt-br&country=br&ScenarioId=Signup" target="_blank" className={style.button}>Power BI</Link>
+
+
 
 
       </div>
-    
-        <div className={style.table}style={{ overflow: 'auto' }} id='descricao' ref={descricaoRef} />
-        
-          
+
+      <div className={style.table} style={{ overflow: 'auto' }} id='descricao' ref={descricaoRef} />
+
+
 
     </>
   );

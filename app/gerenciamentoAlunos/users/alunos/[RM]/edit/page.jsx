@@ -18,8 +18,8 @@ export default function EditUserPage({ params }) {
 
     useEffect(() => {
         fetchUser();
-      }, [fetchUser]); // Adicione fetchUser como dependência
-      
+    }, [fetchUser]); // Adicione fetchUser como dependência
+
 
     const fetchUser = async () => {
         const res = await fetch(`http://localhost:3001/alunos/${params.RM}`);
@@ -88,23 +88,25 @@ export default function EditUserPage({ params }) {
                         value={user.Turma}
                         onChange={(e) => setUser({ ...user, Turma: e.target.value })}
                     >                            <option value="">Turma</option>
-                        <option value="1%25E.F">1 Ano</option>
-                        <option value="2%25E.F">2º Ano</option>
-                        <option value="3%25E.F">3º Ano</option>
-                        <option value="4%25E.F">4º Ano</option>
-                        <option value="5%25E.F">5º Ano</option>
-                        <option value="6%25A%25">6º Ano A</option>
-                        <option value="6%25B%25">6º Ano B</option>
-                        <option value="7%25A%25">7º Ano A</option>
-                        <option value="7%25B%25">7º Ano B</option>
-                        <option value="8%25A%25">8º Ano A</option>
-                        <option value="8%25B%25">8º Ano B</option>
-                        <option value="9%25A%25">9º Ano A</option>
-                        <option value="9%25B%25">9º Ano B</option>
-                        <option value="1%25A%25">1º Ano EM A</option>
-                        <option value="1%25B%25">1º Ano EM B</option>
-                        <option value="2%25E.M">2º Ano EM</option>
-                        <option value="3%25E.M">3º Ano EM</option>
+                        <option value="1EF">1º Ano</option>
+                        <option value="2EF">2º Ano</option>
+                        <option value="3EF">3º Ano</option>
+                        <option value="4EF">4º Ano</option>
+                        <option value="5EF">5º Ano</option >
+                        <option value="6A">6º Ano A</option>
+                        <option value="6B">6º Ano B</option>
+                        <option value="7A">7º Ano A</option>
+                        <option value="7B">7º Ano B</option>
+                        <option value="8A">8º Ano A</option>
+                        <option value="8B">8º Ano B</option>
+                        <option value="9A">9º Ano A</option>
+                        <option value="9B">9º Ano B</option>
+                        <option value="1AEM">1º Ano A</option>
+                        <option value="1BEM">1º Ano B</option>
+                        <option value="2AEM">2º Ano A</option>
+                        <option value="2BEM">2º Ano B</option>
+                        <option value="3AEM">3º Ano A</option>
+                        <option value="3BEM">3º Ano B</option>
 
                     </select>
 

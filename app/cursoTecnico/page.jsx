@@ -150,9 +150,10 @@ const Home = () => {
         <label>
           <select className={style.button} name="ensino" value={ensinoTurma} onChange={handleEnsinoTurmaChange}>
             <option value="">EM</option>
-          
-            <option value="2%25E.M">2º Ano</option>
-            <option value="3%25E.M">3º Ano</option>
+            <option value="2AEM">2º Ano A</option>
+            <option value="2BEM">2º Ano B</option>
+            <option value="3AEM">3º Ano A</option>
+            <option value="3BEM">3º Ano B</option>
           </select>
         </label>
 
