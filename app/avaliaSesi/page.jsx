@@ -204,7 +204,7 @@ const Home = () => {
 
 
         
-      <Link  href="https://app.powerbi.com/home?experience=power-bi&culture=pt-br&country=br&ScenarioId=Signup" className={style.button}>Power BI</Link>     
+      <Link  href="https://app.powerbi.com/home?experience=power-bi&culture=pt-br&country=br&ScenarioId=Signup" target="_blank" className={style.button}>Power BI</Link>     
 
       
 
