@@ -21,7 +21,7 @@ export default function CreateUserPage() {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:3001/avalia', {
+      const res = await fetch('https://api-gestao-da-direcao.onrender.com/avalia', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ rm, etapa, ano, tipoprova, notaExt })

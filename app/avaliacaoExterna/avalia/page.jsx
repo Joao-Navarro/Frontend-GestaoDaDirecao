@@ -15,7 +15,7 @@ const Home = () => {
 
   const getFilter = async () => {
     if (Turma && etapa && ano && tipoprova) {
-      const url = `http://localhost:3001/avalia/${etapa}/${Turma}/${ano}/${tipoprova}`;
+      const url = `https://api-gestao-da-direcao.onrender.com/avalia/${etapa}/${Turma}/${ano}/${tipoprova}`;
       console.log(`Constructed URL: ${url}`);
       console.log('Current state:', etapa, Turma, ano, tipoprova);
 
@@ -177,8 +177,8 @@ const Home = () => {
                   {data.map((item) => (
                     <tr key={item.rm}>
                       <td>{item.rm !== null ? item.rm : "Não informado"}</td>
-                      <td>{item.NomeAluno !== null ? item.NomeAluno : "Não informado"}</td>
-                      <td>{item.notaExt !== null ? item.notaExt : "Não informado"}</td>
+                      <td>{item.nomealuno !== null ? item.nomealuno : "Não informado"}</td>
+                      <td>{item.notaext !== null ? item.notaext : "Não informado"}</td>
                       <td>{item.ano !== null ? item.ano : "Não informado"}</td>
                         <Link href={`avalia/${item.rm}/${item.ano}/edit`} className={style.editLink}>
                           Editar

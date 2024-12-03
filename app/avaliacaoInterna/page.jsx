@@ -13,7 +13,7 @@ const Home = () => {
 
   const getFilter = async () => {
     if (ensinoTurma && etapa && ano) {
-      const url = `http://localhost:3001/${ensinoTurma}/${etapa}/${ano};`  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
+      const url = `https://api-gestao-da-direcao.onrender.com/${ensinoTurma}/${etapa}/${ano};`  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
       console.log(`Constructed URL: ${url}`);
       console.log('Current state:', ensinoTurma, etapa, ano);
 

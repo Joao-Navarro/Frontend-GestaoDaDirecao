@@ -18,11 +18,11 @@ export default function EditUserPage({ params }) {
 
   useEffect(() => {
     fetchUser();
-  }, [fetchUser]); // Adicione fetchUser como dependência
+  }, []); // Adicione fetchUser como dependência
   
 
   const fetchUser = async () => {
-    const res = await fetch(`http://localhost:3001/avalia/${params.rm}/${params.ano}`);
+    const res = await fetch(`https://api-gestao-da-direcao.onrender.com/avalia/${params.rm}/${params.ano}`);
     const data = await res.json();
     setUser(data);
   };
@@ -31,7 +31,7 @@ export default function EditUserPage({ params }) {
     e.preventDefault();
 
     try {
-      const response = await fetch(`http://localhost:3001/avalia/${params.rm}/${params.ano}/${user.tipoprova}`, {
+      const response = await fetch(`https://api-gestao-da-direcao.onrender.com/avalia/${params.rm}/${params.ano}/${user.tipoprova}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user),

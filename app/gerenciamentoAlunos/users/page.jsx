@@ -26,7 +26,7 @@ const Home = () => {
 
   const getFilter = async () => {
     if (ensinoTurma && ano) {
-      const url = `http://localhost:3001/alunos/${ensinoTurma}/${ano}`;  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
+      const url = `https://api-gestao-da-direcao.onrender.com/alunos/${ensinoTurma}/${ano}`;  //http://localhost:3001/avaliasesi/1S/3%25E.M/2024
       console.log(`Constructed URL: ${url}`);
       console.log('Current state:', ensinoTurma, ano);
 
@@ -153,12 +153,12 @@ const Home = () => {
               </thead>
               <tbody>
                 {data.map((item) => (
-                  <tr key={item.RM}>
-                    <td>{item.RM !== null ? item.RM : "Não informado"}</td>
-                    <td>{item.NomeAluno !== null ? item.NomeAluno : "Não informado"}</td>
-                    <td>{item.Turma !== null ? item.Turma : "Não informado"}</td>
-                    <td>{item.Ano !== null ? item.Ano : "Não informado"}</td>
-                    <Link href={`/gerenciamentoAlunos/users/alunos/${item.RM}/edit`} className={style.editLink}>
+                  <tr key={item.rm}>
+                    <td>{item.rm !== null ? item.rm : "Não informado"}</td>
+                    <td>{item.nomealuno !== null ? item.nomealuno : "Não informado"}</td>
+                    <td>{item.turma !== null ? item.turma : "Não informado"}</td>
+                    <td>{item.ano !== null ? item.ano : "Não informado"}</td>
+                    <Link href={`/gerenciamentoAlunos/users/alunos/${item.rm}/edit`} className={style.editLink}>
                       Editar
                     </Link>
                   </tr>

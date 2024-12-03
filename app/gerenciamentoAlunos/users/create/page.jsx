@@ -19,7 +19,7 @@ export default function CreateUserPage() {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:3001/alunos/', {
+      const res = await fetch('https://api-gestao-da-direcao.onrender.com/alunos/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ RM, Turma, Ano, NomeAluno })
